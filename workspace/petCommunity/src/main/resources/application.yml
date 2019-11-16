@@ -10,9 +10,9 @@ server:
 #spring
 spring:
   datasource:
-    url: jdbc:mysql:///pet_community?serverTimezone=GMT%2B8&characterEncoding=utf8
+    url: jdbc:mysql://mysql57.rdsmc5gff9sm7gq.rds.bj.baidubce.com/pet_community?serverTimezone=GMT%2B8&characterEncoding=utf8
     username: root
-    password: root
+    password: petc123456
   thymeleaf:
     prefix: classpath:/templates/pages/
     suffix: .html
