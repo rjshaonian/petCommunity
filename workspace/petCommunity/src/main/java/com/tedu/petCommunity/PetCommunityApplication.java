@@ -9,7 +9,8 @@ public class PetCommunityApplication {
 	public static void main(String[] args) {
 		// 2019-11-16 阳昊
 		System.out.println("测试一次提交");
-		SpringApplication.run(PetCommunityApplication.class, args);
+		SpringApplication.run(PetCommunityApplication.class, args); 
+		
 	}
 
 }
