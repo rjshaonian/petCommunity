@@ -26,4 +26,9 @@ mybatis:
     default-statement-timeout: 30
     map-underscore-to-camel-case: true
   mapper-locations:
-  - classpath:/mapper/sys/*.xml
+  - classpath:/mapper/*/*.xml
+
+#lOG
+logging:
+  level:
+    com.tedu: DEBUG
