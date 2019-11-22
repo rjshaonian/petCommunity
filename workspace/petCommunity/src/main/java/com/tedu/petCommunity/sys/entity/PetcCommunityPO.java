@@ -3,12 +3,18 @@
  */
 package com.tedu.petCommunity.sys.entity;
 
-import java.sql.Date;
+
+
+import java.util.Date;
+import lombok.Data;
+
+
 
 /**
  * @author 彬彬
  *	上午9:12:27
  */
+@Data 
 public class PetcCommunityPO {
 	//主键id
 	private Integer id;
