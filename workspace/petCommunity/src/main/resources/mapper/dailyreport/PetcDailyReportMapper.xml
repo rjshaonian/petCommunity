@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.tedu.petCommunity.dailyreport.dao.PetcDailyReportDao">
+
+	<select id="queryDailyReports"
+		resultType="com.tedu.petCommunity.dailyreport.PetcDailyReportPO">
+		select *
+		from daily_report
+		where 1=1
+		<if test="name!=null and name!=''">
+			and name like concat("%",#{name},"%")
+		</if>
+		<if test="type==null or type==0">
+			and to_days(created_time) = to_days(now())
+		</if>
+		order by created_time desc
+	</select>
+
+</mapper>

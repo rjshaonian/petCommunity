@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>日常汇报</title>
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="dist/css/daily_report.css">
+<body>
+	<!-- 导航栏开始 -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="doDailyReportUI">日常汇报</a>
+			</div>
+			<div id="navbar">
+				<ul class="nav navbar-nav">
+					<li class="active"><a
+						href="doDailyReportUI?type=0">今日</a></li>
+					<li><a href="doDailyReportUI?type=1">全部</a></li>
+				</ul>
+				<form class="navbar-form navbar-left">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="请输入名字"
+							id="name" th:value="${name}">
+					</div>
+					<button type="button" class="btn btn-default" id="search">搜索</button>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="doDailyReportAddUI">添加</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- 导航栏结束 -->
+
+	<div class="container" style="margin-top: 50px">
+		<!-- 影藏输入框用于获取后台数据 -->
+		<input id="type" type="hidden" th:value="${type}" />
+		<div class="page-header card" th:each="dailyReport : ${dailyReports}"
+			th:object="${dailyReport}">
+			<h3>
+				<span th:text=*{name}>名字 </span> <span th:text=*{createdTimeStr}>2019/11/11
+					11:11</span>
+			</h3>
+			<p class="lead">修改文件：</p>
+			<span class="changed" style="word-wrap: break-word;margin:10px;line-height: 30px" th:each="str : *{modifiedFiles}"
+				th:text="${str}">xxxxx.java</span>
+			<p class="lead">工作描述：</p>
+			<p style="word-wrap: break-word;" th:text=*{description}>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<div class="btn-group" role="group">
+				<!-- 影藏输入框用于获取后台数据 -->
+				<button type="button" class="btn btn-warning update">修改</button>
+				<input class="id" type="hidden" th:value="*{id}" />
+				<button type="button" class="btn btn-danger delete">删除</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$("#search").click(search);
+			$(".delete").click(deleteObj);
+			$(".update").click(updateObj);
+		});
+		function search() {
+			var name = $("#name").val();
+			var type = $("#type").val();
+			var url = 'doDailyReportUI?name=' + name
+					+ '&type=' + type;
+			window.location.replace(url);
+		};
+		function deleteObj() {
+			if (!confirm("确认删除吗？"))
+				return;
+			var params = {
+				"id" : $(this).siblings("input").val() - 0
+			};
+			var url = "dailyReport/doDeleteObject";
+			//发送异步请求
+			$.post(url, params, function(result) {
+				if (result.state == 1) {
+					alert(result.message);
+					search();
+				} else {
+					alert(result.message);
+				}
+			});
+		};
+		function updateObj() {
+			var id = $(this).siblings("input").val() - 0
+			var url = 'doDailyReportUpdateUI?id=' + id;
+			window.location.replace(url);
+		};
+	</script>
+</body>
+</html>
