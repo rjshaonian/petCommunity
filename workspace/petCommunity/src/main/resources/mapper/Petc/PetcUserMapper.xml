@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.tedu.petCommunity.sys.dao.PetcUserDao">
+	<update id="updateUserInfo"
+		parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO">
+		update user set username =#{username},
+		nickname=#{nickname},
+		email=#{email},
+		mobile=#{mobile},
+		pet_type=#{petType},
+		valid=#{valid},
+		modified_time=#{modifiedTime},
+		modified_user=#{modifiedUser} where id=#{id}
+	</update>
+</mapper>
