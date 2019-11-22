@@ -1,7 +1,10 @@
-package com.tedu.petCommunity.dailyreport.dao;
+package com.tedu.petCommunity.sys.dao;
+
+import org.apache.ibatis.annotations.Mapper;
 
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 
+@Mapper
 public interface PetcUserDao {
 	/**
 	 * @author Liam-顺
