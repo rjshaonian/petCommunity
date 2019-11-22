@@ -1,7 +1,5 @@
 package com.tedu.petCommunity.common.util;
 
-import org.apache.shiro.SecurityUtils;
-
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 
 /**
@@ -18,6 +16,7 @@ public class ShiroUtils {
 
 	/** 获取登录用户 */
 	public static PetcUserPO getUser() {
-		return (PetcUserPO) SecurityUtils.getSubject().getPrincipal();
+//		return (PetcUserPO) SecurityUtils.getSubject().getPrincipal();
+		return new PetcUserPO();
 	}
 }
