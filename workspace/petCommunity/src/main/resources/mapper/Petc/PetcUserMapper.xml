@@ -14,4 +14,12 @@
 		modified_time=#{modifiedTime},
 		modified_user=#{modifiedUser} where id=#{id}
 	</update>
+	
+	<!-- 添加数据 -->
+	<insert id="insertAll" parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO" useGeneratedKeys="true" keyProperty="id" >
+		insert into user(username,password,salt,email,mobile,valid,nickname) 
+		values
+		(#{username},#{password},#{salt},#{email},#{mobile},#{valid},#{nickname}) 
+		
+	</insert>
 </mapper>
