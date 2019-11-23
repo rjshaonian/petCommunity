@@ -28,4 +28,11 @@ public class TestUpdateUserInfo {
 		int rows = petcUserDao.updateUserInfo(userInfo);
 		System.out.println("修改" + rows);
 	}
+
+	@Test
+	public void findUserInfo() {
+		PetcUserPO userInfo = petcUserDao.findUserInfo(1);
+		System.out.println(userInfo);
+	}
+
 }
