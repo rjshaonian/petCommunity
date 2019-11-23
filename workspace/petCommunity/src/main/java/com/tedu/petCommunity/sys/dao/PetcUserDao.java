@@ -1,6 +1,7 @@
 package com.tedu.petCommunity.sys.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 
@@ -14,6 +15,8 @@ public interface PetcUserDao {
 	PetcUserPO findUserInfo(Integer userId);
 
 	int updateUserInfo(PetcUserPO userInfo);
+
+	int updatePassword(@Param("password") String password, @Param("salt") String salt, @Param("id") Integer id);
 
 	/** 添加用户 */
 	int insertAll(PetcUserPO data);

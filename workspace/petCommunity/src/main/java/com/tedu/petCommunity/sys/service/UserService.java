@@ -21,7 +21,8 @@ public interface UserService {
 
 	/** 修改用户信息 */
 	int updatePetcUser(PetcUserPO petcUserPO, Integer id);
-	
-	
+
+	int updatePassword(String password, String newPassword, String cfgPassword);
+
 	int insertAll(PetcUserPO data);
 }
