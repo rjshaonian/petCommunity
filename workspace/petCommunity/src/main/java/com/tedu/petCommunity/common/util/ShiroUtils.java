@@ -12,7 +12,7 @@ public class ShiroUtils {
 		try {
 			return getUser().getUsername();
 		} catch (Exception e) {
-			return null;
+			return "管理员";
 		}
 
 	}
@@ -21,7 +21,7 @@ public class ShiroUtils {
 		try {
 			return getUser().getId();
 		} catch (Exception e) {
-			return null;
+			return 0;
 		}
 	}
 
