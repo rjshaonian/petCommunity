@@ -1,7 +1,10 @@
 package com.tedu.petCommunity.sys.dao;
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 
@@ -17,8 +20,9 @@ public interface PetcUserDao {
 	
 	
 	/**添加用户*/
-	int insertAll(PetcUserPO data);
+	int insertAll(PetcUserPO data );
+	
 	
 	/**判断用户名是否存在*/
-	PetcUserPO existName(String username);
+int existName(String username);
 }

@@ -16,13 +16,13 @@
 	</update>
 	
 	<!-- 添加数据 -->
-	<insert id="insertAll" parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO" useGeneratedKeys="true" keyProperty="id" >
-		insert into user(username,password,salt,email,mobile,valid,nickname) 
+	<insert id="insertAll" parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO">
+		insert into user(username,password,mobile,nickname) 
 		values
-		(#{username},#{password},#{salt},#{email},#{mobile},#{valid},#{nickname}) 
+		(#{username},#{password},#{mobile},#{nickname}) 
 	</insert>
 	
-	<select id="existName" parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO">
+	<select id="existName" resultType="int">
 		select count(*) from user where username=#{username}
 	</select>
 </mapper>
