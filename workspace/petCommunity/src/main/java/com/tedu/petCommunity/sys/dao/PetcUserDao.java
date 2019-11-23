@@ -17,4 +17,7 @@ public interface PetcUserDao {
 
 	/** 添加用户 */
 	int insertAll(PetcUserPO data);
+
+	/** 判断用户名是否存在 */
+	PetcUserPO existName(String username);
 }

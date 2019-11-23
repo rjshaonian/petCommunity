@@ -26,6 +26,9 @@
 		insert into user(username,password,salt,email,mobile,valid,nickname) 
 		values
 		(#{username},#{password},#{salt},#{email},#{mobile},#{valid},#{nickname}) 
-		
 	</insert>
+	
+	<select id="existName" parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO">
+		select count(*) from user where username=#{username}
+	</select>
 </mapper>
