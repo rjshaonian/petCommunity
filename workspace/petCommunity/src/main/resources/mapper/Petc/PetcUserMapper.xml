@@ -17,9 +17,16 @@
 		mobile=#{mobile},
 		pet_type=#{petType},
 		valid=#{valid},
-		modified_time=#{modifiedTime},
+		modified_time=now(),
 		modified_user=#{modifiedUser} where id=#{id}
 	</update>
+	<update id="updatePassword">
+         update user
+         set password=#{password},
+             salt=#{salt},
+             modified_time=now()
+         where id=#{id}
+</update>
 	
 	<!-- 添加数据 -->
 	<insert id="insertAll" parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO">
