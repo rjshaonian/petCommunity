@@ -28,7 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class PetcLogAspect {
-	@Pointcut("bean(*ServiceImpl)")
+//	@Pointcut("@annotation(com.tedu.petCommunity.common.annotation.RequiredLog)")
+	@Pointcut("within(sys.service..*ServiceImpl)")
 	public void logPointCut() {
 	}
 
