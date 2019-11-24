@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>社区详情页面</title>
+<link rel="stylesheet"
+	href="../bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container"
+		style="background: #aaaaaa; padding: 40px 200px;">
+		<h1 th:test="*{user}">
+			XXXXXXXXX
+
+
+			<button type="button" class="btn btn-danger" id="exit" style="float: right;">退出</button>
+			<button type="button" class="btn btn-primary" id="join" style="float: right;">加入</button>
+			<button type="button" class="btn btn-danger" id="dismiss" style="float: right;">解散</button>
+			<button type="button" class="btn btn-warning" id="modify" style="float: right;">修改</button>
+		</h1>
+		<br />
+
+		<p>XXXXXXXXX</p>
+		<br />
+		<p>
+			创建时间：<span>XX/XX/XX XX:XX:XX</span>
+		</p>
+
+	</div>
+
+	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript">
+		//当页面加载完成之后执行
+		/*$(function() {
+			//1.向服务器发送请求，获取用户类型（0:创建者;1:加入者;2:未加入者）
+			//var user_type=;
+			//2.在界面上显示对应的按钮(0:修改、解散;1:退出;2:加入)
+			//$("#exit").css("display","inline-block");
+			var user_type=0;
+				$("#join").css("display","none");
+				$("#exit").css("display","none");
+		});*/
+	$(function(){
+			var user_type=1;
+			$("#modify").css("display","none");
+			$("#join").css("display","none");
+			$("#dismiss").css("display","none");
+		});
+		/*$(function(){
+			var user_type=2;
+			$("#modify").css("display","none");
+			$("#exit").css("display","none");
+			$("#dismiss").css("display","none");
+		});*/
+		
+		
+		
+	</script>
+</body>
+</html>

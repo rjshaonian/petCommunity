@@ -4,7 +4,6 @@
 package com.tedu.petCommunity.sys.entity;
 
 import java.util.Date;
-
 import lombok.Data;
 
 /**

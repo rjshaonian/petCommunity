@@ -10,7 +10,6 @@ import com.tedu.petCommunity.sys.entity.PetcUserPO;
 public class ShiroUtils {
 	public static String getUsername() {
 		return getUser().getUsername();
-
 	}
 
 	public static Integer getUserId() {
