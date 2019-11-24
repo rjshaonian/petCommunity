@@ -78,6 +78,11 @@
 	text-indent:45px;
 	border:1px solid #dbdbdb;
 }
+#middle table tr td input[type='button']{
+	text-indent:0;
+	text-align:center;
+	width:180px;
+}
 /*选中输入框下面的提示小时所在的td元素*/
 #middle table tr .err-msg{
 	height:32px;

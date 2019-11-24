@@ -20,6 +20,18 @@
 	</properties>
 
 	<dependencies>
+		<!-- 腾讯云服务器 -->
+		<!-- <dependency> <groupId>com.github.qcloudsms</groupId> <artifactId>qcloudsms</artifactId> 
+			<version>1.0.4</version> </dependency> -->
+
+		<!-- 阿里云 -->
+		<dependency>
+			<groupId>com.aliyun</groupId>
+			<artifactId>aliyun-java-sdk-core</artifactId>
+			<version>4.4.3</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -94,5 +106,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
