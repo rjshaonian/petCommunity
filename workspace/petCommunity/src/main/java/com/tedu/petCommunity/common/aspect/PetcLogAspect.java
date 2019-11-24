@@ -21,14 +21,15 @@ import com.tedu.petCommunity.sys.entity.PetcLogPO;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 阳昊 下午3:11:14
+ * @author 阳昊 2019年11月22日 下午3:11:14
  */
 @Order(1)
 @Aspect
 @Component
 @Slf4j
 public class PetcLogAspect {
-	@Pointcut("bean(*ServiceImpl)")
+//	@Pointcut("@annotation(com.tedu.petCommunity.common.annotation.RequiredLog)")
+	@Pointcut("within(sys.service..*ServiceImpl)")
 	public void logPointCut() {
 	}
 

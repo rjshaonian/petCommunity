@@ -7,6 +7,10 @@ public class ServiceException extends RuntimeException {
 		super();
 	}
 
+	public ServiceException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
+
 	public ServiceException(String message) {
 		super(message);
 	}

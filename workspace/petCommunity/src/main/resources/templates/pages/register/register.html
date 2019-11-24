@@ -20,19 +20,19 @@
 		</div>
 	</div>
 	<div id="middle">
-		<form action="#" onsubmit="return check()">
+		<form method="post" id="formSubmit" enctype="multipart/form-data">
 			<table>
 				<tr>
-					<td><input type="text" name="username" maxlength="10" min="4" placeholder="用户名">
-					</td>
+					<td><input type="text" name="username" maxlength="10" min="4"
+						placeholder="用户名"></td>
 				</tr>
 				<tr>
 					<td class="err-msg">支持中文、字母、数字、“-”、“_”的组合，4-10个字母</td>
 				</tr>
 				<tr>
 					<td>
-						<!-- 密码 --> <input type="password" id="pwd" name="pwd" maxlength="10"
-						placeholder="设置密码" />
+						<!-- 密码 --> <input type="password" id="password" name="password"
+						maxlength="10" placeholder="设置密码" />
 					</td>
 				</tr>
 				<tr>
@@ -41,8 +41,8 @@
 				</tr>
 				<tr>
 					<td>
-						<!-- 确认密码 --> <input type="password"  id="rwpwd" name="rwpwd" maxlength="10"
-						placeholder="确认密码" />
+						<!-- 确认密码 --> <input type="password" id="rwpwd" name="rwpwd"
+						maxlength="10" placeholder="确认密码" />
 					</td>
 				</tr>
 				<tr>
@@ -51,7 +51,8 @@
 				</tr>
 				<tr>
 					<td>
-						<!-- 验证手机 --> <input type="text" maxlength="11" name="phone" placeholder="验证手机" />
+						<!-- 验证手机 --> <input type="text" maxlength="11" name="mobile"
+						placeholder="验证手机" />
 					</td>
 				</tr>
 				<tr>
@@ -67,19 +68,40 @@
 				<tr>
 					<td><input type="submit" value="立即注册" /></td>
 				</tr>
-
+				
 
 			</table>
 		</form>
 	</div>
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript">
+	
 		$(function() {
-			$("#pwd").change(check2pwd);
+			$("#password").change(check2pwd);
 			$("#rwpwd").change(check2pwd);
+			$('#formSubmit').submit(submitRegister);
 		});
+		 
+		function submitRegister() {
+	        //首先验证
+	        if(!check()){
+	        	return;
+	        	
+	        }
+	       
+	        
+              $.post("/doRegister",$("form").serialize(),function (data) {
+                if (data.state==1) {
+                	alert("注册成功")
+        	       window.location.href="login"; 
+                } else {
+                    alert(data.message);
+                }
+            })  
+            return false;
+	    }
 		function check2pwd() {
-			if ($("#pwd").val() != $("#rwpwd").val()) {
+			if ($("#password").val() != $("#rwpwd").val()) {
 				$("#rwpwderr").html("两次密码输入不一致");
 				$("#rwpwderr").addClass("alert");
 			} else {
@@ -94,8 +116,8 @@
 			　　　　alert("用户名不能为空");
 			　　　　return false;
 			　　}
-				var pwd =$("[name='pwd']").val();　　
-			　　  if(pwd == null || pwd == ""){
+				var password =$("[name='password']").val();　　
+			　　  if(password == null || password == ""){
 			　　　　alert("密码不能为空");
 			　　　　return false;
 			　　}
@@ -104,8 +126,8 @@
 			　　　　alert("确认密码不能为空");
 			　　　　return false;
 			　　}
-			  var phone =$("[name='phone']").val();　　
-			　　  if(phone == null || phone == ""){
+			  var mobile =$("[name='mobile']").val();　　
+			　　  if(mobile == null || mobile == ""){
 			　　　　alert("手机号码不能为空");
 			　　　　return false;
 			　　}
@@ -114,7 +136,6 @@
 			　　　　alert("验证码不能为空");
 			　　　　return false;
 			　　}
-			  
 			　　　　return true;
 			　　}
 	</script>

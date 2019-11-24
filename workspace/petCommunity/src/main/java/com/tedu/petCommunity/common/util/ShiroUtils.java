@@ -1,22 +1,36 @@
 package com.tedu.petCommunity.common.util;
 
+import org.apache.shiro.SecurityUtils;
+
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 
 /**
- * @author 阳昊 下午4:01:14
+ * @author 阳昊 2019年11月22日 下午4:01:14
  */
 public class ShiroUtils {
 	public static String getUsername() {
-		return getUser().getUsername();
+		try {
+			return getUser().getUsername();
+		} catch (Exception e) {
+			return "管理员";
+		}
+
 	}
 
 	public static Integer getUserId() {
-		return getUser().getId();
+		try {
+			return getUser().getId();
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 	/** 获取登录用户 */
 	public static PetcUserPO getUser() {
-//		return (PetcUserPO) SecurityUtils.getSubject().getPrincipal();
-		return new PetcUserPO();
+		try {
+			return (PetcUserPO) SecurityUtils.getSubject().getPrincipal();
+		} catch (Exception e) {
+			return new PetcUserPO();
+		}
 	}
 }
