@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>宠物社区</title>
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<style type="text/css">
+.main-header {
+	width: auto;
+	height: 20%;
+	background-color: #5499E4;
+	text-align: center;
+	font-size: 15px
+}
+
+span {
+	position: relative;
+	top: 10px;
+}
+
+.community-menu {
+	font-color: black; 
+	left: 0;
+	position: relative; left : 0;
+	top: 60px;
+}
+
+img {
+	max-width: 80px;
+	max-height: 80px;
+}
+</style>
+</head>
+<body class="community_total" style="height: auto min-height:50%">
+	<div class="wrapper" style="height: auto min-height:100%">
+		<header class="main-header">
+			<span>PetCommunity</span><br/> 
+				<span>
+					<a href="home">宠物社区</a>
+				</span>
+			<nav class="navbar" role="navigation">
+				<div class=navbar-costom-menu style="float: right">
+					<img src="dist/img/user8-128x128.jpg" class="user-image"
+						alt="User Image"> <span class="hidden-xs" id="loginUserId">Alexander
+						Pierce</span><br> 
+						<a href="login" class="btn btn-default btn-sign-out">Sign out</a>
+				</div>
+				<div>
+					<ul class="community-menu">
+						<li><a id="load-community-id" style="float: left">社区管理</a></li>
+						<li><a id="load-activity-id" style="float: left"> 活动管理</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<div>
+			<section id="mainContentId" class="content container-fluid">
+				<img alt="Pet Image" src="dist/img/avatar.png">
+			</section>
+		</div>
+	</div>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			doLoadUI("load-community-id", "community/community_list");
+			doLoadUI("load-activity-id", "activity/activity_list");
+			doGetUpdateUserInfo();
+		});
+		function doGetUpdateUserInfo() {
+			var url = "user/doUpdateUser";
+			$.getJSON(url, function(result) {
+				if (result.state == 1) {
+					console.log(result);
+					$("#loginUserId").data("userId", result.data.id);
+					$("#loginUserId").html(result.data.username);
+				}
+			});
+		}
+		function doLoadUI(id, url) {
+
+			$("#" + id).click(function() {
+				$("#mainContentId").load(url);
+			});
+
+		}
+	</script>
+</body>
+</html>

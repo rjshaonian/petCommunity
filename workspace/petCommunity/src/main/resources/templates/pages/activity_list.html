@@ -1,0 +1,118 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">活动信息</h3>
+			</div>
+			<!-- /.box-header -->
+			<a href="community/search" class="community-search" >
+				<button>寻找</button>
+			</a>
+			<a href="community/create" class="community-create" >
+				<button>创建</button>
+			</a>
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>活动名</th>
+							<th>定位</th>
+							<th>操作</th>
+							<th>宠物类型</th>
+							<th>开始时间</th>
+							<th>结束时间</th>
+							<th>创建时间</th>
+							<th>结束时间</th>
+							<th>创建者</th>
+							<th>修改者</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyId">
+					    <tr id="trId">
+					       <td colspan="10">数据正在加载中...</td>
+					    </tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="pageId" class="box-footer clearfix"></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		const pageUrl ="doPageUI";
+		$("#pageId").load(pageUrl, function() {
+			doGetObjects();
+		});
+	})
+
+	function doGetObjects() {
+		var url = "activity/doFindActivitys"
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		var user_id = 2;//$("#loginUserId").data("userId")
+		if (!pageCurrent)
+			pageCurrent = 1;
+		var params = {
+			"pageCurrent" : pageCurrent,
+			"userId" : user_id
+		};
+		$.getJSON(url, params, function(result) {
+			doHandleResponseResult(result);
+		});//特殊的ajax函数
+	}
+	function doHandleResponseResult(result) { //JsonResult
+		if (result.state == 1) {//ok
+			doSetTableBodyRows(result.data.records);//将数据呈现在页面上 
+			//刷新页面
+			doSetPagination(result.data);
+		} else {
+			doSetErrorMessage(result.msg)
+		}
+	}
+	function doSetErrorMessage(msg) {
+		var tbody = $("#tbodyId");
+		tbody.empty();
+		var tr = $("<tr></tr>");
+		var td = $("<td></td>");
+		td.prop("colspan",10);
+		td.html(msg);
+		tr.append(td);
+		tbody.append(tr);
+		//分页 页面初始化
+		doInitPage();
+	}
+	function doInitPage() {
+		$(".rowCount").html("总记录数(0)");
+		$(".pageCount").html("总页数(0)");
+		$(".pageCurrent").html("当前页数(1)");
+	}
+	function doSetTableBodyRows(records) {
+		//1.获取tbody对象，并清空对象
+		var tBody = $("#tbodyId");
+		tBody.empty();
+		//2.迭代records记录，并将其内容追加到tbody
+		for ( var i in records) {
+			//2.1 构建tr对象
+			var tr = $("<tr></tr>");
+			//2.2 构建tds对象
+			var tds = doCreateTds(records[i]);
+			//2.3 将tds追加到tr中
+			tr.append(tds);
+			//2.4 将tr追加到tbody中
+			tBody.append(tr);
+		}
+	}
+	function doCreateTds(data) {
+		var tds = "<td>"+data.actiName+"</td>"+ 
+		"<td>"+data.position+"</td>"+ 
+		"<td>"+data.actiType+"</td>"+ 
+		"<td>"+data.valid+"</td>"+ 
+		"<td>"+data.startTime+"</td>"+ 
+		"<td>"+data.endTime+"</td>"+ 
+		"<td>"+data.createTime+"</td>"+
+		"<td>"+data.modifiedTime+"</td>"+
+		"<td>"+data.createUser+"</td>"+
+		"<td>"+data.modifiedUser+"</td>";
+		return tds;
+	}
+</script>
