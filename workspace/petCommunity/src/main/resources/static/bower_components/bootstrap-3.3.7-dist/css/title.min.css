@@ -1,0 +1,25 @@
+@charset "UTF-8";
+.main-header {
+	width: auto;
+	height: 20%;
+	background-color: #5499E4;
+	text-align: center;
+	font-size: 15px
+}
+
+span {
+	position: relative;
+	top: 10px;
+}
+
+.community-menu {
+	font-color: black; 
+	left: 0;
+	position: relative; left : 0;
+	top: 60px;
+}
+
+img {
+	max-width: 80px;
+	max-height: 80px;
+}

@@ -1,51 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>宠物社区</title>
 <link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/title.min.css">
+<link rel="stylesheet"
 	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-<style type="text/css">
-.main-header {
-	width: auto;
-	height: 20%;
-	background-color: #5499E4;
-	text-align: center;
-	font-size: 15px
-}
+<!-- <style type="text/css">
 
-span {
-	position: relative;
-	top: 10px;
-}
-
-.community-menu {
-	font-color: black; 
-	left: 0;
-	position: relative; left : 0;
-	top: 60px;
-}
-
-img {
-	max-width: 80px;
-	max-height: 80px;
-}
-</style>
+</style> -->
 </head>
 <body class="community_total" style="height: auto min-height:50%">
 	<div class="wrapper" style="height: auto min-height:100%">
 		<header class="main-header">
-			<span>PetCommunity</span><br/> 
-				<span>
-					<a href="home">宠物社区</a>
-				</span>
+			<span>PetCommunity</span><br /> <span> <a href="home">宠物社区</a>
+			</span>
 			<nav class="navbar" role="navigation">
 				<div class=navbar-costom-menu style="float: right">
 					<img src="dist/img/user8-128x128.jpg" class="user-image"
-						alt="User Image"> <span class="hidden-xs" id="loginUserId">Alexander
-						Pierce</span><br> 
-						<a href="login" class="btn btn-default btn-sign-out">Sign out</a>
+						alt="User Image"> <span class="hidden-xs" id="loginUserId"
+						th:text="${user.username}"> 用户名 </span><br> <a href="login"
+						class="btn btn-default btn-sign-out">Sign out</a>
 				</div>
 				<div>
 					<ul class="community-menu">
@@ -73,8 +50,7 @@ img {
 			$.getJSON(url, function(result) {
 				if (result.state == 1) {
 					console.log(result);
-					$("#loginUserId").data("userId", result.data.id);
-					$("#loginUserId").html(result.data.username);
+					$("#loginUserId").data("userId",result.data.id);
 				}
 			});
 		}

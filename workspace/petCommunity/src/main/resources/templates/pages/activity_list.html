@@ -49,7 +49,7 @@
 	function doGetObjects() {
 		var url = "activity/doFindActivitys"
 		var pageCurrent = $("#pageId").data("pageCurrent");
-		var user_id = 2;//$("#loginUserId").data("userId")
+		var user_id = $("#loginUserId").data("userId");//2
 		if (!pageCurrent)
 			pageCurrent = 1;
 		var params = {
