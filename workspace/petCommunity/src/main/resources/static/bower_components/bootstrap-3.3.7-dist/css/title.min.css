@@ -54,3 +54,13 @@ img {
 #search{
 	float:right ;
 }
+section {
+	 width:300px;
+  height:300px;
+  text-align:center;
+  background-color:#ccc
+}
+.petPicture img{
+	width:300px;
+ 	 height:200px	 
+}
