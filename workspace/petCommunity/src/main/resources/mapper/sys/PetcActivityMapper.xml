@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.tedu.petCommunity.sys.dao.PetcActivityDao">
+
+	<sql id="queryWhereId">
+		<where>
+			<if test="actiName!=null and actiName!=''">
+				acti_name like concat("%",#{actiName},"%")
+			</if>
+		</where>
+	</sql>
+	<select id="getRowCount" resultType="int">
+		select count(*) from activity
+		<include refid="queryWhereId" />
+	</select>
+	<select id="findActivities"
+		resultType="com.tedu.petCommunity.sys.entity.PetcActivityPO">
+		select
+		id,acti_name,position,valid,acti_type,start_time,end_time,create_time,modified_time
+		,create_user,modified_user from activity
+		<include refid="queryWhereId" />
+		order by create_time desc limit #{startIndex},#{pageSize}
+	</select>
+	<select id="findActivityById"
+		resultType="com.tedu.petCommunity.sys.entity.PetcActivityPO">
+		select * from activity where id=#{id}
+	</select>
+
+	<insert id="insert"
+		parameterType="com.tedu.petCommunity.sys.entity.PetcActivityPO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into activity
+		(id,acti_name,position,valid,acti_type,start_time,end_time,create_time,modified_time
+		,create_user,modified_user)
+		values
+		(#{id},#{actiName},#{position},#{valid},#{actiType},#{startTime},#{endTime},#{createTime},
+		#{modifiedTime},#{createUser},#{modifiedUser})
+	</insert>
+
+
+</mapper>
