@@ -1,5 +1,6 @@
 package com.tedu.petCommunity.common.util;
 
+
 import org.apache.shiro.SecurityUtils;
 
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
@@ -9,28 +10,26 @@ import com.tedu.petCommunity.sys.entity.PetcUserPO;
  */
 public class ShiroUtils {
 	public static String getUsername() {
-		try {
-			return getUser().getUsername();
-		} catch (Exception e) {
-			return "管理员";
-		}
-
+		return getUser().getUsername();
 	}
 
 	public static Integer getUserId() {
-		try {
-			return getUser().getId();
-		} catch (Exception e) {
-			return 0;
-		}
+		return getUser().getId();
 	}
 
 	/** 获取登录用户 */
 	public static PetcUserPO getUser() {
 		try {
+//			PetcUserPO userPO = new PetcUserPO();
+//			userPO.setUsername("管理员");
+//			userPO.setId(0);
+//			return userPO;
 			return (PetcUserPO) SecurityUtils.getSubject().getPrincipal();
 		} catch (Exception e) {
-			return new PetcUserPO();
+			PetcUserPO userPO = new PetcUserPO();
+			userPO.setUsername("管理员");
+			userPO.setId(0);
+			return userPO;
 		}
 	}
 }

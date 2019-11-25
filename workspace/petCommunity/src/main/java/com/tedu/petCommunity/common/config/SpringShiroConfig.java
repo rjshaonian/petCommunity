@@ -83,7 +83,7 @@ public class SpringShiroConfig {
 	public ShiroFilterFactoryBean shiroFilterFactory(SecurityManager securityManager) {
 		ShiroFilterFactoryBean sfBean = new ShiroFilterFactoryBean();
 		sfBean.setSecurityManager(securityManager);
-		sfBean.setLoginUrl("/doLoginUI");
+		sfBean.setLoginUrl("/login");
 		// 定义map指定请求过滤规则(哪些资源允许匿名访问,哪些必须认证访问)
 		LinkedHashMap<String, String> map = new LinkedHashMap<>();
 		// 静态资源允许匿名访问:"anon"
@@ -91,12 +91,14 @@ public class SpringShiroConfig {
 		map.put("/build/**", "anon");// anno
 		map.put("/dist/**", "anon");
 		map.put("/plugins/**", "anon");
-		map.put("/doLogout", "logout");
-		map.put("/user/doLogin", "anon");
+		map.put("/register", "anon");
+		map.put("/login", "anon");
+		map.put("/doRegister", "anon");
+		map.put("/doLogin", "anon");
 		// 除了匿名访问的资源,其它都要认证("authc")后访问
 		// map.put("/**","authc");
-//		map.put("/**", "user");// 记住我时将authc改为user
-		map.put("/**", "anon");
+		map.put("/**", "user");// 记住我时将authc改为user
+//		map.put("/**", "anon");
 		sfBean.setFilterChainDefinitionMap(map);
 		return sfBean;
 	}

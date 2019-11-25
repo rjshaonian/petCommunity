@@ -1,6 +1,6 @@
 package com.tedu.petCommunity.sys.service;
 
-import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 
@@ -17,11 +17,15 @@ public interface UserService {
 	 * @param userId
 	 * @return
 	 */
-	Map<String, Object> findUserInfoById(Integer userId);
+	PetcUserPO findUserInfoById(Integer userId);
 
 	/** 修改用户信息 */
 	int updatePetcUser(PetcUserPO petcUserPO, Integer id);
-	
-	
+
+	int updatePassword(String password, String newPassword, String cfgPassword);
+
 	int insertAll(PetcUserPO data);
+
+	String doRegister(String code, PetcUserPO data, HttpSession session);
+
 }

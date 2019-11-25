@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/title.min.css">
+</head>
+<body class="commnunityColor" style="margin:0px;padding:0px">
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">社区信息</h3>
+			</div>
+			<!-- /.box-header -->
+			<a href="community/search" class="community-search" >
+				<button>寻找</button>
+			</a>
+			<a href="community/create" class="community-create" >
+				<button>创建</button>
+			</a>
+			<div class="box-body table-responsive no-padding">
+				<div>
+					<span>社区名</span><br><br>
+					<div id="community">
+					</div>
+				</div>
+				<!--  <table class="table table-hover" style="height:100px">
+					<thead>
+						<tr>
+							<th style="text-align: center">社区名</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyId" >
+					    <tr id="trId" >
+					       <td rowspan="2">数据正在加载中...</td>
+					    </tr>
+					</tbody>
+				</table>  -->
+			</div>
+				<div id="pageId" class="box-footer clearfix">
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		const pageUrl ="doPageUI";
+		$("#pageId").load(pageUrl, function() {
+			doGetObjects();
+		});
+	})
+
+	function doGetObjects() {
+		var url = "community/doFindCommunitys"
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		var user_id =$("#loginUserId").data("userId")
+		if (!pageCurrent)
+			pageCurrent = 1;
+		var params = {
+			"pageCurrent" : pageCurrent,
+			"userId" : user_id
+		};
+		$.getJSON(url, params, function(result) {
+			doHandleResponseResult(result);
+		});//特殊的ajax函数
+	}
+	function doHandleResponseResult(result) { //JsonResult
+		if (result.state == 1) {//ok
+			
+			doSetTableBodyRows(result.data.records);//将数据呈现在页面上 
+			//刷新页面
+			doSetPagination(result.data);
+		} else {
+			doSetErrorMessage(result.msg)
+		}
+	}
+	function doSetErrorMessage(msg) {
+		$("#community").html("");
+		doInitPage();
+	}
+	function doInitPage() {
+		$(".rowCount").html("总记录数(0)");
+		$(".pageCount").html("总页数(0)");
+		$(".pageCurrent").html("当前页数(1)");
+	}
+	 function doSetTableBodyRows(records) {
+		//console.log(records);
+		$("#community").html("");
+		for ( var i in records) {
+			var parent=document.getElementById("community");
+			var div1=doCreateElement1(records[i]);
+			var div2=doCreateElement2(records[i]);
+			var div3=doCreateElement3(records[i]);
+			var div4=document.createElement("br");
+			parent.appendChild(div1);
+			parent.appendChild(div2);
+			parent.appendChild(div4);
+			parent.appendChild(div3);
+		} 
+	} 
+	 function doCreateElement3(data){
+			var userId=data.id;
+		 	var div=document.createElement("a");
+		 	div.setAttribute("href","/community/chat?id="+userId)
+			var text=document.createTextNode("社区聊天");
+			div.appendChild(text);
+			return div;
+	 }
+	 function doCreateElement2(data){
+			var userId=data.id;
+		 	var div=document.createElement("a");
+		 	div.setAttribute("href","community/detail?id="+userId)
+			var text=document.createTextNode("社区详细信息");
+			div.appendChild(text);
+			return div;
+	 }
+	 function doCreateElement1(data) {
+		var div=document.createElement("div");
+		var text=document.createTextNode(data.commName);
+		div.appendChild(text);
+		return div;
+	} 
+</script>
+</body>
+</html>

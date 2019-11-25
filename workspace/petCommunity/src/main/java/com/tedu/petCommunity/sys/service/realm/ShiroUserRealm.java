@@ -3,7 +3,6 @@ package com.tedu.petCommunity.sys.service.realm;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -56,8 +55,8 @@ public class ShiroUserRealm extends AuthorizingRealm {
 		if (userPO == null)
 			throw new UnknownAccountException();
 		// 4.判定用户是否已被禁用。
-		if (userPO.getValid() == 0)
-			throw new LockedAccountException();
+//		if (userPO.getValid() == 0)
+//			throw new LockedAccountException();
 
 		// 5.封装用户信息
 		ByteSource credentialsSalt = ByteSource.Util.bytes(userPO.getSalt());

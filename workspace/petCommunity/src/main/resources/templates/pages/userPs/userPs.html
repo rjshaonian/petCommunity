@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+</head>
+<body>
+	<a id="modify" href="xxx?id=">修改密码</a>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript">
+		
+		$(function(){
+			$("#modify").click(doModifyPsUI);
+		})
+		
+		function doModifyPsUI(){
+			//jq移除/添加属性方法
+			//$('#username').removeAttr("disabled");
+			//$('#username').attr("disabled","disabled");
+			window.location.replace("doUserPsUI/doUpdatePassword?id="+$("#id").val());
+		}
+	</script>
+</body>
+</html>

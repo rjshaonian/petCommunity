@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>宠物社区登录</title><!-- 
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css"> -->
+</head>
+
+<body>
+	<div>
+		<div>
+			<a href="#">宠物社区</a>
+		</div>
+		<div>
+			<p class="login-box-msg">请登录</p>
+
+			<form method="post">
+				<div>
+					<input type="text" id="usernameId" name="username" placeholder="账号">
+				</div>
+				<div>
+					<input type="password" id="passwordId" name="password"
+						placeholder="密码">
+				</div>
+
+
+				<div class="row">
+					<div>
+						<div>
+							<label> <input type="checkbox" id="rememberId">记住我
+							</label>
+						</div>
+					</div>
+					<div>
+						<button type="button" class="btn btn-login">登录</button>
+					</div>
+					<div>
+						<a href="register">注册</a>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script>
+		$(function() {
+			$(".btn-login").click(doLogin);
+		});
+		function doLogin() {
+			var params = {
+				username : $("#usernameId").val(),
+				password : $("#passwordId").val(),
+				isRememberMe : $("#rememberId").prop("checked")
+			}
+			var url = "doLogin";
+			console.log("params", params);
+			$.post(url, params, function(result) {
+				if (result.state == 1) {
+					//跳转到indexUI对应的页面
+					location.href = "home";
+				} else {
+					$(".login-box-msg").html(result.message);
+				}
+				return false;//防止刷新时重复提交
+			});
+		}
+	</script>
+</body>
+</html>

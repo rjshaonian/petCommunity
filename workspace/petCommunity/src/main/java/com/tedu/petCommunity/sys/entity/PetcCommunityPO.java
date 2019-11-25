@@ -32,4 +32,5 @@ public class PetcCommunityPO implements Serializable {
 	private Integer createUser;
 	// 修改者id
 	private Integer modifiedUser;
+
 }
