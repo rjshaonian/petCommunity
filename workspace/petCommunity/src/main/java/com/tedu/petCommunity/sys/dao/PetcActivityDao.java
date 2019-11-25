@@ -19,7 +19,7 @@ public interface PetcActivityDao {
 
 	int insert(PetcActivityPO entity);
 
-	int getRowCount(@Param("userId") Integer userId);
+	int getRowCount1(@Param("userId") Integer userId);
 
 	List<PetcActivityPO> findActivitys(@Param("userId") Integer userId, @Param("startIndex") Integer startIndex,
 			@Param("pageSize") Integer pageSize);
