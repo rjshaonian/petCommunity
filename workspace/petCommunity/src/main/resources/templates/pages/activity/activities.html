@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>活动列表</title>
+<style>
+td {
+	text-align: center
+}
+</style>
+</head>
+<body>
+	<h1>活动列表activites</h1>
+	<div class="row">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title"></h3>
+
+				<div class="box-tools">
+					<div style="width: 350px;">
+						<input type="text" name="table_search" id="searchNameId"
+							placeholder="活动名称">
+
+						<sapn class="input-group-btn">
+						<button type="button" class="btn btn-default btn-search">查找活动</button>
+						</span>
+					</div>
+				</div>
+			</div>
+			<!-- /.box-header -->
+			<div>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>活动名称</th>
+							<th>地点</th>
+							<th>创建时间</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyId">
+						<tr>
+							<td colspan="7">数据正在加载中...</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="pageId" class="box-footer clearfix"></div>
+			<!-- /.box-body -->
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$(function() {
+			
+			$(".wrapper").on("click", ".main", doCancel)
+			$("#pageId").load("doPageUI", doGetObjects);
+			$(".input-group-btn").on("click", ".btn-search", doQueryObjects)
+					.on("click", ".btn-add", goDetail)
+			$("#tbodyId").on("click", ".btn-look", goDetail)
+			$("#tbodyId").on("click", ".btn-look", goDetail)
+			
+			//查询和修改按钮事件注册
+		})
+		
+		
+		/* 详情页  */
+		
+		function goDetail() {
+			debugger
+			var id = $(this).parents("td").siblings("td")[0].innerHTML;
+			$("#mainContentId").load("activity/detail", function() {
+				$(".box-title").html("详情页");
+			});
+			var url = "activity/findActivityById";
+			var param = {
+				"id" : id
+			};
+			$.getJSON(url, param, function(result) {
+				if (result.state == 1) {
+					
+					debugger
+					/*$("#mainContentId").load("activity/detail", function() {
+						$(".box-title").html("详情页");
+					});*/
+					
+					//$("#mainContentId").data("data", result.data)
+					//loadPageUI(title);
+					/*doLoadPageUI(result.data.id);*/
+					var tBody = $("#tbodyId");
+					var page = $("#pageId");
+					tBody.empty();
+					page.empty();
+					var tr ="<tr><td>"+result.data.actiName+"</td><td>"+result.data.position+"</td></tr>";
+					/*var td = "<td>"+ row.actiName + "</td>" + 
+					"<td>" + row.position + "</td>"+
+					"<td>" + row.createTime + "</td>";
+					tr.append(td);*/
+					//tr追加到body
+					tBody.append(tr);
+				} else {
+					alert(result.message);
+				}
+			});
+
+		}
+		/*  $("#mainContentId").load("activity/detail"); */
+	/*	function doLoadPageUI(id) {
+			$("#mainContentId").load("activity/detail", function() {
+				$(".box-title").html("详情页");
+			});
+			debugger
+			 var url="activity/findActivityById";
+		      $.getJSON(url,id,function(result){
+		 	        doHandleResponseResult(result);
+		 	        console.log(result);
+				 }
+			   );
+		}*/
+		/* 详情页  */
+		function doQueryObjects() {
+			$("#pageId").data("pageCurrent", 1);
+			doGetObjects();
+		}
+		function doGetObjects() {
+			//1.定义请求参数
+			//var params="pageCurrent=1";
+			var pageCurrent = $("#pageId").data("pageCurrent");
+			if (!pageCurrent)
+				pageCurrent = 1;
+			var params = {
+				"pageCurrent" : pageCurrent
+			};//json格式的js对象
+			//查询时获取用户名
+			var actiName = $("#searchNameId").val();
+			if (actiName) {
+				params.actiName = actiName;//参数名必须与控制层参数一致
+			}
+			var url = "activity/findActivities";
+			//2.发起异步请求
+			$.getJSON(url, params, function(result) {
+
+				doHandleResponseResult(result);
+			});//特殊的ajax函数
+
+		}
+
+		function doHandleResponseResult(result) { //JsonResult
+			debugger
+			if (result.state == 1) {//ok
+				//更新table中tbody内部的数据
+				doSetTableBodyRows(result.data.records);//将数据呈现在页面上 
+				//更新页面page.html分页数据
+				//doSetPagination(result.data); //此方法写到page.html中
+			} else {
+				alert(result.msg);
+			}
+		}
+
+		function doSetTableBodyRows(records) {
+debugger
+			//获取tbody对象并清空
+			var tBody = $("#tbodyId");
+			tBody.empty();
+			//迭代记录并追加
+			for (var i = 0; i < records.length; i++) {
+				//创建tr对象
+				var tr = $("<tr></tr>");
+				//创建td对象
+				var tds = doCreateTds(records[i]);
+				//td追加到tr
+				tr.append(tds);
+				//tr追加到body
+				tBody.append(tr);
+			}
+		}
+
+		function doCreateTds(row) {
+			debugger
+			var tds = "<td hidden='true'>" + row.id + "</td>" + "<td>"
+					+ row.actiName + "</td>" + "<td>" + row.position + "</td>"
+					+ "<td>" + row.createTime + "</td>"
+					+ "<td><a class='btn-delete'>删除</a>"
+					+ "&nbsp;<a class='btn-look' id='look'>详情</a></td>";
+			return tds;
+		}
+	</script>
+</body>
+</html>
