@@ -47,12 +47,14 @@
 			doLoadUI("load-activity-id", "activity/activity_list");
 			doGetUpdateUserInfo();
 		});
-		function doGetUpdateUserInfo() {
+		function doGetUpdateUserInfo(){
 			var url = "user/doUpdateUser";
 			$.getJSON(url, function(result) {
 				if (result.state == 1) {
 					console.log(result);
 					$("#loginUserId").data("userId",result.data.id);
+					var a=$("#loginUserId").data("userId");
+					console.log(a);
 				}
 			});
 		}

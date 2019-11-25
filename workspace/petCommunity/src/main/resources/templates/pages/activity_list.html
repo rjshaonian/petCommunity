@@ -2,20 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<style type="text/css">
-#activity{
-	text-align: center;
-	width:100%;
-	height:150px
-}
-.row{
-	background:#75BD43;
-	 background-position: 50% 0px;
-}
-#search{
-	float:right ;
-}
-</style>
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/title.min.css">
 </head>
 <body class="activityColor" style="margin:0px;padding:0px">
 <div class="row">
@@ -66,7 +54,7 @@
 	function doGetObjects() {
 		var url = "activity/doFindActivitys"
 		var pageCurrent = $("#pageId").data("pageCurrent");
-		var user_id =114;//$("#loginUserId").data("userId")
+		var user_id =$("#loginUserId").data("userId");
 		if (!pageCurrent)
 			pageCurrent = 1;
 		var params = {
