@@ -1,4 +1,4 @@
-package com.tedu.petCommunity.dailyreport.service.impl;
+package com.tedu.petCommunity.sys.service.impl;
 
 import java.util.List;
 
@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tedu.petCommunity.common.exception.ServiceException;
-import com.tedu.petCommunity.dailyreport.dao.ActivityDao;
-import com.tedu.petCommunity.dailyreport.service.ActivityService;
 import com.tedu.petCommunity.dailyreport.vo.PageObject;
+import com.tedu.petCommunity.sys.dao.PetcActivityDao;
 import com.tedu.petCommunity.sys.entity.PetcActivityPO;
+import com.tedu.petCommunity.sys.service.PetcActivityService;
 
 @Service
-public class ActivityServiceImpl implements ActivityService {
+public class PetcActivityServiceImpl implements PetcActivityService {
 	
 	@Autowired
-	private ActivityDao activityDao;
+	private PetcActivityDao activityDao;
 
 	@Override
 	public PageObject<PetcActivityPO> findActivitys(Integer userId, Integer pageCurrent) {

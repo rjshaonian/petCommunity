@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tedu.petCommunity.dailyreport.dao.ActivityDao">
-
+<mapper namespace="com.tedu.petCommunity.sys.dao.PetcCommunityDao">
 	<sql id="queryWhereId">
           <where>
              id in
-		(select acti_id from user_acti where user_id=#{userId})
+		(select comm_id from user_comm where user_id=#{userId})
           </where>
     </sql>
     <!-- 查询记录数 -->
     <select id="getRowCount"
     		resultType="int">
-    	select count(*) 
-          from activity
+    	select count(*) from community
           <include refid="queryWhereId"/>
     </select>
     <!--查询社区  -->
-	<select id="findActivitys"
-			resultType="com.tedu.petCommunity.sys.entity.PetcActivityPO">
-		select *from activity 
+	<select id="findCommunitys"
+			resultType="com.tedu.petCommunity.sys.entity.PetcCommunityPO">
+		select *from community 
 		<include refid="queryWhereId"/>
-		order by start_time desc
+		order by create_time desc
          limit #{startIndex},#{pageSize} 
 	</select>
 </mapper>

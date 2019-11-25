@@ -5,21 +5,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.tedu.petCommunity.common.util.ShiroUtils;
-import com.tedu.petCommunity.dailyreport.service.ActivityService;
-import com.tedu.petCommunity.dailyreport.service.CommunityService;
 import com.tedu.petCommunity.dailyreport.vo.PageObject;
 import com.tedu.petCommunity.sys.entity.PetcActivityPO;
 import com.tedu.petCommunity.sys.entity.PetcCommunityPO;
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
+import com.tedu.petCommunity.sys.service.PetcActivityService;
+import com.tedu.petCommunity.sys.service.PetcCommunityService;
 
 @SpringBootTest
 public class CommunityTests {
 
 	@Autowired
-	private CommunityService communityService;
+	private PetcCommunityService communityService;
 	
 	@Autowired
-	private ActivityService activityService;
+	private PetcActivityService activityService;
 	
 	
 	@Test

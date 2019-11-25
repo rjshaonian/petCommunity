@@ -1,4 +1,4 @@
-package com.tedu.petCommunity.dailyreport.dao;
+package com.tedu.petCommunity.sys.dao;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.tedu.petCommunity.sys.entity.PetcActivityPO;
 
 @Mapper
-public interface ActivityDao {
+public interface PetcActivityDao {
 
 	int getRowCount(@Param("userId")Integer  userId);
 	

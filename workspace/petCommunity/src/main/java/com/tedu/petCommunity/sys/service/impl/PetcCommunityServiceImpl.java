@@ -1,4 +1,4 @@
-package com.tedu.petCommunity.dailyreport.service.impl;
+package com.tedu.petCommunity.sys.service.impl;
 
 
 import java.util.List;
@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tedu.petCommunity.common.exception.ServiceException;
-import com.tedu.petCommunity.dailyreport.dao.CommunityDao;
-import com.tedu.petCommunity.dailyreport.service.CommunityService;
 import com.tedu.petCommunity.dailyreport.vo.PageObject;
+import com.tedu.petCommunity.sys.dao.PetcCommunityDao;
 import com.tedu.petCommunity.sys.entity.PetcCommunityPO;
+import com.tedu.petCommunity.sys.service.PetcCommunityService;
 
 @Service
-public class CommunityServiceImpl implements CommunityService {
+public class PetcCommunityServiceImpl implements PetcCommunityService {
 	
 	@Autowired
-	private CommunityDao communityDao;
+	private PetcCommunityDao communityDao;
 
 
 	@Override

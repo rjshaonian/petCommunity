@@ -1,4 +1,4 @@
-package com.tedu.petCommunity.dailyreport.controller;
+package com.tedu.petCommunity.sys.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
