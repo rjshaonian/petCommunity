@@ -3,12 +3,8 @@
  */
 package com.tedu.petCommunity.sys.entity;
 
-
-
 import java.util.Date;
 import lombok.Data;
-
-
 
 /**
  * @author 彬彬
@@ -32,4 +28,5 @@ public class PetcCommunityPO {
 	private Integer createUser;
 	//修改者id
 	private Integer modifiedUser;
+	
 }

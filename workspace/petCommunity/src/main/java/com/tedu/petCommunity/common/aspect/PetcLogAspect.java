@@ -78,7 +78,7 @@ public class PetcLogAspect {
 	private String getOperation(Method targetMethod) {
 //		RequiredLog rLog = targetMethod.getAnnotation(RequiredLog.class);
 //		return rLog.value();
-		return null;
+		return targetMethod.getName();
 	}
 
 	private String getTargetMethodName(Method targetMethod) {
