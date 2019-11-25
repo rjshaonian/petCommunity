@@ -19,7 +19,11 @@ public class ShiroUtils {
 	/** 获取登录用户 */
 	public static PetcUserPO getUser() {
 		try {
-			return (PetcUserPO) SecurityUtils.getSubject().getPrincipal();
+			PetcUserPO userPO = new PetcUserPO();
+			userPO.setUsername("管理员");
+			userPO.setId(0);
+			return userPO;
+//			return (PetcUserPO) SecurityUtils.getSubject().getPrincipal();
 		} catch (Exception e) {
 			PetcUserPO userPO = new PetcUserPO();
 			userPO.setUsername("管理员");

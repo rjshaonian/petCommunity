@@ -21,7 +21,7 @@ public class PetcActivityPO {
 	//是否启用0:未启用;1:启用
 	private Integer valid;
 	//宠物类型
-	private Integer actiType;
+	private String actiType;
 	//开始时间
 	private Date startTime;
 	//结束时间

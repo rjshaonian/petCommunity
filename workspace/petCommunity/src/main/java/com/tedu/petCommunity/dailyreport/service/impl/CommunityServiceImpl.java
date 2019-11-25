@@ -27,7 +27,7 @@ public class CommunityServiceImpl implements CommunityService {
 		  int rowCount=communityDao.getRowCount(userId);
 		  if(rowCount==0)
 		  throw new ServiceException("系统没有查到相关社区的记录");
-		  int pageSize=5;
+		  int pageSize=2;
 		  int startIndex=(pageCurrent-1)*pageSize;
 		  List<PetcCommunityPO> records=
 		  communityDao.findCommunitys(userId, startIndex, pageSize);

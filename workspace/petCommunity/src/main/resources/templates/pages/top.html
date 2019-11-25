@@ -19,12 +19,12 @@
 			</span>
 			<nav class="navbar" role="navigation">
 				<div class=navbar-costom-menu style="float: right">
-					<img src="dist/img/user8-128x128.jpg" class="user-image"
-						alt="User Image"> <span class="hidden-xs" id="loginUserId"
-						th:text="${user.username}"> 用户名 </span><br> <a href="login"
-						class="btn btn-default btn-sign-out">Sign out</a>
+					<img src="dist/img/petlogo.jpg" class="user-image"
+						alt="User Image"> 	
+						<a href="login" class="btn btn-default btn-sign-out" id="out">Sign out</a>
 				</div>
-				<div>
+					<a href="personal" id="loginUserId" th:text=${user.username}></a>
+				<div style="background:">
 					<ul class="community-menu">
 						<li><a id="load-community-id" style="float: left">社区管理</a></li>
 						<li><a id="load-activity-id" style="float: left"> 活动管理</a></li>
@@ -33,8 +33,10 @@
 			</nav>
 		</header>
 		<div>
-			<section id="mainContentId" class="content container-fluid">
-				<img alt="Pet Image" src="dist/img/avatar.png">
+			<section id="mainContentId" class="petPicture">
+				<img alt="Pet Image" src="dist/img/chongwumao-009.jpg">
+				<img alt="Pet Image" src="dist/img/hashiqi-007.jpg">
+				<img alt="Pet Image" src="dist/img/user8-128x128.jpg">
 			</section>
 		</div>
 	</div>

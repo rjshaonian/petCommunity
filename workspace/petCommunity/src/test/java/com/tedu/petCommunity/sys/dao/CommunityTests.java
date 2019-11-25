@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.tedu.petCommunity.common.util.ShiroUtils;
 import com.tedu.petCommunity.dailyreport.service.ActivityService;
 import com.tedu.petCommunity.dailyreport.service.CommunityService;
-import com.tedu.petCommunity.dailyreport.service.PetUserService;
 import com.tedu.petCommunity.dailyreport.vo.PageObject;
 import com.tedu.petCommunity.sys.entity.PetcActivityPO;
 import com.tedu.petCommunity.sys.entity.PetcCommunityPO;
@@ -21,8 +21,6 @@ public class CommunityTests {
 	@Autowired
 	private ActivityService activityService;
 	
-	@Autowired
-	private PetUserService petUserService;
 	
 	@Test
 	public void testCommunity() {
@@ -39,7 +37,7 @@ public class CommunityTests {
 	
 	@Test
 	public void testUser() {
-		PetcUserPO user = petUserService.fingUserById(2);
+		PetcUserPO user = ShiroUtils.getUser();
 		System.out.println(user);
 	}
 }

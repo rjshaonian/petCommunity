@@ -25,7 +25,7 @@ public class ActivityServiceImpl implements ActivityService {
 		  int rowCount=activityDao.getRowCount(userId);
 		  if(rowCount==0)
 		  throw new ServiceException("系统没有查到对应活动的记录");
-		  int pageSize=5;
+		  int pageSize=3;
 		  int startIndex=(pageCurrent-1)*pageSize;
 		  List<PetcActivityPO> records=
 		  activityDao.findActivitys(userId, startIndex, pageSize);
