@@ -1,7 +1,6 @@
 package com.tedu.petCommunity.sys.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -14,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class PetcPageController {
 
-	@RequestMapping("home")
-	public String goHome() {
-		return "home";
-	}
+//	@RequestMapping("home")
+//	public String goHome() {
+//		return "home";
+//	}
 
 	@RequestMapping("activity")
 	public String goActivity() {
@@ -28,14 +27,14 @@ public class PetcPageController {
 	public String showActivities() {
 		return "activity/activities";
 	}
-
-	@RequestMapping("doPageUI")
-	public String doPageUI() {
-		return "activity/page";
-	}
-
-	@RequestMapping("{module}/{moduleUI}")
-	public String doModuleUI(@PathVariable String moduleUI) {
-		return "activity/" + moduleUI;
-	}
+//
+//	@RequestMapping("doPageUI")
+//	public String doPageUI() {
+//		return "activity/page";
+//	}
+//
+//	@RequestMapping("{module}/{moduleUI}")
+//	public String doModuleUI(@PathVariable String moduleUI) {
+//		return "activity/" + moduleUI;
+//	}
 }
