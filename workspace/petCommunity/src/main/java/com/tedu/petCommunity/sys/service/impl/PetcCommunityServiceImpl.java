@@ -1,5 +1,6 @@
 package com.tedu.petCommunity.sys.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.util.StringUtils;
 
 import com.tedu.petCommunity.common.config.PageProperties;
 import com.tedu.petCommunity.common.exception.ServiceException;
+import com.tedu.petCommunity.common.util.ShiroUtils;
 import com.tedu.petCommunity.common.vo.CommObject;
 import com.tedu.petCommunity.common.vo.PageObject;
 import com.tedu.petCommunity.dailyreport.vo.UserCommVo;
@@ -16,7 +18,9 @@ import com.tedu.petCommunity.sys.dao.CommActi;
 import com.tedu.petCommunity.sys.dao.PetcCommunityDao;
 import com.tedu.petCommunity.sys.dao.PetcUserCommDao;
 import com.tedu.petCommunity.sys.entity.PetcCommunityPO;
+import com.tedu.petCommunity.sys.entity.PetcUserPO;
 import com.tedu.petCommunity.sys.service.PetcCommunityService;
+import com.tedu.petCommunity.sys.vo.PetcCommDetailVO;
 
 @Service
 public class PetcCommunityServiceImpl implements PetcCommunityService {
@@ -64,8 +68,8 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 
 		// 2.保存社区信息
 		// 获取当前时间并赋值给pojo对象
-		entity.setCreateTime(new Date());
-		entity.setModifiedTime(entity.getCreateTime());
+		entity.setCreatedTime(new Date());
+		entity.setModifiedTime(entity.getCreatedTime());
 		int rows = communityDao.createObject(entity);
 
 		// 3.返回结果
@@ -147,4 +151,54 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 		communityDao.deleteComm(commId);
 		communityDao.deleteObject(entity);
 	}
+
+	@Override
+	public PetcUserPO getUserNameById(Integer id) {
+		return communityDao.getUserById(id);
+	}
+
+	@Override
+	public PetcCommDetailVO getCommDetailVO(Integer id) {
+		// 1.根据id获取社区信息
+		PetcCommunityPO po = communityDao.getCommunityById(id);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		po.setCreatedTimeStr(format.format(po.getCreatedTime()));
+		po.setModifiedTimeStr(format.format(po.getModifiedTime()));
+		// 2.根据创建者id获取创建者信息
+		PetcUserPO createdUser = communityDao.getUserById(po.getCreatedUser());
+		// 3.分析登录账号相对此社区的类型
+		Integer myId = ShiroUtils.getUserId();
+		Integer relationship = 0;
+		if (myId.intValue() == createdUser.getId().intValue()) {
+			relationship = 2;
+		} else if (communityDao.getUserCommCount(id, myId) > 0) {
+			relationship = 1;
+		}
+		PetcCommDetailVO vo = new PetcCommDetailVO();
+		vo.setId(id);
+		vo.setNickname(createdUser.getNickname());
+		vo.setRelationship(relationship);
+		vo.setPo(po);
+		return vo;
+	}
+
+	@Override
+	public void doCreateComm(String commName, String position) {
+		// 1.插入社区表
+		PetcCommunityPO po = new PetcCommunityPO();
+		po.setCommName(commName);
+		po.setPosition(position);
+		po.setValid(1);
+		po.setCreatedTime(new Date());
+		po.setModifiedTime(po.getCreatedTime());
+		Integer userId = ShiroUtils.getUserId();
+		po.setCreatedUser(userId);
+		po.setModifiedUser(po.getCreatedUser());
+		communityDao.insertCommPO(po);
+		// 2.查出id
+		Integer commId = communityDao.findCommIdByPO(po);
+		// 3.向用户、社区关系表中插入一条关联数据
+		communityDao.insertRelationshipByUserComm(userId, commId);
+	}
+
 }

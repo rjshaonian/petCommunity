@@ -19,7 +19,7 @@
 	<select
 		resultType="com.tedu.petCommunity.sys.entity.PetcUserChatVO"
 		id="findUserChatByCommId">
-		select c.*,u.username from user u,chat c where comm_id=#{commId}
+		select c.*,u.nickname from user u,chat c where comm_id=#{commId}
 		and u.id=c.created_user
 		order by created_time desc
 	</select>

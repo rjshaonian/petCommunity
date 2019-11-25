@@ -4,6 +4,8 @@ import com.tedu.petCommunity.common.vo.CommObject;
 import com.tedu.petCommunity.common.vo.PageObject;
 import com.tedu.petCommunity.dailyreport.vo.UserCommVo;
 import com.tedu.petCommunity.sys.entity.PetcCommunityPO;
+import com.tedu.petCommunity.sys.entity.PetcUserPO;
+import com.tedu.petCommunity.sys.vo.PetcCommDetailVO;
 
 public interface PetcCommunityService {
 
@@ -46,4 +48,22 @@ public interface PetcCommunityService {
 	 * @return
 	 */
 	int addObject(PetcCommunityPO entity);
+
+	/**
+	 * @param createUser
+	 * @return
+	 */
+	PetcUserPO getUserNameById(Integer createUser);
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	PetcCommDetailVO getCommDetailVO(Integer id);
+
+	/**
+	 * @param commName
+	 * @param position
+	 */
+	void doCreateComm(String commName, String position);
 }

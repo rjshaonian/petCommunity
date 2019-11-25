@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>宠物社区</title>
+<!--Custom Theme files-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<!--Custom Theme files-->
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link href="dist/css/style.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link type="text/css" rel="stylesheet"
+	href="dist/css/jquery.mmenu.all.css?v=5.4.4" />
+<!--//Custom Theme files-->
+<!--web-fonts-->
+<link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600'
+	rel='stylesheet' type='text/css'>
+<!--//web-fonts-->
+<style type="text/css">
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body>
+	<div class=" mm-wrapper" id="page">
+		<div class="push-menu ">
+			<div class="banner">
+				<div class="banner-text">
+					<div class="menu">
+						<a href="#menu"><img src="dist/img/menu-icon.png" alt="" /></a>
+						<nav id="menu">
+							<ul class="">
+								<li class="menu-title" onclick="location.href='home'">主页</li>
+								<li><a href="personal_modify"><span class="icons">
+									</span> 修改信息</a></li>
+								<li><a href="personal_password"><span
+										class="icons icn4"> </span> 修改密码</a></li>
+								<li><a href="login"><span class="icons icn5"> </span>
+										退出登录</a></li>
+							</ul>
+						</nav>
+					</div>
+					<div class="title">
+						<!-- <div class="title-left">
+							<img src="dist/img/icon.png" alt="" />
+						</div> -->
+						<div class="title-right">
+							<h6>社区名：</h6>
+							<h2 th:text="${vo.po.commName}">社区名</h2>
+							<h6>社区定位：</h6>
+							<h2 th:text="${vo.po.position}">社区定位</h2>
+							<h6>创建时间：</h6>
+							<h2 th:text="${vo.po.createdTimeStr}">创建时间</h2>
+							<h6>创建者：</h6>
+							<h2 id="nickname" th:text="${vo.nickname}">创建者</h2>
+							<h2>
+								<input type="hidden" class="btn btn-primary" value="加入"
+									id="join" /> <input type="hidden" class="btn btn-danger"
+									value="退出" id="exit" /> <input type="hidden"
+									class="btn btn-warning" value="修改" id="modify" /> <input
+									type="hidden" class="btn btn-danger" value="解散" id="disband" />
+							</h2>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script src="dist/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript"
+		src="dist/js/jquery.mmenu.min.all.js?v=5.4.4"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$("#menu").mmenu({
+				extensions : [ "theme-dark", "effect-listitems-slide" ],
+				iconPanels : {
+					add : true,
+					visible : 1
+				},
+				navbar : {
+					add : false
+				},
+				counters : true
+			}).on('click', 'a[href^="#/"]', function() {
+				alert("Thank you for clicking, but that's a demo link.");
+				return false;
+			});
+			
+			showBtn();
+		});
+		
+		function showBtn(){
+			var relationship = [[${vo.relationship}]]-0;
+			if(relationship==2){
+				$("#modify").attr("type","button");
+				$("#disband").attr("type","button");
+				$("#nickname").html($("#nickname").html()+"（我）");
+			}else if(relationship==1){
+				$("#exit").attr("type","button");
+			}else if(relationship ==0){
+				$("#join").attr("type","button");
+			}
+		}
+	</script>
+</body>
+</html>

@@ -2,11 +2,14 @@ package com.tedu.petCommunity.sys.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import com.tedu.petCommunity.dailyreport.vo.UserCommVo;
 import com.tedu.petCommunity.sys.entity.PetcCommunityPO;
+import com.tedu.petCommunity.sys.entity.PetcUserPO;
 
 @Mapper
 public interface PetcCommunityDao {
@@ -40,4 +43,44 @@ public interface PetcCommunityDao {
 
 	/** 退出社区 */
 	int deleteObject(PetcCommunityPO entity);
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	@Select("select * from community where id=#{id}")
+	PetcCommunityPO getCommunityById(Integer id);
+
+	/**
+	 * @return
+	 */
+	@Select("select * from user where id=#{id}")
+	PetcUserPO getUserById(Integer id);
+
+	/**
+	 * @param id
+	 * @param myId
+	 */
+	@Select("select count(*) from user_comm where comm_id=#{commId} and user_id=#{userId}")
+	int getUserCommCount(Integer commId, Integer userId);
+
+	/**
+	 * @param po
+	 */
+	@Insert("insert into community values(null,#{commName},#{position},#{valid},#{createdTime},#{modifiedTime},#{createdUser},#{modifiedUser})")
+	int insertCommPO(PetcCommunityPO po);
+
+	/**
+	 * @param po
+	 * @return
+	 */
+	@Select("select id from community where comm_name=#{commName} and position=#{position}")
+	Integer findCommIdByPO(PetcCommunityPO po);
+
+	/**
+	 * @param userId
+	 * @param commId
+	 */
+	@Insert("insert into user_comm values(null,#{userId},#{commId})")
+	void insertRelationshipByUserComm(Integer userId, Integer commId);
 }

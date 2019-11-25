@@ -115,7 +115,7 @@
 				alert("两次输入密码不一致，请重新确认！！！");
 				return false;
 			}
-			$.post("/doRegister", $("form").serialize(), function(result) {
+			$.post("register/doRegister", $("form").serialize(), function(result) {
 				if (result.state == 1) {
 					alert("注册成功")
 					window.location.href = "login";

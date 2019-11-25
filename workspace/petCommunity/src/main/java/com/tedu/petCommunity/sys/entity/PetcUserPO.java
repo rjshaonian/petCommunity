@@ -42,4 +42,13 @@ public class PetcUserPO implements Serializable {
 	// 修改者id
 	private Integer modifiedUser;
 
+	/**
+	 * @return the nickname
+	 */
+	public String getNickname() {
+		if (nickname == null || nickname.equals("") || nickname.length() == 0)
+			return getUsername();
+		return nickname;
+	}
+
 }

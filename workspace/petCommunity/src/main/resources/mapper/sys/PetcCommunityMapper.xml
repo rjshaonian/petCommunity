@@ -14,7 +14,7 @@
 		resultType="com.tedu.petCommunity.sys.entity.PetcCommunityPO">
 		select *from community
 		<include refid="queryWhereId1" />
-		order by create_time desc
+		order by created_time desc
 		limit #{startIndex},#{pageSize}
 	</select>
 
@@ -22,9 +22,9 @@
 	<insert id="createObject"
 		parameterType="com.tedu.petCommunity.sys.entity.PetcCommunityPO">
 		insert into community
-		(comm_name,position,create_user,create_time,modified_time)
+		(comm_name,position,create_user,created_time,modified_time)
 		values
-		(#{commName},#{position},#{createUser},#{createTime},#{modifiedTime})
+		(#{commName},#{position},#{createUser},#{createdTime},#{modifiedTime})
 	</insert>
 
 	<!-- 查询社区 -->
