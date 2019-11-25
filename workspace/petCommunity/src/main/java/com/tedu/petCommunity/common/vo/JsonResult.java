@@ -2,6 +2,9 @@ package com.tedu.petCommunity.common.vo;
 
 import java.io.Serializable;
 
+/**
+ * @author 阳昊 2019年11月22日 下午4:00:34
+ */
 public class JsonResult implements Serializable {
 	private static final long serialVersionUID = -856924038217431339L;// SysResult/Result/R
 	/** 状态码 */

@@ -68,7 +68,29 @@ public class PetcActivityServiceImpl implements PetcActivityService {
 		/* sysRoleMenuDao.insertObjects(entity.getId(), Ids); */
 		// 4.返回业务结果
 		return rows;
+	}
 
+	@Autowired
+	private PetcActivityDao activityDao;
+
+	@Override
+	public PageObject<PetcActivityPO> findActivitys(Integer userId, Integer pageCurrent) {
+
+		if (pageCurrent == null || pageCurrent < 1)
+			throw new IllegalArgumentException("当前页码不正确");
+		int rowCount = activityDao.getRowCount(userId);
+		if (rowCount == 0)
+			throw new ServiceException("系统没有查到对应活动的记录");
+		int pageSize = 3;
+		int startIndex = (pageCurrent - 1) * pageSize;
+		List<PetcActivityPO> records = activityDao.findActivitys(userId, startIndex, pageSize);
+		PageObject<PetcActivityPO> pageObject = new PageObject<PetcActivityPO>();
+		pageObject.setPageCurrent(pageCurrent);
+		pageObject.setPageSize(pageSize);
+		pageObject.setRowCount(rowCount);
+		pageObject.setRecords(records);
+		pageObject.setPageCount((rowCount - 1) / pageSize + 1);
+		return pageObject;
 	}
 
 }

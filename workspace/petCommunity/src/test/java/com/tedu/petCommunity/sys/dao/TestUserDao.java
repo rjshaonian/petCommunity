@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
+import com.tedu.petCommunity.sys.service.UserService;
 
 @SpringBootTest
 public class TestUserDao {
@@ -23,4 +24,6 @@ public class TestUserDao {
 		
 		userDao.insertAll(data);
 	}
+
+	
 }

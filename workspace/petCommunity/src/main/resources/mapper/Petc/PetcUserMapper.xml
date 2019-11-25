@@ -3,6 +3,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.tedu.petCommunity.sys.dao.PetcUserDao">
+	<select id="findUserInfo" parameterType="int"
+		resultType="com.tedu.petCommunity.sys.entity.PetcUserPO">
+		select *
+		from user
+		where id=#{userId}
+	</select>
 	<update id="updateUserInfo"
 		parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO">
 		update user set username =#{username},
@@ -11,15 +17,25 @@
 		mobile=#{mobile},
 		pet_type=#{petType},
 		valid=#{valid},
-		modified_time=#{modifiedTime},
+		modified_time=now(),
 		modified_user=#{modifiedUser} where id=#{id}
 	</update>
+	<update id="updatePassword">
+         update user
+         set password=#{password},
+             salt=#{salt},
+             modified_time=now()
+         where id=#{id}
+</update>
 	
 	<!-- 添加数据 -->
-	<insert id="insertAll" parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO" useGeneratedKeys="true" keyProperty="id" >
-		insert into user(username,password,salt,email,mobile,valid,nickname) 
+	<insert id="insertAll" parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO">
+		insert into user(username,password,mobile,nickname,salt) 
 		values
-		(#{username},#{password},#{salt},#{email},#{mobile},#{valid},#{nickname}) 
-		
+		(#{username},#{password},#{mobile},#{nickname},#{salt}) 
 	</insert>
+	
+	<select id="existName" resultType="int">
+		select count(*) from user where username=#{username}
+	</select>
 </mapper>

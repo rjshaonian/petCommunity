@@ -8,6 +8,8 @@ public interface PetcActivityService {
 
 	PetcActivityPO findActivityById(Integer id);
 
-	int save(PetcActivityPO entity/* , Integer[] ids */);
+	int save(PetcActivityPO entity);
+
+	PageObject<PetcActivityPO> findActivitys(Integer userId, Integer pageCurrent);
 
 }

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.tedu.petCommunity.sys.dao.PetcActivityDao">
+<mapper namespace="com.tedu.petCommunity.sys.dao.PetcActivityDao">
 
+
+
+
+</mapper>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.petCommunity.sys.dao.PetcActivityDao">
 	<sql id="queryWhereId">
 		<where>
 			<if test="actiName!=null and actiName!=''">
@@ -37,6 +43,13 @@
 		(#{id},#{actiName},#{position},#{valid},#{actiType},#{startTime},#{endTime},#{createTime},
 		#{modifiedTime},#{createUser},#{modifiedUser})
 	</insert>
-
-
+	<!--查询社区 -->
+	<select id="findActivitys"
+		resultType="com.tedu.petCommunity.sys.entity.PetcActivityPO">
+		select *from activity
+		<include refid="queryWhereId" />
+		order by start_time desc
+		limit #{startIndex},#{pageSize}
+	</select>
 </mapper>
+>>>>>>> 8673fc3086f1c4101c71e95d9d6fa0772af984fa

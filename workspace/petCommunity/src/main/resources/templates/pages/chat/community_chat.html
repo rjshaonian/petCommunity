@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>社群聊天</title>
+<link rel="stylesheet"
+	href="../bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container"
+		style="background: #aaaaaa; padding: 40px 200px;">
+		<a href="http://localhost/community/detail">群聊天名</a>
+		<div class="input_say">
+			<textarea rows=5 class="form-control" name="description"
+				placeholder="我也说两句..."></textarea>
+		</div>
+		<button type="button" class="btn btn-primary">发送</button>
+		<br /> <span th:text=*{community_miss}>社区信息：xxxxxxxxxxxx</span>
+		<div>
+			<p>昵称</p>
+			<p style="word-wrap: break-word;" th:text=*{description}>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<h3>
+				<span th:text=*{createdTimeStr}>2019/11/11 11:11</span>
+			</h3>
+		</div>
+		<div align="center">
+			<button id="up" type="button" class="btn btn-primary"
+				style="float: left;">上一页</button>
+			<span>第几页</span>
+			<button id="down" type="button" class="btn btn-primary"
+				style="float: right;">下一页</button>
+		</div>
+	</div>
+</body>
+</html>
