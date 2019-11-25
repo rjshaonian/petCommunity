@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.tedu.petCommunity.common.vo.JsonResult;
 
-/** 全局异常处理类 */
+/**
+ * 全局异常处理类
+ * @author 阳昊 2019年11月22日 下午3:58:32
+ */
+/**  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
