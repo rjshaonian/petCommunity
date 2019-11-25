@@ -1,5 +1,7 @@
 package com.tedu.petCommunity.sys.service;
 
+import javax.servlet.http.HttpSession;
+
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 
 /**
@@ -23,4 +25,6 @@ public interface UserService {
 	int updatePassword(String password, String newPassword, String cfgPassword);
 
 	int insertAll(PetcUserPO data);
+	
+	String doRegister(String code,PetcUserPO data,HttpSession session);
 }

@@ -2,6 +2,8 @@ package com.tedu.petCommunity.sys.controller;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,8 +35,4 @@ public class UtilController {
 		session.setAttribute("CMap", CMap);
 		return new JsonResult("执行成功");
 	}
-	
-	
-	/**验证码校验*/
-	
 }

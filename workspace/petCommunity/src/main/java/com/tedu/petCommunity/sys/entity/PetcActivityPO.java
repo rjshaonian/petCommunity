@@ -20,7 +20,7 @@ public class PetcActivityPO {
 	private String position;
 	//是否启用0:未启用;1:启用
 	private Integer valid;
-	//宠物类型
+	//活动类型
 	private String actiType;
 	//开始时间
 	private Date startTime;

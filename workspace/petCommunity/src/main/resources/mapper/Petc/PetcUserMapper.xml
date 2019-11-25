@@ -35,7 +35,7 @@
 		(#{username},#{password},#{mobile},#{nickname},#{salt}) 
 	</insert>
 	
-	<select id="existName" resultType="com.tedu.petCommunity.sys.entity.PetcUserPO">
-		select * from user where username=#{username}
+	<select id="existName" resultType="int">
+		select count(*) from user where username=#{username}
 	</select>
 </mapper>
