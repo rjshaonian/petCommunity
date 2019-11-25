@@ -93,6 +93,7 @@ public class SpringShiroConfig {
 		map.put("/plugins/**", "anon");
 		map.put("/register", "anon");
 		map.put("/login", "anon");
+		map.put("/doRegister", "anon");
 		map.put("/doLogin", "anon");
 		// 除了匿名访问的资源,其它都要认证("authc")后访问
 		// map.put("/**","authc");

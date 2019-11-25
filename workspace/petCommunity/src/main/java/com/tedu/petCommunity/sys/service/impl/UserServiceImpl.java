@@ -88,8 +88,8 @@ public class UserServiceImpl implements UserService {
 		// username=#{username})
 		// 2.2如果(list==null||list.size()==0),说明数据库中没有此用户名的用户,可以注册
 		// 2.3否则报错("此用户已被注册,请修改用户名")
-		PetcUserPO existName = petcUserDao.existName(data.getUsername());
-		if (existName != null && existName.getId() > 0)
+		int row = petcUserDao.existName(data.getUsername());
+		if (row > 0)
 			throw new ServiceException("用户名已存在");
 		// 3保存用户关系
 		int rows = petcUserDao.insertAll(data);
