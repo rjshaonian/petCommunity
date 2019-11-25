@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+.main-header {
+	width: auto;
+	height: 20%;
+	background-color: #5499E4;
+	text-align: center;
+	font-size: 15px
+}
+
+span {
+	position: relative;
+	top: 10px;
+}
+
+#loginUserId {
+	position: absolute;
+	top: 10px;
+	right: 120px;
+}
+
+.community-menu {
+	font-color: black;
+	left: 0;
+	position: relative;
+	left: 0;
+	top: 35px;
+}
+
+.navbar-costom-menu a {
+	position: absolute;
+	top: 65px;
+	right: 100px;
+}
+
+img {
+	max-width: 120px;
+	max-height: 80px;
+}
+
+/* .petPicture {
+	background: #ffc;
+	margin: 0 auto;
+	width: 980px;
+	height: 700px;
+	position: absolute; 绝对定位
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); 移动
+} */
+
+/* .pic img {
+	width: 160px;
+	height: 260px;
+	margin: 20px;
+	border: 10px solid #fff;
+	box-shadow: 0px 4px 3px #ccc;
+}
+
+.pic img:nth-of-type(1), .pic img:nth-of-type(5) {
+	transform: rotate(5deg);
+}
+
+.pic img:nth-of-type(2), .pic img:nth-of-type(6) {
+	transform: rotate(-3deg);
+}
+
+.pic img:nth-of-type(3), .pic img:nth-of-type(8) {
+	transform: rotate(2deg);
+}
+
+.pic img:nth-of-type(4), .pic img:nth-of-type(7) {
+	transform: rotate(-7deg);
+}
+
+.pic img:hover {
+	transform: rotate(0deg);
+	transform: scale(1.1);
+}
+} */

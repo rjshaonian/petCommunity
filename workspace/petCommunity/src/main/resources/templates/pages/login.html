@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>宠物社区登录</title>
+<title>宠物社区登录</title><!-- 
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css"> -->
 </head>
 
 <body>
@@ -48,7 +50,6 @@
 			$(".btn-login").click(doLogin);
 		});
 		function doLogin() {
-			debugger
 			var params = {
 				username : $("#usernameId").val(),
 				password : $("#passwordId").val(),

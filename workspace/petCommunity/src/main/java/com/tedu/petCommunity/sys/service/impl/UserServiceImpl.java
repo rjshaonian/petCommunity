@@ -82,14 +82,30 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException("密码不能为空");
 		if (StringUtils.isEmpty(data.getMobile()))
 			throw new ServiceException("手机号码不能为空");
+		if(StringUtils.isEmpty(data.getCode()))
+			throw new ServiceException("验证码不能为空");
+
+		//2.对密码进行加密
+		//2.1获取密码 
+		String password = data.getPassword(); 
+		//==2.2获取盐值 
+		String salt = UUID.randomUUID().toString(); 
+		SimpleHash sh=new SimpleHash("MD5",password,salt, 1);
+		String hex = sh.toHex(); 
+		data.setSalt(salt);
+		data.setPassword(hex);
+
+
+
+
 
 		// 2验证用户已存在
 		// 2.1查询数据库中,username=用户注册输入的username有多少条list(select id from user where
 		// username=#{username})
 		// 2.2如果(list==null||list.size()==0),说明数据库中没有此用户名的用户,可以注册
 		// 2.3否则报错("此用户已被注册,请修改用户名")
-		PetcUserPO existName = petcUserDao.existName(data.getUsername());
-		if (existName != null && existName.getId() > 0)
+		int row = petcUserDao.existName(data.getUsername());
+		if (row > 0)
 			throw new ServiceException("用户名已存在");
 		// 3保存用户关系
 		int rows = petcUserDao.insertAll(data);
@@ -98,7 +114,6 @@ public class UserServiceImpl implements UserService {
 
 		return rows;
 
-		// 3.1
 	}
 
 }

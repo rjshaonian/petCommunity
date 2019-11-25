@@ -3,6 +3,9 @@
  */
 package com.tedu.petCommunity.sys.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,12 +26,11 @@ public class PetcLoginController {
 	@RequestMapping("doLogin")
 	@ResponseBody
 	public JsonResult doLogin(String username, String password, boolean isRememberMe) {
-//		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-//		if (isRememberMe)
-//			token.setRememberMe(true);
-//		Subject subject = SecurityUtils.getSubject();
-//		subject.login(token);
-
+		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+		if (isRememberMe)
+			token.setRememberMe(true);
+		Subject subject = SecurityUtils.getSubject();
+		subject.login(token);
 		return new JsonResult("login ok");
 	}
 
