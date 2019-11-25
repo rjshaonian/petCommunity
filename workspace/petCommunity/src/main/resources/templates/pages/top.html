@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>宠物社区</title>
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/title.min.css">
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<!-- <style type="text/css">
+
+</style> -->
+</head>
+<body class="community_total" style="height: auto min-height:50%">
+	<div class="wrapper" style="height: auto min-height:100%">
+		<header class="main-header">
+			<span>PetCommunity</span><br /> <span> <a href="home">宠物社区</a>
+			</span>
+			<nav class="navbar" role="navigation">
+				<div class=navbar-costom-menu style="float: right">
+					<img src="dist/img/petlogo.jpg" class="user-image"
+						alt="User Image">	
+						<a href="login" class="btn btn-default btn-sign-out" id="out">Sign out</a>
+				</div>
+					<a id="loginUserId" th:text=${user.username}></a>
+				<div style="background:">
+					<ul class="community-menu">
+						<li><a id="load-community-id" style="float: left">社区管理</a></li>
+						<li><a id="load-activity-id" style="float: left"> 活动管理</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<div >
+			<section id="mainContentId" class="petPicture">
+				<img alt="Pet Image" src="dist/img/chongwumao-009.jpg" id="picture1">
+				<img alt="Pet Image" src="dist/img/hashiqi-007.jpg" id="picture2">
+				<img alt="Pet Image" src="dist/img/user8-128x128.jpg" id="picture3">
+			</section>
+		</div>
+	</div>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			doLoadUI("load-community-id", "community/community_list");
+			doLoadUI("load-activity-id", "activity/activity_list");
+			doGetUpdateUserInfo();
+		});
+		function doGetUpdateUserInfo(){
+			var url = "user/doUpdateUser";
+			$.getJSON(url, function(result) {
+				if (result.state == 1) {
+					console.log(result);
+					$("#loginUserId").data("userId",result.data.id);
+					var div=document.getElementById("loginUserId");
+					div.setAttribute("href","personal?id="+result.data.id)
+					var a=$("#loginUserId").data("userId");
+					console.log(a);
+				}
+			});
+		}
+		function doLoadUI(id, url) {
+
+			$("#" + id).click(function() {
+				$("#mainContentId").load(url);
+			});
+
+		}
+	</script>
+</body>
+</html>

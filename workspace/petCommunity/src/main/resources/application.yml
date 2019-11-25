@@ -32,9 +32,10 @@ mybatis:
 logging:
   level:
     com.tedu: DEBUG
-    
-    
-#page
-    db: 
-    page: 
-        pageSize: 3 
+
+#async-thread-pool
+async-thread-pool:
+  corePoolSize: 20
+  maxPoolSize: 1000
+  keepAliveSeconds: 30
+  queueCapacity: 1000

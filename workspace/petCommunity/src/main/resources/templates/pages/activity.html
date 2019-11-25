@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css" >
+</style>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>宠物社区</title>
+</head>
+<body>
+<div class="wrapper">
+
+
+        <li class="treeview">
+           <a id="load-mainPage-id">回到主页</a></i> 
+        </li> 
+        <li class="treeview">
+          <a href="#">
+          <span class="main">活动管理</span>
+            <span class="pull-right-container">
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a id="load-show-id">展示活动</a></li>
+            <li><a id="load-create-id">发起活动</a></li>
+            <li><a id="load-fix-id">修改活动</a></li>
+            <li><a id="load-find-id">查找活动</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+  
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        This is a simulation.
+        <small>宠物社区, HELLO~</small>
+      </h1>
+    </section>
+    <!-- Main content -->
+    <section id="mainContentId" class="content container-fluid">
+
+     <img alt="图片" src="https://wx3.sinaimg.cn/mw1024/794f086dgy1g890jocqugj20xt0qonpd.jpg" style="opacity:0.5" width="1090px" >
+    </section>
+    <!-- /.content -->
+  </div>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script type="text/javascript">
+  $(function(){
+    doLoadUI("load-show-id","activity/activities")
+    doLoadUI("load-create-id","activity/createActivity")
+   /*  doLoadUI("load-main","/activity") */
+   /*  $("main").click(function(){location.replace("/activity");} */
+   
+    
+    
+    doLoadUI("load-mainPage-id","/home") })
+   /* doLoadUI("load-role-id","role/role_list")
+    doLoadUI("load-dept-id","dept/dept_list")
+    doLoadUI("load-user-id","user/user_list")
+    doLoadUI("load-pwd-id","user/pwd_edit")*/
+    //呈现用户登录信息
+   /* $.getJSON("user/doGetLoginUser",function(result){
+    	if(result.state==1){
+    	$("#loginUserId").html(result.data.username);
+    	}
+    })
+  })*/
+  
+  
+  function doLoadUI(id,url){
+	 
+    $("#"+id).click(function(){//callback
+    	 if(id=="load-mainPage-id"){
+    		 location.replace(url);
+   		  return;
+   	  }
+	  $("#mainContentId").load(url);
+    });
+  }
+  
+  function doCancel(){
+var url="activity";
+location.replace(url);
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+

@@ -3,15 +3,19 @@
  */
 package com.tedu.petCommunity.sys.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * @author 彬彬 上午9:12:27
  */
 @Data
-public class PetcCommunityPO {
+@ToString
+public class PetcCommunityPO implements Serializable {
+	private static final long serialVersionUID = 8924387722922123121L;
 	// 主键id
 	private Integer id;
 	// 社区名
@@ -28,4 +32,5 @@ public class PetcCommunityPO {
 	private Integer createUser;
 	// 修改者id
 	private Integer modifiedUser;
+
 }

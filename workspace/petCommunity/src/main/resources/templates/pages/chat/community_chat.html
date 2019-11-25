@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>社群聊天</title>
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container"
+		style="background: #aaaaaa; padding: 40px 200px;">
+		<a href="http://localhost/community/detail" th:text="${commPO.commName}">群聊天名</a>
+
+		<div class="box">
+			我也说两句:
+			<textarea cols="30" rows="10"></textarea>
+			<button id="btn">发送</button>
+		</div>
+
+
+		<br /> <span th:text=${commPO.position}>社区信息：xxxxxxxxxxxx</span>
+		
+		
+		<div th:each="chat : ${chats.records}">
+			昵称<p th:text="${chat.username}"></p>
+			<!-- <p style="word-wrap: break-word;" th:text=${description}>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<h3>
+				<span th:text=${createdTimeStr}>2019/11/11 11:11</span>
+			</h3> -->
+		</div>
+		
+		
+		<div align="center">
+			<button id="first" type="button" class="btn btn-primary"
+				style="float: left;">首页</button>
+			<button id="up" type="button" class="btn btn-primary"
+				style="float: left;">上一页</button>
+			<button id="last" type="button" class="btn btn-primary"
+				style="float: right;">尾页</button>
+			<button id="down" type="button" class="btn btn-primary"
+				style="float: right;">下一页</button>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+			window.onload = function() {
+				// 1 获取对象
+				var btn = document.getElementById("btn");
+				var tt = document.getElementsByTagName("textarea")[0];
+				//  创建父亲
+				var ul = document.createElement("ul");
+				// 给发布按钮注册单击事件
+				btn.onclick = function() {
+					if (tt.value == "") {
+						alert("输入的内容不能为空");
+						return;// 提前函数调用结束
+					}
+					// alert(tt.value); 获取文本域的值
+					var tt_value = tt.value;
+					tt.value = "";
+					// 创建儿子
+					var liEle = document.createElement("li");
+					liEle.innerHTML = tt_value + "<a href='#'>撤回</a>";
+					//
+					if (ul.children.length == 0) {
+						ul.appendChild(liEle);
+					} else {
+						ul.insertBefore(liEle, ul.children[0]);
+					}
+					// 整个ul追加到div内部去
+					this.parentNode.appendChild(ul);
+
+					var as = document.getElementsByTagName("a");
+					for (var i = 0; i < as.length; i++) {
+						as[i].onclick = function() {
+							ul.removeChild(this.parentNode);
+							return false;
+						}
+					}
+				}
+			}
+		</script>
+</body>
+</html>
