@@ -9,36 +9,22 @@
 <body>
 
 	<div style="padding: 100px 100px 10px;">
-		<form action="doUpdateUser" class="bs-example bs-example-form" role="form">
+		<form action="doUpdatePassword" class="bs-example bs-example-form" role="form">
 		<input name="id" id="id" th:value="${user.id}" hidden="true"/>
 			<div class="input-group">
-				<span class="input-group-addon">用户名</span> <input name="username" type="text"
+				<span class="input-group-addon">旧密码</span> <input name="password" type="text"
 					class="form-control" th:value="${user.username}">
+					<input type="password" id="password" name="password"/>
 			</div>
 			<br>
 			<div class="input-group">
-				<span class="input-group-addon">昵称</span> <input name="nickname" type="text"
+				<span class="input-group-addon">新密码</span> <input name="nickname" type="password"
 					class="form-control" th:value="${user.nickname}">
 			</div>
 			<br>
 			<div class="input-group">
-				<span class="input-group-addon">常用定位</span> <input name="position" type="text"
+				<span class="input-group-addon">确认新密码</span> <input name="position" type="password"
 					class="form-control" th:value="${user.position}">
-			</div>
-			<br>
-			<div class="input-group">
-				<span class="input-group-addon">邮箱</span> <input name="email" type="text"
-					class="form-control" th:value="${user.email}">
-			</div>
-			<br>
-			<div class="input-group">
-				<span class="input-group-addon">电话</span> <input name="mobile" type="text"
-					class="form-control" th:value="${user.mobile}">
-			</div>
-			<br>
-			<div class="input-group">
-				<span class="input-group-addon">宠物类型</span> <input name="petType" type="text"
-					class="form-control" th:value="${user.petType}">
 			</div>
 			<br>
 			<input type="submit" value="确认修改" id="modify" />

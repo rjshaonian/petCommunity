@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tedu.petCommunity.common.vo.JsonResult;
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 import com.tedu.petCommunity.sys.service.UserService;
 
@@ -36,15 +38,15 @@ public class PetcPersionalController {
 		return "redirect:/personal?id=" + id;
 	}
 
-//	@RequestMapping("doFindUserById")
-//	public JsonResult doFindUserById(Integer id) {
-//		Map<String, Object> map = userService.findUserInfoById(id);
-//		return new JsonResult(map);
-//	}
-//
-//	@RequestMapping("doUpdatePassword")
-//	public JsonResult doUpdatePassword(String pwd, String newPwd, String cfgPwd) {
-//		userService.updatePassword(pwd, newPwd, cfgPwd);
-//		return new JsonResult("update ok");
-//	}
+	@RequestMapping("doUserPsUI")
+	public String doUserPsUI(Integer id) {
+		return "userPs/userPs";
+	}
+
+	@ResponseBody
+	@RequestMapping("doUserPsUI/doUpdatePassword")
+	public JsonResult doUpdatePassword(String pwd, String newPwd, String cfgPwd) {
+		userService.updatePassword(pwd, newPwd, cfgPwd);
+		return new JsonResult("update ok");
+	}
 }
