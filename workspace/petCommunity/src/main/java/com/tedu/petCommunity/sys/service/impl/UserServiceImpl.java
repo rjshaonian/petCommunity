@@ -1,6 +1,9 @@
 package com.tedu.petCommunity.sys.service.impl;
 
+import java.util.HashMap;
 import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -95,10 +98,6 @@ public class UserServiceImpl implements UserService {
 		data.setSalt(salt);
 		data.setPassword(hex);
 
-
-
-
-
 		// 2验证用户已存在
 		// 2.1查询数据库中,username=用户注册输入的username有多少条list(select id from user where
 		// username=#{username})
@@ -114,6 +113,17 @@ public class UserServiceImpl implements UserService {
 
 		return rows;
 
+	}
+
+	@Override
+	public String doRegister(String code, PetcUserPO data, HttpSession session) {
+		HashMap<Object, Object> CMap = (HashMap<Object, Object>) session.getAttribute("CMap");
+		String sixNum = (String) CMap.get("sixNum");
+		if(code==null||!code.equals(sixNum)) {
+			throw new ServiceException("验证码错误");
+		}
+		
+		return sixNum;
 	}
 
 }

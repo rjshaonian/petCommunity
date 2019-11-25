@@ -1,5 +1,6 @@
 package com.tedu.petCommunity.sys.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
@@ -8,7 +9,8 @@ import lombok.Data;
  * @author 阳昊 下午7:30:50
  */
 @Data
-public class PetcUserPO {
+public class PetcUserPO implements Serializable {
+	private static final long serialVersionUID = 4640427206980466925L;
 	// 主键id
 	private Integer id;
 	// 登录用户名
@@ -23,7 +25,7 @@ public class PetcUserPO {
 	private String position;
 	// 电子邮箱
 	private String email;
-	//验证码
+	// 验证码
 	private Integer code;
 	// 电话
 	private String mobile;
