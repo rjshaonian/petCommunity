@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.petCommunity.dailyreport.dao.PetcCommunityDao">
+	<!--创建社区 -->
+	<insert id="createObject"
+	parameterType="com.tedu.petCommunity.sys.entity.PetcCommunityPO">
+	insert into community
+	(comm_name,position,create_user,create_time,modified_time)
+	values
+	(#{commName},#{position},#{createUser},#{createTime},#{modifiedTime})
+	</insert>
+	
+	<!-- 查询社区 -->
+	 <sql id="queryWhereId">
+         from community
+         <where>
+            <if test="commName!=null and commName!=''">
+              comm_name like concat("%",#{commName},"%")
+            </if>
+         </where>
+    </sql>
+    
+	<select id="FindPetcCommunity" resultType="com.tedu.petCommunity.sys.entity.PetcCommunityPO">
+	select *
+	<include refid="queryWhereId"/>
+	order by create_time desc
+	
+	</select>
+	
+	 <select id="getRowCount" resultType="int">
+         select count(*)
+         <include refid="queryWhereId"/>
+    </select>
+	
+	<!--修改社区  -->
+	 <select id="findObjectById"
+           parameterType="int"
+           resultType="com.tedu.petCommunity.dailyreport.vo.UserCommVo">
+           select * 
+           from user  
+           where id=#{id}     
+   </select>
+   
+   
+   
+   <!-- 加入社区 -->
+     <insert id="addC"
+           parameterType="com.tedu.petCommunity.sys.entity.PetcCommunityPO"
+           useGeneratedKeys="true"
+           keyProperty="id">
+      insert into community
+      (comm_name,position)
+      values
+    (#{commName},#{position})
+   </insert>
+   
+   <!-- 退出社区 -->
+   <delete id="deleteObject">
+       delete from community
+       <choose>
+         <when test="ids!=null and ids.length>0">
+           <where>
+              <foreach collection="ids"
+                       item="id"
+                       separator="or">
+                  id=#{id}
+              </foreach>
+           </where>
+         </when>
+         <otherwise>
+          where id=-1
+         </otherwise>
+       </choose>
+    </delete>
+	
+</mapper>
