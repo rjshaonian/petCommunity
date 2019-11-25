@@ -11,6 +11,7 @@ import com.tedu.petCommunity.sys.entity.PetcUserPO;
  */
 
 public interface UserService {
+
 	/**
 	 * 查找用户信息
 	 * 
@@ -28,4 +29,6 @@ public interface UserService {
 
 	String doRegister(String code, PetcUserPO data, HttpSession session);
 
+	// String isNoDifferenceOfPassword(Integer id, String password, String
+	// newPassword);
 }
