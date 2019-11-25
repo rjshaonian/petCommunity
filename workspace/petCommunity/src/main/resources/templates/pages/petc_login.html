@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>宠物社区</title>
+<!--Custom Theme files-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<!--Custom Theme files-->
+<link href="dist/css/style.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link type="text/css" rel="stylesheet"
+	href="dist/css/jquery.mmenu.all.css?v=5.4.4" />
+<!--//Custom Theme files-->
+<!--web-fonts-->
+<link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600'
+	rel='stylesheet' type='text/css'>
+<!--//web-fonts-->
+<!--js-->
+<script src="dist/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"
+	src="dist/js/jquery.mmenu.min.all.js?v=5.4.4"></script>
+<!-- //js -->
+<style type="text/css">
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body>
+	<!-- main -->
+	<div class="main"
+		style="margin: 0 auto; padding: 0; height: 80%; width: 90%">
+		<div class="signin-form profile" style="height: 100%">
+			<h3>
+				欢迎来到<br /> <span>宠物社区</span>
+			</h3>
+			<img src="dist/img/icon.png" width="100px" height="100px" />
+			<div class="login-form">
+				<form method="post">
+					<input type="text" name="username" placeholder="请输入用户名..."
+						required="required"> <input type="password"
+						name="password" placeholder="请输入密码..."
+						required="required"> <span class="err-msg" style="color: red">
+					</span> <input type="submit" value="登录">
+				</form>
+			</div>
+			<p>
+				<a href="register"> 点击注册用户 </a>
+			</p>
+		</div>
+	</div>
+
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('[type=submit]').click(submit);
+		});
+
+		function submit() {
+			$.post("login/doLogin", $("form").serialize(), function(result) {
+				if (result.state == 1) {
+					location.href = "home";
+				} else {
+					$(".err-msg").html(result.message);
+				}
+			});
+			return false;//防止刷新时重复提交
+		}
+	</script>
+</body>
+</html>

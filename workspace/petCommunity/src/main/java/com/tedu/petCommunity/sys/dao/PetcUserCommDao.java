@@ -1,4 +1,4 @@
-package com.tedu.petCommunity.dailyreport.dao;
+package com.tedu.petCommunity.sys.dao;
 
 import java.util.List;
 

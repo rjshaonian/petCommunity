@@ -1,4 +1,4 @@
-package com.tedu.petCommunity.dailyreport.dao;
+package com.tedu.petCommunity.sys.dao;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;

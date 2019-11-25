@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>宠物社区登录</title><!-- 
+<title>宠物社区登录</title>
+<!-- 
 <link rel="stylesheet"
 	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css"> -->
 </head>
@@ -15,7 +16,7 @@
 		<div>
 			<p class="login-box-msg">请登录</p>
 
-			<form method="post">
+			<form>
 				<div>
 					<input type="text" id="usernameId" name="username" placeholder="账号">
 				</div>
@@ -55,7 +56,7 @@
 				password : $("#passwordId").val(),
 				isRememberMe : $("#rememberId").prop("checked")
 			}
-			var url = "doLogin";
+			var url = "login/doLogin";
 			console.log("params", params);
 			$.post(url, params, function(result) {
 				if (result.state == 1) {

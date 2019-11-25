@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>宠物社区</title>
+<!--Custom Theme files-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<!--Custom Theme files-->
+<link href="dist/css/style.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link type="text/css" rel="stylesheet"
+	href="dist/css/jquery.mmenu.all.css?v=5.4.4" />
+<!--//Custom Theme files-->
+<!--web-fonts-->
+<link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600'
+	rel='stylesheet' type='text/css'>
+<!--//web-fonts-->
+<style type="text/css">
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body>
+	<div class=" mm-wrapper" id="page">
+		<div class="push-menu ">
+			<div class="banner">
+				<div class="banner-text">
+					<div class="menu">
+						<a href="#menu"><img src="dist/img/menu-icon.png" alt="" /></a>
+						<nav id="menu">
+							<ul class="">
+								<li class="menu-title" onclick="location.href='home'">主页</li>
+								<li><a href="personal_modify"><span class="icons">
+									</span> 修改信息</a></li>
+								<li><a href="personal_password"><span
+										class="icons icn4"> </span> 修改密码</a></li>
+								<li><a href="login"><span class="icons icn5"> </span>
+										退出登录</a></li>
+							</ul>
+						</nav>
+					</div>
+					<div class="title">
+						<div class="title-left">
+							<img src="dist/img/icon.png" alt="" />
+						</div>
+						<div class="title-right">
+							<h2 th:text="${user.nickname}">用户名</h2>
+							<h6 th:text="${user.position}">常用定位</h6>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div class="banner-bottom">
+				<div class="banner-bottom-left" onclick="loadComm()" id="comm">
+					<h3>社区</h3>
+					<p>Communities</p>
+				</div>
+				<div class="banner-bottom-right" onclick="loadActi()" id="acti">
+					<h3>活动</h3>
+					<p>Activities</p>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="work-text">
+				<h3>
+					<span id="contentType">社区</span> <input type="button" id="search"
+						value="查找" style="float: right;" /> <input type="button"
+						id="create" value="创建" style="float: right;" />
+				</h3>
+
+				<section class="ac-container">
+					<!-- <div>
+						<label for="ac-1" class="grid1"><i></i>社区一</label>
+					</div>
+					<div>
+						<label for="ac-2" class="grid2"><i></i>社区二</label>
+					</div>
+					<div>
+						<label for="ac-3" class="grid3"><i></i>社区三</label>
+					</div>
+					<div>
+						<label for="ac-4" class="grid4"><i></i>社区四</label>
+					</div> -->
+				</section>
+			</div>
+		</div>
+	</div>
+
+	<script src="dist/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript"
+		src="dist/js/jquery.mmenu.min.all.js?v=5.4.4"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$("#menu").mmenu({
+				extensions : [ "theme-dark", "effect-listitems-slide" ],
+				iconPanels : {
+					add : true,
+					visible : 1
+				},
+				navbar : {
+					add : false
+				},
+				counters : true
+			}).on('click', 'a[href^="#/"]', function() {
+				alert("Thank you for clicking, but that's a demo link.");
+				return false;
+			});
+
+			loadComm();//页面加载完成后，默认载入社区信息
+		});
+		function loadComm() {
+			$("#comm").attr("class", "banner-bottom-left");
+			$("#acti").attr("class", "banner-bottom-right");
+			$("#contentType").html("社区");
+			$("#search").attr("onclick", "location.href = 'comm_search'");
+			$("#create").attr("onclick", "location.href = 'comm_create'");
+			loadContent("comm");
+		}
+		function loadActi() {
+			$("#acti").attr("class", "banner-bottom-left");
+			$("#comm").attr("class", "banner-bottom-right");
+			$("#contentType").html("活动");
+			$("#search").attr("onclick", "location.href = 'acti_search'");
+			$("#create").attr("onclick", "location.href = 'acti_create'");
+			loadContent("acti");
+		}
+		function loadContent(type) {
+			var url = "home/loadContent"
+			var params = {
+				"type" : type
+			};
+			$.getJSON(url, params, function(result) {
+				if (result.state == 1) {//ok
+					setContent(result.data);//将数据呈现在页面上 
+				} else {
+					alert(result.msg)
+				}
+			});//特殊的ajax函数
+		}
+		function setContent(data) {
+			console.log(data);
+			var content = $(".ac-container");
+			content.empty();
+			var list = data.list;
+			for (var i = 0; i < list.length; i++) {
+				var url = data.url+"?id="+list[i].id;
+				var n = i % 4 + 1;
+				var eleStr = "<div><a href='"+url+"'><label for='ac-"+n+"' class='grid"+n+"'><i></i>"
+						+ list[i].commName + "</label><a></div>";
+				content.append($(eleStr));
+			}
+		}
+	</script>
+</body>
+</html>

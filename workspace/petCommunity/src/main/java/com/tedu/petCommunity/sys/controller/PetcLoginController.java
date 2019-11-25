@@ -16,14 +16,14 @@ import com.tedu.petCommunity.common.vo.JsonResult;
  * @author 张拂为 2019年11月23日 上午9:27:00
  */
 @Controller
+@RequestMapping("/login")
 public class PetcLoginController {
-
-	@RequestMapping("login")
+	@RequestMapping()
 	public String doLoginUI() {
-		return "login";
+		return "petc_login";
 	}
 
-	@RequestMapping("doLogin")
+	@RequestMapping("/doLogin")
 	@ResponseBody
 	public JsonResult doLogin(String username, String password, boolean isRememberMe) {
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
