@@ -12,4 +12,6 @@ public interface PetcActivityService {
 
 	PageObject<PetcActivityPO> findActivitys(Integer userId, Integer pageCurrent);
 
+	int killActivity(Integer id);
+
 }

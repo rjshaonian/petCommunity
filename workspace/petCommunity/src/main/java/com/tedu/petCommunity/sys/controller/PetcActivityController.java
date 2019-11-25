@@ -17,6 +17,12 @@ public class PetcActivityController {
 	@Autowired
 	private PetcActivityService ADS;
 
+	@RequestMapping("killActivity")
+	public JsonResult doDeleteObject(Integer id) {
+		ADS.killActivity(id);
+		return new JsonResult("delete ok");
+	}
+
 	@RequestMapping("findActivities")
 	public JsonResult doFindPageObjects(String actiName, Integer pageCurrent) {
 		return new JsonResult(ADS.findPageObjects(actiName, pageCurrent));

@@ -5,7 +5,7 @@
 <title>活动列表</title>
 <style>
 td {
-	text-align: center
+	text-align: left
 }
 </style>
 </head>
@@ -52,7 +52,7 @@ td {
 	<script type="text/javascript">
 		$(function() {
 			
-			$(".wrapper").on("click", ".main", doCancel)
+			/*$(".wrapper").on("click", ".main", doCancel)*/
 			$("#pageId").load("doPageUI", doGetObjects);
 			$(".input-group-btn").on("click", ".btn-search", doQueryObjects)
 					.on("click", ".btn-add", goDetail)
@@ -90,7 +90,7 @@ td {
 					var page = $("#pageId");
 					tBody.empty();
 					page.empty();
-					var tr ="<tr><td>"+result.data.actiName+"</td><td>"+result.data.position+"</td></tr>";
+					var tr ="<tr><td>"+result.data.actiName+"</td><td>"+result.data.position+"</td><td>"+result.data.actiType+"</td><td>"+result.data.startTime+"</td><td>"+result.data.endTime+"</td><td>"+result.data.createTime+"</td><td>"+result.data.createUser+"</td></tr>";
 					/*var td = "<td>"+ row.actiName + "</td>" + 
 					"<td>" + row.position + "</td>"+
 					"<td>" + row.createTime + "</td>";
