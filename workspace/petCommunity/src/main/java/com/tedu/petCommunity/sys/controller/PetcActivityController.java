@@ -13,7 +13,8 @@ import com.tedu.petCommunity.sys.service.PetcActivityService;
 @RestController
 @RequestMapping("/activity/")
 public class PetcActivityController {
-
+	@Autowired
+	PetcActivityService ADS;
 
 	@RequestMapping("killActivity")
 	public JsonResult doDeleteObject(Integer id) {

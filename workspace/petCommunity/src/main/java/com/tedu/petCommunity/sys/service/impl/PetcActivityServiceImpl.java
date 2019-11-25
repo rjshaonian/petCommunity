@@ -90,6 +90,9 @@ public class PetcActivityServiceImpl implements PetcActivityService {
 		return pageObject;
 	}
 
+	@Autowired
+	PetcActivityDao ADD;
+
 	@Override
 	public int killActivity(Integer Id) {
 		int rows = ADD.killActivityById(Id);

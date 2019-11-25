@@ -122,8 +122,6 @@ public class UserServiceImpl implements UserService {
 		if (code == null || !code.equals(sixNum)) {
 			throw new ServiceException("验证码错误");
 		}
-
 		return sixNum;
 	}
-
 }

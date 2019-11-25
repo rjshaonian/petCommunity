@@ -18,4 +18,5 @@ public interface SysUserDao {
 	 * @return
 	 */
 	int insertObject(SysUser entity);
+
 }
