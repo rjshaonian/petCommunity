@@ -20,7 +20,7 @@ public class PetcUserPO {
 	// 昵称
 	private String nickname;
 	// 常用定位
-	private String positioning;
+	private String position;
 	// 电子邮箱
 	private String email;
 	//验证码

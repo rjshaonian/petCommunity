@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div style="padding: 100px 100px 10px;">
+		<form class="bs-example bs-example-form" role="form">
+		<input id="id" th:value="${user.id}" hidden="true"/>
+			<div class="input-group">
+				<span class="input-group-addon">用户名</span> <input id="username" type="text"
+					class="form-control" th:value="${user.username}" disabled="disabled">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">昵称</span> <input type="text"
+					class="form-control" th:value="${user.nickname}" disabled="disabled">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">常用定位</span> <input type="text"
+					class="form-control" th:value="${user.position}" disabled="disabled">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">邮箱</span> <input type="text"
+					class="form-control" th:value="${user.email}" disabled="disabled">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">电话</span> <input type="text"
+					class="form-control" th:value="${user.mobile}" disabled="disabled">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">宠物类型</span> <input type="text"
+					class="form-control" th:value="${user.petType}" disabled="disabled">
+			</div>
+			<br>
+			<input type="button" value="修改" id="modify" />
+		</form>
+	</div>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#modify").click(doModifyUI);
+		})
+		
+		function doModifyUI(){
+			//jq移除/添加属性方法
+			//$('#username').removeAttr("disabled");
+			//$('#username').attr("disabled","disabled");
+			window.location.replace("personal/setting?id="+$("#id").val());
+		}
+	</script>
+</body>
+</html>
