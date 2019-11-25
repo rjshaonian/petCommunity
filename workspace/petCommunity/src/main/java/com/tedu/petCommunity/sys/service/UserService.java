@@ -25,6 +25,7 @@ public interface UserService {
 	int updatePassword(String password, String newPassword, String cfgPassword);
 
 	int insertAll(PetcUserPO data);
-	
-	String doRegister(String code,PetcUserPO data,HttpSession session);
+
+	String doRegister(String code, PetcUserPO data, HttpSession session);
+
 }

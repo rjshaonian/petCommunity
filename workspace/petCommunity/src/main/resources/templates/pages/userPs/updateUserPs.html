@@ -18,28 +18,32 @@
 			</div>
 			<br>
 			<div class="input-group">
-				<span class="input-group-addon">新密码</span> <input name="nickname" type="password"
-					class="form-control" th:value="${user.nickname}">
+				<span class="input-group-addon">新密码</span> <input name="newPwd" type="password"
+					class="form-control" th:value="${user.newPwd}">
 			</div>
 			<br>
 			<div class="input-group">
-				<span class="input-group-addon">确认新密码</span> <input name="position" type="password"
-					class="form-control" th:value="${user.position}">
+				<span class="input-group-addon">确认新密码</span> <input name="cfgPwd" type="password"
+					class="form-control" th:value="${user.cfgPwd}">
 			</div>
 			<br>
 			<input type="submit" value="确认修改" id="modify" />
 		</form>
 	</div>
-<!-- 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-
-	<script type="text/javascript">
-		$(function(){
-			$("#modify").click(doModifyUI);
-		})
-		
-		function doModifyUI(){
-			window.location.replace("personal/setting");
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#modify").click(doModifyUI);
+	})
+	
+	function getId() {
+		   var url = location.search; //获取url中"?"符后的字串
+		   if (url.indexOf("?") != -1) {    //判断是否有参数
+		      var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+		      strs = str.split("=");        //直接弹出第一个参数 （如果有多个参数 还要进行循环的）
+		   }
 		}
-	</script> -->
+</script>
+	
 </body>
 </html>

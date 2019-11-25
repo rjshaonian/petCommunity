@@ -7,15 +7,10 @@
 	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 </head>
 <body>
-
-	<div style="padding: 100px 100px 10px;">
-		<form class="bs-example bs-example-form" role="form">
-		<input id="id" th:value="${user.id}" hidden="true"/>
-		<input type="button" value="修改密码" id="modify" />
-		</form>
-	</div>
+	<a id="modify" href="xxx?id=">修改密码</a>
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript">
+		
 		$(function(){
 			$("#modify").click(doModifyPsUI);
 		})
