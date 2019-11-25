@@ -14,8 +14,6 @@ import com.tedu.petCommunity.sys.service.PetcActivityService;
 @RequestMapping("/activity/")
 public class PetcActivityController {
 
-	@Autowired
-	private PetcActivityService ADS;
 
 	@RequestMapping("killActivity")
 	public JsonResult doDeleteObject(Integer id) {
@@ -25,22 +23,23 @@ public class PetcActivityController {
 
 	@RequestMapping("findActivities")
 	public JsonResult doFindPageObjects(String actiName, Integer pageCurrent) {
-		return new JsonResult(ADS.findPageObjects(actiName, pageCurrent));
+		return new JsonResult(activityService.findPageObjects(actiName, pageCurrent));
 	}
 
 	@RequestMapping("findActivityById")
 	public JsonResult doFindObjectById(Integer id) {
-		return new JsonResult(ADS.findActivityById(id));
+		return new JsonResult(activityService.findActivityById(id));
 	}
 
 	@RequestMapping("save")
 	@ResponseBody
 	public JsonResult doSaveObject(PetcActivityPO entity/* , Integer[] Ids */) {
 		System.out.println("============================" + entity);
-		ADS.save(entity);
+		activityService.save(entity);
 		return new JsonResult("save ok");
 	}
 
+	@Autowired
 	private PetcActivityService activityService;
 
 	@RequestMapping("doFindActivitys")

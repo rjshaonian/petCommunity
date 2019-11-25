@@ -48,9 +48,36 @@ img {
 	height:150px
 }
 .row{
-	background:#75BD43;
+	 background:#75BD43;
 	 background-position: 50% 0px;
 }
 #search{
 	float:right ;
+}
+#picture1{
+	position:absolute; 
+  	left:400px;
+ 	top:400px
+}
+#picture2{
+	position:absolute; 
+  	right:450px;
+ 	top:400px;
+}
+#picture3{
+	position:absolute; 
+  	left:600px;
+ 	top:150px
+}
+#mainContentId{
+	background-color:red;
+	background-repeat:repeat;
+	background-position:center;
+	background-size:10x100;
+	background-origin:border-box;
+}
+.petPicture img{
+	
+	width:800px;
+	height:1000px
 }

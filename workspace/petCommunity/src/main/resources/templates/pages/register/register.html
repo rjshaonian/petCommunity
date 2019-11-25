@@ -7,20 +7,24 @@
 	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="dist/css/register.css">
 </head>
-<body>
-	<img src="01.gif" width="300px" />
+<body style="background-image:url(dist/img/333.jpg);background-size: 100% 100%;background-repeat: no-repeat;">
+	<div id="imgs">
+		<img  src="dist/img/01.gif" />
+	</div>
+
 	<div id="header">
 		<div id="line1">
 			<!-- jtlog,欢迎注册 -->
-			<span class="wel-regist">欢迎来到宠物社区</span>
+			<span class="wel-regist" style="color:red">欢迎来到宠物社区</span>
 		</div>
 		<div id="line2">
 			<!-- 已有账号,请登录 -->
-			<span>已有账号? <a href="login">请登录</a>
+			<span>已有账号? <a href="login" style="color:red">请登录</a>
 			</span>
 		</div>
 	</div>
 	<div id="middle">
+	 <!-- <img src="dist/img/111.jpg" width="50px">  -->
 		<form method="post" id="formSubmit" enctype="multipart/form-data">
 			<table>
 				<tr>
@@ -52,8 +56,8 @@
 				</tr>
 				<tr>
 					<td>
-						<!-- 验证手机 --> <input type="text" maxlength="11" id="mobile" name="mobile"
-						placeholder="验证手机" />
+						<!-- 验证手机 --> <input type="text" maxlength="11" id="mobile"
+						name="mobile" placeholder="验证手机" />
 					</td>
 				</tr>
 				<tr>
@@ -62,9 +66,9 @@
 				</tr>
 				<tr>
 					<td>
-						<!-- 验证码 --> <input type="text" name="code" placeholder="动态码" />
-						<input type="button" id="code_btn"
-						class="btn btn-default" value="获取验证码" onclick="submitRegiste()"/>
+						<!-- 验证码 --> <input type="text" name="code" placeholder="动态码" maxlength="6"/>
+						<input type="button" id="code_btn" class="btn btn-default"
+						value="获取验证码" onclick="submitRegiste()" />
 					</td>
 				</tr>
 				<tr>
@@ -147,28 +151,28 @@
 		//注册提交时,校验必填框是否为空
 		function check(){
 			　　var username = $("[name='username']").val();　　
-			　　if(username == null || username == ""){
-			　　　　alert("用户名不能为空");
+			　　if(username == null || username == ""||username.length<4){
+			　　　　alert("用户名输入错误");
 			　　　　return false;
 			　　}
 				var password =$("[name='password']").val();　　
-			　　  if(password == null || password == ""){
-			　　　　alert("密码不能为空");
+			　　  if(password == null || password == ""||password.length<6){
+			　　　　alert("密码输入错误");
 			　　　　return false;
 			　　}
 			  var rwpwd =$("[name='rwpwd']").val();　　
-			　　  if(rwpwd == null || rwpwd == ""){
-			　　　　alert("确认密码不能为空");
+			　　  if(rwpwd == null || rwpwd == ""||rwpwd.length<6){
+			　　　　alert("确认密码输入错误");
 			　　　　return false;
 			　　}
 			  var mobile =$("[name='mobile']").val();　　
-			　　  if(mobile == null || mobile == ""){
-			　　　　alert("手机号码不能为空");
+			　　  if(mobile == null || mobile == ""||mobile.length<12){
+			　　　　alert("手机号码输入错误");
 			　　　　return false;
 			　　}
 			  var code =$("[name='code']").val();　　
-			　　  if(code == null || code == ""){
-			　　　　alert("验证码不能为空");
+			　　  if(code == null || code == ""||code.length<7){
+			　　　　alert("验证码输入错误");
 			　　　　return false;
 			　　}
 			　　　　return true;

@@ -5,6 +5,7 @@ package com.tedu.petCommunity.sys.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +20,12 @@ import com.tedu.petCommunity.sys.vo.PetcCommDetailVO;
 @Controller
 @RequestMapping("/")
 public class PetcCommDetailController {
-	PatcCommDetailService patcCommDetailService;
+	@Autowired
+	private PatcCommDetailService patcCommDetailService;
 
 	@RequestMapping("community/detail")
 	public String doCommDetailUI(Integer user, Model model) {
-		List<PetcCommDetailVO> commDetail = PatcCommDetailService.getCommDetail(null, user);
+		List<PetcCommDetailVO> commDetail = patcCommDetailService.getCommDetail(null, user);
 		model.addAttribute("commDetail", commDetail);
 		model.addAttribute("user", ShiroUtils.getUser());
 		return "community/comm_detail";
