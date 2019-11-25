@@ -15,12 +15,7 @@
 	
 
 }
-#header #line1 img{/*log图片*/
-	margin-left:50px;
-	margin-right:33px;
-	vertical-align: middle;/*和其他行内元素中线对齐*/
 
-}
 
 #header #line1.wel-regist{
 	font-size:36px;
@@ -78,6 +73,11 @@
 	text-indent:45px;
 	border:1px solid #dbdbdb;
 }
+#middle table tr td input[type='button']{
+	text-indent:0;
+	text-align:center;
+	width:180px;
+}
 /*选中输入框下面的提示小时所在的td元素*/
 #middle table tr .err-msg{
 	height:32px;
@@ -134,7 +134,6 @@
 
 
 /*----------------------体部分(header)end--------------------------*/
-
 
 /*----------------------尾部分(header)start-------------------------*/
 #footer{

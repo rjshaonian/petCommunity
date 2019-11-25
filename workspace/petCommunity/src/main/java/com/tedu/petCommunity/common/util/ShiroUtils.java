@@ -1,6 +1,5 @@
 package com.tedu.petCommunity.common.util;
 
-import org.apache.shiro.SecurityUtils;
 
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="../bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div style="padding: 100px 100px 10px;">
+		<form action="doUpdateUser" class="bs-example bs-example-form" role="form">
+		<input name="id" id="id" th:value="${user.id}" hidden="true"/>
+			<div class="input-group">
+				<span class="input-group-addon">用户名</span> <input name="username" type="text"
+					class="form-control" th:value="${user.username}">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">昵称</span> <input name="nickname" type="text"
+					class="form-control" th:value="${user.nickname}">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">常用定位</span> <input name="position" type="text"
+					class="form-control" th:value="${user.position}">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">邮箱</span> <input name="email" type="text"
+					class="form-control" th:value="${user.email}">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">电话</span> <input name="mobile" type="text"
+					class="form-control" th:value="${user.mobile}">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">宠物类型</span> <input name="petType" type="text"
+					class="form-control" th:value="${user.petType}">
+			</div>
+			<br>
+			<input type="submit" value="修改" id="modify" />
+		</form>
+	</div>
+<!-- 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(function(){
+			$("#modify").click(doModifyUI);
+		})
+		
+		function doModifyUI(){
+			window.location.replace("personal/setting");
+		}
+	</script> -->
+</body>
+</html>
