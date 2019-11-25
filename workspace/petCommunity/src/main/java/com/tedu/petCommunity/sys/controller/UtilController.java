@@ -17,7 +17,7 @@ import com.tedu.petCommunity.sys.code.SendSmsDemo;
 
 
 @RestController
-@RequestMapping("msg")
+@RequestMapping("/msg/")
 public class UtilController {
 	@Autowired
 	private SendSmsDemo sendSmsDemo;
@@ -33,4 +33,8 @@ public class UtilController {
 		session.setAttribute("CMap", CMap);
 		return new JsonResult("执行成功");
 	}
+	
+	
+	/**验证码校验*/
+	
 }

@@ -15,12 +15,7 @@
 	
 
 }
-#header #line1 img{/*log图片*/
-	margin-left:50px;
-	margin-right:33px;
-	vertical-align: middle;/*和其他行内元素中线对齐*/
 
-}
 
 #header #line1.wel-regist{
 	font-size:36px;
@@ -139,7 +134,6 @@
 
 
 /*----------------------体部分(header)end--------------------------*/
-
 
 /*----------------------尾部分(header)start-------------------------*/
 #footer{

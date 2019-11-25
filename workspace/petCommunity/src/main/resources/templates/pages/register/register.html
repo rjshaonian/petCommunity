@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="dist/css/register.css">
 </head>
 <body>
+	<img src="01.gif" width="300px" />
 	<div id="header">
 		<div id="line1">
 			<!-- jtlog,欢迎注册 -->
@@ -51,7 +52,7 @@
 				</tr>
 				<tr>
 					<td>
-						<!-- 验证手机 --> <input type="text" maxlength="11" name="mobile"
+						<!-- 验证手机 --> <input type="text" maxlength="11" id="mobile" name="mobile"
 						placeholder="验证手机" />
 					</td>
 				</tr>
@@ -62,7 +63,8 @@
 				<tr>
 					<td>
 						<!-- 验证码 --> <input type="text" name="code" placeholder="动态码" />
-						<input type="button" id="code_btn" onclick="submitRegiste()" class="btn btn-default" value="获取验证码"/>
+						<input type="button" id="code_btn"
+						class="btn btn-default" value="获取验证码" onclick="submitRegiste()"/>
 					</td>
 				</tr>
 				<tr>
@@ -77,12 +79,31 @@
 	<!-- 验证码倒计时 -->
 	<script type="text/javascript">
 	
+	$(function() {
+		$("#password").change(check2pwd);
+		$("#rwpwd").change(check2pwd);
+		$("#code_btn").click(sendMsg);
+		$('[type=submit]').click(submitRegister);
+	});
+	
+	function sendMsg(){
+		const url = "/msg/send";
+		var a = $("#mobile").val();
+		var	data = {
+ 				"mobile" : a
+			}
+		 $.post(url,data,function(result){
+			if (result.state != 1) {
+				alert(result.message);
+			}
+		}) 
+	}
+	
 	function submitRegiste(){
 		  var code_btn = $('#code_btn');
 		  var time = 60;
 		  var timer = null;
 		  code_btn.val(time + '秒后重新发送');
-		  
 		  code_btn.attr("disabled","disabled");  // 禁用按钮
 		  timer = setInterval(function(){
 		    // 定时器到底了 兄弟们回家啦
@@ -97,20 +118,13 @@
 		  }, 1000) 
 		}
 	
-		$(function() {
-			$("#password").change(check2pwd);
-			$("#rwpwd").change(check2pwd);
-			$('[type=submit]').click(submitRegister);
-		});
+		
 		 
 		function submitRegister() {
 	        //首先验证
 	        if(!check()){
 	        	return;
-	        	
 	        }
-	       
-	        
               $.post("/doRegister",$("form").serialize(),function (data) {
                 if (data.state==1) {
                 	alert("注册成功")
@@ -159,18 +173,7 @@
 			　　}
 			　　　　return true;
 			　　}
-		const url = "/msg/send";
-		var	data = {
-				"mobile" : $("[name='mobile']").val(),
-			}
-		debugger;
-		 $.post(url,data,function(result){
-			if (result.state == 1) {
-				console.log(result.data);
-			} else {
-				alert(result.message);
-			}
-		}) 
+		
 	</script>
 </body>
 </html>

@@ -26,7 +26,7 @@ public class SendSmsDemo {
     request.putQueryParameter("RegionId", "cn-hangzhou");
 	request.putQueryParameter("PhoneNumbers", mobile);
 	request.putQueryParameter("SignName", "宠物社区");
-	request.putQueryParameter("TemplateCode", "SMS_177541904");
+	request.putQueryParameter("TemplateCode", "SMS_178451533");
 	request.putQueryParameter("TemplateParam",sixNum);
 	try {
         CommonResponse response = client.getCommonResponse(request);
