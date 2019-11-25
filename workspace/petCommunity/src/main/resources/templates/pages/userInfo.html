@@ -41,21 +41,36 @@
 					class="form-control" th:value="${user.petType}" disabled="disabled">
 			</div>
 			<br>
-			<input type="button" value="修改" id="modify" />
+			<input type="button" value="修改个人信息" id="modify" />
+			<input type="button" value="修改密码" id="repswd" />
 		</form>
 	</div>
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			$("#modify").click(doModifyUI);
+			$("#repswd").click(function(){
+				var url = "doUserPsUI?id="+getId();
+				window.location.assign(url);
+			});
 		})
-		
+		function getId() {
+		   var url = location.search; //获取url中"?"符后的字串
+		   if (url.indexOf("?") != -1) {    //判断是否有参数
+		      var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+		      strs = str.split("=");        //直接弹出第一个参数 （如果有多个参数 还要进行循环的）
+		   }
+		   return strs[1];
+		}
 		function doModifyUI(){
 			//jq移除/添加属性方法
 			//$('#username').removeAttr("disabled");
 			//$('#username').attr("disabled","disabled");
 			window.location.replace("personal/setting?id="+$("#id").val());
 		}
+		/* function doUpdatePwUI(){
+			window.location.replace("userPs/doUserPsUI?id="+$("#repswd").val());
+		} */
 	</script>
 </body>
 </html>

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * : 主页url homee
+ * : 主页url home
  * 
  * @author Administrator
  *
@@ -26,6 +26,16 @@ public class PetcPageController {
 	@RequestMapping("activity/activities")
 	public String showActivities() {
 		return "activity/activities";
+	}
+
+	@RequestMapping("activity/createActivity")
+	public String goCreateActivity() {
+		return "activity/createActivity";
+	}
+
+	@RequestMapping("activity/detail")
+	public String goDetail() {
+		return "activity/detail";
 	}
 //
 //	@RequestMapping("doPageUI")

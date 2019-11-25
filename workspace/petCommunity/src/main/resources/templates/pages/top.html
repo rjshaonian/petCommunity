@@ -24,6 +24,7 @@
 						<a href="login" class="btn btn-default btn-sign-out" id="out">Sign out</a>
 				</div>
 					<a id="loginUserId" th:text=${user.username}></a>
+					
 				<div style="background:">
 					<ul class="community-menu">
 						<li><a id="load-community-id" style="float: left">社区管理</a></li>
@@ -44,7 +45,7 @@
 	<script type="text/javascript">
 		$(function() {
 			doLoadUI("load-community-id", "community/community_list");
-			doLoadUI("load-activity-id", "activity/activity_list");
+			doLoadUI("load-activity-id", "activity");/*原来是到activity_list*/
 			doGetUpdateUserInfo();
 		});
 		function doGetUpdateUserInfo(){
