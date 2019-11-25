@@ -23,4 +23,5 @@ public interface UserService {
 	int updatePassword(String password, String newPassword, String cfgPassword);
 
 	int insertAll(PetcUserPO data);
+
 }

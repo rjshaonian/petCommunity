@@ -40,6 +40,7 @@ public class PetcPersionalController {
 
 	@RequestMapping("doUserPsUI")
 	public String doUserPsUI(Integer id) {
+
 		return "userPs/userPs";
 	}
 
