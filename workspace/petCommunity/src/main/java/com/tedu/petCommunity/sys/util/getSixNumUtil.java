@@ -2,6 +2,7 @@ package com.tedu.petCommunity.sys.util;
 
 import java.util.Random;
 
+
 public class getSixNumUtil {
 	/**创建六位随机数字*/
 	public static String getSixNum() {
@@ -13,5 +14,6 @@ public class getSixNumUtil {
 		}
 		return "{\"code\":\""+result+"\"}";
 	}
+	
 }
 
