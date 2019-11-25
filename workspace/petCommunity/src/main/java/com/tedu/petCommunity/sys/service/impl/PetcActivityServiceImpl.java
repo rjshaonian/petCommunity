@@ -14,9 +14,6 @@ import com.tedu.petCommunity.sys.service.PetcActivityService;
 @Service
 public class PetcActivityServiceImpl implements PetcActivityService {
 
-	@Autowired
-	private PetcActivityDao ADD;
-
 	@Override
 	public PageObject<PetcActivityPO> findPageObjects(String actiName, Integer pageCurrent) {
 
@@ -24,13 +21,13 @@ public class PetcActivityServiceImpl implements PetcActivityService {
 		if (pageCurrent == null || pageCurrent < 1)
 			throw new IllegalArgumentException("当前页码值无效");
 		// 2.查询总记录数并进行校验
-		int rowCount = ADD.getRowCount(actiName);
+		int rowCount = activityDao.getRowCount(actiName);
 		if (rowCount == 0)
 			throw new ServiceException("没有找到对应记录");
 		// 3.查询当前页记录
 		int pageSize = 5;
 		int startIndex = (pageCurrent - 1) * pageSize;
-		List<PetcActivityPO> records = ADD.findActivities(actiName, startIndex, pageSize);
+		List<PetcActivityPO> records = activityDao.findActivities(actiName, startIndex, pageSize);
 
 		// 4.对查询结果进行封装并返回
 		return new PageObject<>(pageCurrent, pageSize, rowCount, records);
@@ -41,7 +38,7 @@ public class PetcActivityServiceImpl implements PetcActivityService {
 		if (id == null || id < 1)
 			throw new IllegalArgumentException("id值无效");
 
-		PetcActivityPO rm = ADD.findActivityById(id);
+		PetcActivityPO rm = activityDao.findActivityById(id);
 		/*
 		 * SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 * rm.setCreateTime2(format.format(rm.getCreateTime()));
@@ -63,7 +60,7 @@ public class PetcActivityServiceImpl implements PetcActivityService {
 		if (null == (entity.getActiName()))
 			throw new IllegalArgumentException("活动名不允许为空");
 		// 2.保存角色自身信息
-		int rows = ADD.insert(entity);
+		int rows = activityDao.insert(entity);
 		// 3.保存角色菜单关系数据
 		/* sysRoleMenuDao.insertObjects(entity.getId(), Ids); */
 		// 4.返回业务结果
@@ -78,7 +75,7 @@ public class PetcActivityServiceImpl implements PetcActivityService {
 
 		if (pageCurrent == null || pageCurrent < 1)
 			throw new IllegalArgumentException("当前页码不正确");
-		int rowCount = activityDao.getRowCount(userId);
+		int rowCount = activityDao.getRowCount1(userId);
 		if (rowCount == 0)
 			throw new ServiceException("系统没有查到对应活动的记录");
 		int pageSize = 3;

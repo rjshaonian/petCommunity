@@ -8,9 +8,10 @@
 			</if>
 		</where>
 	</sql>
+	
 	<select id="getRowCount" resultType="int">
 		select count(*) from activity
-		<include refid="queryWhereId" />
+		<include refid="queryWhereId"/>
 	</select>
 	<select id="findActivities"
 		resultType="com.tedu.petCommunity.sys.entity.PetcActivityPO">
@@ -39,8 +40,18 @@
 	<select id="findActivitys"
 		resultType="com.tedu.petCommunity.sys.entity.PetcActivityPO">
 		select *from activity
-		<include refid="queryWhereId" />
+		<include refid="queryWhereId1" />
 		order by start_time desc
 		limit #{startIndex},#{pageSize}
 	</select>
+	<select id="getRowCount1" resultType="int">
+		select count(*) from activity
+		<include refid="queryWhereId1" />
+	</select>
+	<sql id="queryWhereId1">
+		<where>
+			id in
+			(select acti_id from user_acti where user_id=#{userId})
+		</where>
+	</sql>
 </mapper>

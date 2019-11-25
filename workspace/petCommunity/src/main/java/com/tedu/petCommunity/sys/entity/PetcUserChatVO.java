@@ -8,12 +8,14 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * @author 彬彬 上午8:55:42
+ * @author VictorHe 2019年11月24日 下午8:36:45
  */
 @Data
-public class PetcChatPO {
+public class PetcUserChatVO {
 	// 主键id
 	private Integer id;
+	// 用户名
+	private String username;
 	// 关联社区id
 	private Integer commId;
 	// 内容
@@ -24,5 +26,4 @@ public class PetcChatPO {
 	private Date createTime;
 	// 创建者id
 	private String createUser;
-
 }
