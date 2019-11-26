@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.petCommunity.sys.dao.PetcUserCommDao">
+	<!--创建 -->
+	<insert id="insertObjects">
+		insert into user_comm
+		(user_id,comm_id)
+		values
+		<foreach collection="comm_id" separator="," item="comm_id">
+			(#{userId},#{commName})
+		</foreach>
+	</insert>
+
+	<!-- 添加 -->
+	<insert id="addC">
+		insert into user_comm
+		(user_id,comm_id)
+		values
+		<foreach collection="commId" separator="," item="commId">
+			(#{userId},#{commId})
+		</foreach>
+	</insert>
+
+
+	<select id="findByCommId" resultType="int">
+		select comm_id
+		from user_id
+		where user_id=#{id}
+	</select>
+</mapper>

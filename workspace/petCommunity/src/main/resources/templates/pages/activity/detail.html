@@ -5,19 +5,12 @@
 <title>活动列表</title>
 <style type="text/css">
 .a{
-    background-image: url(https://wx3.sinaimg.cn/mw1024/794f086dgy1g89af10wg0j20dw0hj3zi.jpg);
-    opacity:0.5;
 }
 .b{opacity:1;}
 
 </style>
 </head>
 <body>
-<div class="a">
-<div>111</div>
-<div>111</div>
-<div>111</div>
-<div>111</div>
 	<div class="b">
 	<h1>Detail</h1>
 	
@@ -34,6 +27,7 @@
 							<th>开始时间</th>
 							<th>结束时间</th>
 							<th>创建时间</th>
+							<th>创建者</th>
 						</tr>
 					</thead>
 					<tbody id="tbodyId">
@@ -45,15 +39,41 @@
 			</div>
 			<div id="pageId"></div>
 			<!-- /.box-body -->
+			<button type="button" class="back">返回列表</button>
+	<button type="button" class="kill">删除</button>
 	</div>
-<img alt="img" src="">
+<img alt="img" src="https://wx3.sinaimg.cn/mw1024/794f086dgy1g89af10wg0j20dw0hj3zi.jpg">
 	</div>
-	<p>
-	<p>
-</div>
 	<script type="text/javascript">
-
-
+	$(document).ready(function(){
+		$(".b")
+		  .on("click",".back",doBack)
+		  .on("click",".kill",doKill)
+	});
+	
+	function doBack(){
+		 $("#mainContentId").load("activity/activities");
+		}
+	function doKill(){
+		debugger
+		var id = 6;/*$(this).parents("td").siblings("td")[0].innerHTML;*/
+		/*$("#mainContentId").load("activity/detail", function() {
+			$(".box-title").html("详情页");
+		});*/
+		var url = "activity/killActivity";
+		var param = {
+			"id" : id
+		};
+		$.getJSON(url, param, function(result) {
+			if (result.state == 1) {
+				debugger
+				alert(result.message);
+				  doBack();
+			} else {
+				alert(result.message);
+			}
+		});
+		}
 </script>
 </body>
 </html>

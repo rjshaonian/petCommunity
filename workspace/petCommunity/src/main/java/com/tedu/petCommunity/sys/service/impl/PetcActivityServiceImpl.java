@@ -90,4 +90,16 @@ public class PetcActivityServiceImpl implements PetcActivityService {
 		return pageObject;
 	}
 
+	@Autowired
+	PetcActivityDao ADD;
+
+	@Override
+	public int killActivity(Integer Id) {
+		int rows = ADD.killActivityById(Id);
+		if (rows == 0)
+			throw new ServiceException("此菜单可能已经不存在");
+		return rows;
+
+	}
+
 }

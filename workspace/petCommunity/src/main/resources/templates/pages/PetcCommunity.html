@@ -1,0 +1,58 @@
+ <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<link href="../bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="../bower_components/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<style>
+div {
+	margin: 5px;
+}
+</style>
+<div class="input-group input-group-lg">
+	<span class="input-group-addon" id="basic-addon1">commName</span> <input
+		type="text" class="form-control" placeholder="社区名" name="commName">
+</div>
+<div class="input-group input-group-lg">
+	<span class="input-group-addon" id="basic-addon3">position</span> <input
+		type="text" class="form-control" placeholder="位置" name="position">
+</div>
+<!-- <div class="input-group input-group-lg">
+	<span class="input-group-addon" id="basic-addon4">createUser</span> <input
+		type="text" class="form-control" placeholder="创始人" name="createUser">
+</div> -->
+<button type="button" class="btn btn-success">OK</button>
+
+<script type="text/javascript">
+	$(function() {
+		$(".btn-success").click(doCreatObject);
+	})
+	function doCreatObject() {
+
+		//1.定义url
+		var addUrl = "../petcCommunity/doCreatObject";
+		//2.获取表单数据
+		var params = doGetAddFormData();
+		//3.异步提交数据
+		$.post(addUrl, params, function(result) {
+			//debugger
+			if (result.state == 1) {
+				alert(result.message);
+				//doCancel();
+			} else {
+				alert(result.message);
+			}
+		})
+
+	}
+	function doGetAddFormData() {
+		var params = {
+			commName : $("[name='commName']").val(),
+			position : $("[name='position']").val()
+			//createUser : $("[name='createUser']").val()
+		}
+		//debugger
+		return params;
+	}
+</script>
+
+
+

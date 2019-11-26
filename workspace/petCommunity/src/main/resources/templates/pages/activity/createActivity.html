@@ -5,8 +5,7 @@
 <title>活动列表</title>
 </head>
 <body>
-
-	<h1>创建活动</h1>
+<h1>创建活动</h1>
 <div class="box box-info">
       <div class="box-header with-border">
       </div>
@@ -42,12 +41,13 @@
         <!-- /.box-body -->
         <div class="box-footer">
           <button type="button" class="btn btn-default btn-cancel">取消</button>
+          <!-- <button type="button" name="Submit" onclick="location.reload();" value="取消"> -->
           <button type="button" class="btn btn-info pull-right btn-save">保存</button>
         </div>
         <!-- /.box-footer -->
       </form>
     </div>	
-<!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 <script type="text/javascript">
 
@@ -83,8 +83,6 @@ function saveOrUpdate(){
 			createUser:null,
 			modifiedUser:null*/
     	}
-  alert(params);
-	  console.log(params);
 	  //2.异步提交表单数据
 	  debugger
 	  var insertUrl="activity/save";

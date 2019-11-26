@@ -1,0 +1,32 @@
+<!-- <script src="bower_components/jquery/dist/jquery.min.js"></script>
+<link href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="bower_components/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<div class="btn-group" role="group" aria-label="web">
+  <button type="button" class="btn btn-default">Delete</button>
+  <button type="button" class="btn btn-default">Join</button>
+  <button type="button" class="btn btn-default">Exit</button>
+</div>
+<div id="pageId" class="box-footer clearfix">
+</div>
+<script type="text/javascript">
+$(function(){
+$(".btn btn-default").click(doDelete)   
+	 
+}	  
+	 function doDelete(){
+		 if(!confirm("确认删除吗?"))return;
+		 var params={"id":id};
+		 var url="petcCommunity/doDeletePC";
+		 
+		 $.post(url,params,function(result){
+	    	  if(result.state==1){
+	    		  alert(result.message);
+	    		 
+	    	  }else{
+	    		  alert(result.message);
+	    	  }
+	 } 
+
+
+</script> -->

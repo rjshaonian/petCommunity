@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class PetcCommunityChatDaoTest {
 	@Autowired
-	PetcCommunityChatDao petcCommunityDao;
+	PetcChatDao petcCommunityDao;
 
 	@Test
 	public void testGetRowCount() {

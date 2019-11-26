@@ -85,16 +85,16 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException("密码不能为空");
 		if (StringUtils.isEmpty(data.getMobile()))
 			throw new ServiceException("手机号码不能为空");
-		if(StringUtils.isEmpty(data.getCode()))
+		if (StringUtils.isEmpty(data.getCode()))
 			throw new ServiceException("验证码不能为空");
 
-		//2.对密码进行加密
-		//2.1获取密码 
-		String password = data.getPassword(); 
-		//==2.2获取盐值 
-		String salt = UUID.randomUUID().toString(); 
-		SimpleHash sh=new SimpleHash("MD5",password,salt, 1);
-		String hex = sh.toHex(); 
+		// 2.对密码进行加密
+		// 2.1获取密码
+		String password = data.getPassword();
+		// ==2.2获取盐值
+		String salt = UUID.randomUUID().toString();
+		SimpleHash sh = new SimpleHash("MD5", password, salt, 1);
+		String hex = sh.toHex();
 		data.setSalt(salt);
 		data.setPassword(hex);
 
@@ -119,11 +119,9 @@ public class UserServiceImpl implements UserService {
 	public String doRegister(String code, PetcUserPO data, HttpSession session) {
 		HashMap<Object, Object> CMap = (HashMap<Object, Object>) session.getAttribute("CMap");
 		String sixNum = (String) CMap.get("sixNum");
-		if(code==null||!code.equals(sixNum)) {
+		if (code == null || !code.equals(sixNum)) {
 			throw new ServiceException("验证码错误");
 		}
-		
 		return sixNum;
 	}
-
 }

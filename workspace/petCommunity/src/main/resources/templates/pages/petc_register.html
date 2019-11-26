@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>宠物社区</title>
+<!--Custom Theme files-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<!--Custom Theme files-->
+
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link href="dist/css/style.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link type="text/css" rel="stylesheet"
+	href="dist/css/jquery.mmenu.all.css?v=5.4.4" />
+<!--//Custom Theme files-->
+<!--web-fonts-->
+<link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600'
+	rel='stylesheet' type='text/css'>
+<!--//web-fonts-->
+<!--js-->
+<script src="dist/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"
+	src="dist/js/jquery.mmenu.min.all.js?v=5.4.4"></script>
+</head>
+<body>
+	<!-- main -->
+	<div class="main" style="width: 90%">
+		<div class="signin-form profile">
+			<h3>
+				欢迎来到<br /> <span>宠物社区</span>
+			</h3>
+			<img src="dist/img/icon.png" width="100px" height="100px" />
+			<div class="login-form">
+				<form method="post" id="formSubmit">
+					<table style="width: 100%">
+						<tr>
+							<td colspan="2"><input type="text" name="username"
+								maxlength="10" min="4" placeholder="请输入用户名..."
+								required="required"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><input type="password" id="password"
+								name="password" maxlength="10" placeholder="请输入密码..."
+								required="required"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><input type="password" id="rwpwd"
+								name="rwpwd" maxlength="10" placeholder="请确认密码..."
+								required="required"></td>
+						</tr>
+						<tr>
+							<td colspan="2" width="100%"><input type="text"
+								maxlength="11" id="mobile" name="mobile" placeholder="注册手机号..."
+								required="required"></td>
+						</tr>
+						<tr>
+							<td width="60%"><input type="text" name="code"
+								placeholder="验证码..." required="required"></td>
+							<td width="40%"><input type="button" class="btn btn-primary"
+								id="code_btn" value="获取验证码"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><input type="submit" value="注册"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<p>
+				已有账号？<a href="login"> 点击登录 </a>
+			</p>
+		</div>
+	</div>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- 验证码倒计时 -->
+	<script type="text/javascript">
+		$(function() {
+			$("#code_btn").click(sendMsg);
+			$('[type=submit]').click(submitRegister);
+		});
+
+		function sendMsg() {
+			const url = "register/sendCode";
+			var data = {
+				"mobile" : $("#mobile").val()
+			}
+			debugger
+			$.post(url,data,function(result){
+				if (result.state != 1) {
+					alert(result.message);
+				}
+			})
+			var code_btn = $('#code_btn');
+			var time = 60;
+			var timer = null;
+			code_btn.val(time + '秒后重新发送');
+			code_btn.attr("disabled", "disabled"); // 禁用按钮
+			timer = setInterval(function() {
+				// 定时器到底了 兄弟们回家啦
+				if (time == 1) {
+					clearInterval(timer);
+					code_btn.val('获取验证码');
+					code_btn.removeAttr("disabled");
+				} else {
+					time--;
+					code_btn.val(time + '秒后重新发送');
+				}
+			}, 1000)
+		}
+
+		function submitRegister() {
+			//首先验证
+			if ($("#password").val() != $("#rwpwd").val()) {
+				alert("两次输入密码不一致，请重新确认！！！");
+				return false;
+			}
+			$.post("register/doRegister", $("form").serialize(), function(result) {
+				if (result.state == 1) {
+					alert("注册成功")
+					window.location.href = "login";
+				} else {
+					alert(result.message);
+				}
+			})
+			return false;
+		}
+	</script>
+
+</body>
+</html>

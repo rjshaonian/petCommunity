@@ -39,15 +39,15 @@ public class PetcPersionalController {
 	}
 
 	@RequestMapping("doUserPsUI")
-	public String doUserPsUI(Integer id) {
-
-		return "userPs/userPs";
+	public String doUserPsUI() {
+		// userService.updatePassword(password, newPassword, cfgPassword);
+		return "userPs/updateUserPs";
 	}
 
 	@ResponseBody
 	@RequestMapping("doUserPsUI/doUpdatePassword")
-	public JsonResult doUpdatePassword(String pwd, String newPwd, String cfgPwd) {
-		userService.updatePassword(pwd, newPwd, cfgPwd);
+	public JsonResult doUpdatePassword(String password, String newPwd, String cfgPwd) {
+		userService.updatePassword(password, newPwd, cfgPwd);
 		return new JsonResult("update ok");
 	}
 }

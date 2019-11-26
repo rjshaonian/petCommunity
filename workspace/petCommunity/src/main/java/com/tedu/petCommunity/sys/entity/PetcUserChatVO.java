@@ -15,7 +15,7 @@ public class PetcUserChatVO {
 	// 主键id
 	private Integer id;
 	// 用户名
-	private String username;
+	private String nickname;
 	// 关联社区id
 	private Integer commId;
 	// 内容
@@ -23,7 +23,9 @@ public class PetcUserChatVO {
 	// 是否启用0:未启用;1:启用
 	private String valid;
 	// 创建时间
-	private Date createTime;
+	private Date createdTime;
+	// 创建时间
+	private String createdTimeStr;
 	// 创建者id
-	private String createUser;
+	private String createdUser;
 }

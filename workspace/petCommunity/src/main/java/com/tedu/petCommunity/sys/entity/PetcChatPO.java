@@ -19,10 +19,10 @@ public class PetcChatPO {
 	// 内容
 	private String content;
 	// 是否启用0:未启用;1:启用
-	private String valid;
+	private Integer valid;
 	// 创建时间
-	private Date createTime;
+	private Date createdTime;
 	// 创建者id
-	private String createUser;
+	private Integer createdUser;
 
 }
