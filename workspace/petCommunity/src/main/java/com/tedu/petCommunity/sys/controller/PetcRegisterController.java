@@ -37,8 +37,8 @@ public class PetcRegisterController {
 
 	@RequestMapping("/doRegister")
 	@ResponseBody
-	public JsonResult doRegister(PetcUserPO data) {
-		registerService.insertAll(data);
+	public JsonResult doRegister(PetcUserPO data, String code, HttpServletRequest request) {
+		registerService.doRegister(data, code, request);
 		return new JsonResult("seccess");
 	}
 

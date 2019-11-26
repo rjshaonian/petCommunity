@@ -1,6 +1,6 @@
 package com.tedu.petCommunity.sys.service;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 
@@ -25,10 +25,9 @@ public interface UserService {
 
 	int updatePassword(String password, String newPassword, String cfgPassword);
 
-	int insertAll(PetcUserPO data);
-
-	String doRegister(String code, PetcUserPO data, HttpSession session);
+	void doRegister(PetcUserPO data, String code, HttpServletRequest request);
 
 	// String isNoDifferenceOfPassword(Integer id, String password, String
 	// newPassword);
+
 }

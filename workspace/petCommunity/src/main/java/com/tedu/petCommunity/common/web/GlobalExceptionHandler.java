@@ -13,13 +13,12 @@ import com.tedu.petCommunity.common.vo.JsonResult;
 
 /**
  * 全局异常处理类
+ * 
  * @author 阳昊 2019年11月22日 下午3:58:32
  */
-/**  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-	// JDK中的自带的日志API
 	@ExceptionHandler(RuntimeException.class)
 	public JsonResult doHandleRuntimeException(RuntimeException e) {
 		e.printStackTrace();// 也可以写日志
