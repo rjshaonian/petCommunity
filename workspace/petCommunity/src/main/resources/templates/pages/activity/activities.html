@@ -3,13 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>活动列表</title>
-<style>
+<!-- <style>
 td {
 	text-align: left
 }
-</style>
+</style> -->
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link href="dist/css/style.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link type="text/css" rel="stylesheet"
+	href="dist/css/jquery.mmenu.all.css?v=5.4.4" />
+<!--//Custom Theme files-->
+<!--web-fonts-->
+<link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600'
+	rel='stylesheet' type='text/css'>
 </head>
-<body>
+<body class="commnunityColor" style="margin:0px;padding:0px">
 	<h1>活动列表activites</h1>
 	<div class="row">
 		<div class="box">
@@ -20,7 +30,6 @@ td {
 					<div style="width: 350px;">
 						<input type="text" name="table_search" id="searchNameId"
 							placeholder="活动名称">
-
 						<sapn class="input-group-btn">
 						<button type="button" class="btn btn-default btn-search">查找活动</button>
 						</span>
@@ -44,45 +53,47 @@ td {
 					</tbody>
 				</table>
 			</div>
-			<div id="pageId" class="box-footer clearfix"></div>
+			<div>
+				<div id="pageId" class="box-footer clearfix"></div>
+			</div>
 			<!-- /.box-body -->
 		</div>
 	</div>
 
 	<script type="text/javascript">
 		$(function() {
-			
+
 			/*$(".wrapper").on("click", ".main", doCancel)*/
-			$("#pageId").load("doPageUI", doGetObjects);
+			const pageUrl = "community/doPageUI";
+			$("#pageId").load(pageUrl, function() {
+				doGetObjects();
+			});
 			$(".input-group-btn").on("click", ".btn-search", doQueryObjects)
 					.on("click", ".btn-add", goDetail)
 			$("#tbodyId").on("click", ".btn-look", goDetail)
-			$("#tbodyId").on("click", ".btn-look", goDetail)
-			
 			//查询和修改按钮事件注册
 		})
-		
-		
+
 		/* 详情页  */
-		
 		function goDetail() {
 			debugger
 			var id = $(this).parents("td").siblings("td")[0].innerHTML;
 			$("#mainContentId").load("activity/detail", function() {
 				$(".box-title").html("详情页");
 			});
+
 			var url = "activity/findActivityById";
 			var param = {
 				"id" : id
 			};
 			$.getJSON(url, param, function(result) {
 				if (result.state == 1) {
-					
+
 					debugger
 					/*$("#mainContentId").load("activity/detail", function() {
 						$(".box-title").html("详情页");
 					});*/
-					
+
 					//$("#mainContentId").data("data", result.data)
 					//loadPageUI(title);
 					/*doLoadPageUI(result.data.id);*/
@@ -90,13 +101,20 @@ td {
 					var page = $("#pageId");
 					tBody.empty();
 					page.empty();
-					var tr ="<tr><td>"+result.data.actiName+"</td><td>"+result.data.position+"</td><td>"+result.data.actiType+"</td><td>"+result.data.startTime+"</td><td>"+result.data.endTime+"</td><td>"+result.data.createTime+"</td><td>"+result.data.createUser+"</td></tr>";
+					var tr = "<tr><td>" + result.data.actiName + "</td><td>"
+							+ result.data.position + "</td><td>"
+							+ result.data.actiType + "</td><td>"
+							+ result.data.startTime + "</td><td>"
+							+ result.data.endTime + "</td><td>"
+							+ result.data.createTime + "</td><td>"
+							+ result.data.createUser + "</td></tr>";
 					/*var td = "<td>"+ row.actiName + "</td>" + 
 					"<td>" + row.position + "</td>"+
 					"<td>" + row.createTime + "</td>";
 					tr.append(td);*/
 					//tr追加到body
 					tBody.append(tr);
+					$("#mainContentId").data("id", id);
 				} else {
 					alert(result.message);
 				}
@@ -104,18 +122,18 @@ td {
 
 		}
 		/*  $("#mainContentId").load("activity/detail"); */
-	/*	function doLoadPageUI(id) {
-			$("#mainContentId").load("activity/detail", function() {
-				$(".box-title").html("详情页");
-			});
-			debugger
-			 var url="activity/findActivityById";
-		      $.getJSON(url,id,function(result){
-		 	        doHandleResponseResult(result);
-		 	        console.log(result);
-				 }
-			   );
-		}*/
+		/*	function doLoadPageUI(id) {
+				$("#mainContentId").load("activity/detail", function() {
+					$(".box-title").html("详情页");
+				});
+				debugger
+				 var url="activity/findActivityById";
+			      $.getJSON(url,id,function(result){
+			 	        doHandleResponseResult(result);
+			 	        console.log(result);
+					 }
+				   );
+			}*/
 		/* 详情页  */
 		function doQueryObjects() {
 			$("#pageId").data("pageCurrent", 1);
@@ -138,7 +156,7 @@ td {
 			var url = "activity/findActivities";
 			//2.发起异步请求
 			$.getJSON(url, params, function(result) {
-
+				console.log(result);
 				doHandleResponseResult(result);
 			});//特殊的ajax函数
 
@@ -150,14 +168,13 @@ td {
 				//更新table中tbody内部的数据
 				doSetTableBodyRows(result.data.records);//将数据呈现在页面上 
 				//更新页面page.html分页数据
-				//doSetPagination(result.data); //此方法写到page.html中
+				doSetPagination(result.data); //此方法写到page.html中
 			} else {
 				alert(result.msg);
 			}
 		}
-
 		function doSetTableBodyRows(records) {
-debugger
+			debugger
 			//获取tbody对象并清空
 			var tBody = $("#tbodyId");
 			tBody.empty();
@@ -178,8 +195,7 @@ debugger
 			debugger
 			var tds = "<td hidden='true'>" + row.id + "</td>" + "<td>"
 					+ row.actiName + "</td>" + "<td>" + row.position + "</td>"
-					+ "<td>" + row.createTime + "</td>"
-					+ "<td><a class='btn-delete'>删除</a>"
+					+ "<td>" + row.createTime + "</td>" + "<td>"
 					+ "&nbsp;<a class='btn-look' id='look'>详情</a></td>";
 			return tds;
 		}

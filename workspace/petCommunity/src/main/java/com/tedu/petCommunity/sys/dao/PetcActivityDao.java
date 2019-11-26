@@ -27,4 +27,5 @@ public interface PetcActivityDao {
 
 	@Delete("delete from activity where id=#{id}")
 	int killActivityById(Integer Id);
+	int update(PetcActivityPO entity);
 }

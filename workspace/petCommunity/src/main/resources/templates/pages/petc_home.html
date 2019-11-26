@@ -129,7 +129,7 @@ html, body {
 			$("#acti").attr("class", "banner-bottom-left");
 			$("#comm").attr("class", "banner-bottom-right");
 			$("#contentType").html("活动");
-			$("#search").attr("onclick", "location.href = 'acti_search'");
+			$("#search").attr("onclick", "location.href = 'activity'");
 			$("#create").attr("onclick", "location.href = 'acti_create'");
 			loadContent("acti");
 		}
@@ -151,11 +151,12 @@ html, body {
 			var content = $(".ac-container");
 			content.empty();
 			var list = data.list;
+			var names = data.names;
 			for (var i = 0; i < list.length; i++) {
 				var url = data.url+"?id="+list[i].id;
 				var n = i % 4 + 1;
 				var eleStr = "<div><a href='"+url+"'><label for='ac-"+n+"' class='grid"+n+"'><i></i>"
-						+ list[i].commName + "</label><a></div>";
+						+ names[i] + "</label><a></div>";
 				content.append($(eleStr));
 			}
 		}

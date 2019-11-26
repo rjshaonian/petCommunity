@@ -28,7 +28,7 @@ public class PetcPageController {
 		return "activity/activities";
 	}
 
-	@RequestMapping("activity/createActivity")
+	@RequestMapping("acti_create")
 	public String goCreateActivity() {
 		return "activity/createActivity";
 	}
@@ -36,6 +36,11 @@ public class PetcPageController {
 	@RequestMapping("activity/detail")
 	public String goDetail() {
 		return "activity/detail";
+	}
+	
+	@RequestMapping("activity/fixActivity")
+	public String goFix() {
+		return "activity/fixActivity";
 	}
 //
 //	@RequestMapping("doPageUI")

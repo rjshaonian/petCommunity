@@ -9,6 +9,13 @@
 		</where>
 	</sql>
 	
+	<update id="update"
+		parameterType="com.tedu.petCommunity.sys.entity.PetcActivityPO"
+		useGeneratedKeys="true" keyProperty="id">
+		update activity set acti_name=#{actiName},position=#{position},valid=#{valid},acti_type=#{actiType},
+		start_time=#{startTime},end_time=#{endTime},modified_time=#{modifiedTime} where id=#{id}
+	</update>
+	
 	<select id="getRowCount" resultType="int">
 		select count(*) from activity
 		<include refid="queryWhereId"/>
@@ -33,7 +40,7 @@
 		(id,acti_name,position,valid,acti_type,start_time,end_time,create_time,modified_time
 		,create_user,modified_user)
 		values
-		(#{id},#{actiName},#{position},#{valid},#{actiType},#{startTime},#{endTime},#{createTime},
+		(null,#{actiName},#{position},#{valid},#{actiType},#{startTime},#{endTime},#{createTime},
 		#{modifiedTime},#{createUser},#{modifiedUser})
 	</insert>
 	<!--查询社区 -->

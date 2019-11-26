@@ -13,8 +13,16 @@ import com.tedu.petCommunity.sys.service.PetcActivityService;
 @RestController
 @RequestMapping("/activity/")
 public class PetcActivityController {
+	
 	@Autowired
 	PetcActivityService ADS;
+	
+	@RequestMapping("update")
+	@ResponseBody
+	public JsonResult doUpdateObject(PetcActivityPO entity) {
+		activityService.update(entity);
+		return new JsonResult("update ok");
+	}
 
 	@RequestMapping("killActivity")
 	public JsonResult doDeleteObject(Integer id) {

@@ -15,4 +15,5 @@ import lombok.NoArgsConstructor;
 public class PetcHomeContentVO<T> {
 	private String url;
 	private List<T> list;
+	private List<String> names;
 }

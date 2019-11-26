@@ -40,6 +40,7 @@
 			<div id="pageId"></div>
 			<!-- /.box-body -->
 			<button type="button" class="back">返回列表</button>
+			<button type="button" class="fix">修改</button>
 	<button type="button" class="kill">删除</button>
 	</div>
 <img alt="img" src="https://wx3.sinaimg.cn/mw1024/794f086dgy1g89af10wg0j20dw0hj3zi.jpg">
@@ -49,14 +50,19 @@
 		$(".b")
 		  .on("click",".back",doBack)
 		  .on("click",".kill",doKill)
+		  .on("click",".fix",doFix)
 	});
-	
+
+	function doFix(){
+		 $("#mainContentId").load("activity/fixActivity");
+		}
 	function doBack(){
 		 $("#mainContentId").load("activity/activities");
 		}
 	function doKill(){
 		debugger
-		var id = 6;/*$(this).parents("td").siblings("td")[0].innerHTML;*/
+		var id =$("#mainContentId").data("id");
+		/*$(this).parents("td").siblings("td")[0].innerHTML;*/
 		/*$("#mainContentId").load("activity/detail", function() {
 			$(".box-title").html("详情页");
 		});*/

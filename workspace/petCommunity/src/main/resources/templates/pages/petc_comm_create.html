@@ -51,7 +51,7 @@ html, body {
 
 							<h6>社区名：</h6>
 							<input type="text" class="form-control" id="commName"
-								placeholder="社区名...">
+								placeholder="社区名..." >
 							<h6>社区定位：</h6>
 							<input type="text" class="form-control" id="position"
 								placeholder="社区定位..."> 
@@ -88,6 +88,7 @@ html, body {
 				alert("Thank you for clicking, but that's a demo link.");
 				return false;
 			});
+			
 		});
 		
 		function createComm(){
@@ -98,9 +99,10 @@ html, body {
 				};
 				$.post(url, params, function(result) {
 					if (result.state == 1) {//ok
-						setContent(result.data);//将数据呈现在页面上 
+						//setContent(result.data);//将数据呈现在页面上 
+						location.href="home";
 					} else {
-						alert(result.msg)
+						alert(result.message)
 					}
 				});//特殊的ajax函数
 		}

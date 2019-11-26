@@ -25,8 +25,11 @@
 		(comm_name,position,create_user,created_time,modified_time)
 		values
 		(#{commName},#{position},#{createUser},#{createdTime},#{modifiedTime})
-	</insert>
-
+	</insert>	
+	<select id="findPetcCommunityByName" 
+		resultType="com.tedu.petCommunity.sys.entity.PetcCommunityPO">
+		select comm_name from community where comm_name=#{commName}
+	</select>
 	<!-- 查询社区 -->
 	<sql id="queryWhereId">
 		from community

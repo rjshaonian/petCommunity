@@ -102,4 +102,14 @@ public class PetcActivityServiceImpl implements PetcActivityService {
 
 	}
 
+	@Override
+	public int update(PetcActivityPO entity) {
+		if (entity == null)
+			throw new IllegalArgumentException("修改对象不能为空");
+		if (null == (entity.getActiName()))
+			throw new IllegalArgumentException("活动名不允许为空");
+		int rows = activityDao.update(entity);
+		return rows;
+	}
+
 }

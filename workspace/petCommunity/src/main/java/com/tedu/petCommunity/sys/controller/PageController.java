@@ -25,11 +25,11 @@ public class PageController {
 	public String search() {
 		return "findPetcCommunity";
 	}
-
+	
 	/** 修改社区页面 */
 	@GetMapping("modify")
 	public String modify() {
 		return "ModifyComm";
 	}
-
+	
 }

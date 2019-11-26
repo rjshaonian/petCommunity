@@ -62,16 +62,13 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 		// 1.参数校验
 		if (entity == null)
 			throw new IllegalArgumentException("保存对象不能为空");
-
 		if (StringUtils.isEmpty(entity.getCommName()))
 			throw new IllegalArgumentException("用户名不能为空");
-
 		// 2.保存社区信息
 		// 获取当前时间并赋值给pojo对象
 		entity.setCreatedTime(new Date());
 		entity.setModifiedTime(entity.getCreatedTime());
 		int rows = communityDao.createObject(entity);
-
 		// 3.返回结果
 		return rows;
 	}
@@ -185,6 +182,11 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 	@Override
 	public void doCreateComm(String commName, String position) {
 		// 1.插入社区表
+		if (commName==null || commName=="")
+			throw new ServiceException("用户名不能为空");
+		 List<PetcCommunityPO> list = communityDao.findPetcCommunityByName(commName);
+		if(list!=null)
+			throw new  ServiceException("用户名已存在");
 		PetcCommunityPO po = new PetcCommunityPO();
 		po.setCommName(commName);
 		po.setPosition(position);

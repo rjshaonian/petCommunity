@@ -26,6 +26,7 @@
 	  //2.1获取当前页码值,总页数
 	  var pageCurrent= $("#pageId").data("pageCurrent");
 	  var pageCount=$("#pageId").data("pageCount");
+	  console.log(pageCount);
       //2.2修改页码值
       if(cls=="first"){
     	  pageCurrent=1;
@@ -41,14 +42,14 @@
 	  doGetObjects();
   }
   //初始化分页信息
-  function doInitPagination(){
+/*   function doInitPagination(){
 	//1.初始化总记录数
 	 $(".rowCount").html("总记录数(0)")
 	//2.初始化总页数
 	 $(".pageCount").html("总页数(0)")
 	//3.初始化当前页码值
 	 $(".pageCurrent").html("当前页(1)")
-  }
+  } */
   //设置分页信息
   function doSetPagination(pageObject){
 	  //1.初始化总记录数

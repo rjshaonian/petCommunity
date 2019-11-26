@@ -21,6 +21,7 @@ public interface PetcCommunityDao {
 
 	/** 创建社区 */
 	int createObject(PetcCommunityPO entity);
+	List<PetcCommunityPO> findPetcCommunityByName(String commName);
 
 	/** 查找社区 */
 

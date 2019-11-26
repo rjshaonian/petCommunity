@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>活动列表</title>
+</head>
+<body>
+<h1>修改活动</h1>
+<div class="box box-info">
+      <div class="box-header with-border">
+      </div>
+      <!-- /.box-header -->
+      <!-- form start -->
+      <form class="form-horizontal">
+        <div class="box-body">
+          <div class="form-group">
+            <label for="nameId" >活动名称</label>
+              <input type="text"  name="actiName" id="nameId" placeholder="名称">
+          </div>
+          <div class="form-group">
+            <label for="locId" >活动地点</label>
+              <input type="text"  name="position" id="positionId" placeholder="地点">
+          </div>
+          <div class="form-group">
+            <label for="typeId" >宠物类型</label>
+              <input type="text"  name="actiType" id="actiTypeId" placeholder="哺乳类·鸟类·两栖类·鱼类">
+          </div>
+          <div class="form-group">
+            <label for="startId" >开始时间</label>
+              <input type="text"  name="startTime" id="startTimeId" placeholder="开始时间"><span id="st"></span>
+          </div>
+          <label>sorry,由于技术问题,您必须按照提示的这个格式存储时间</label>
+          <div class="form-group">
+            <label for="endId" >结束时间</label>
+              <input type="text"  name="endTime" id="endTimeId" placeholder="结束时间"><span id="et"></span>
+          </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          <button type="button" class="btn btn-default btn-cancel">取消</button>
+          <!-- <button type="button" name="Submit" onclick="location.reload();" value="取消"> -->
+          <button type="button" class="btn btn-info pull-right btn-save">修改</button>
+        </div>
+        <!-- /.box-footer -->
+      </form>
+    </div>	
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	holdData();
+	$(".box-footer")
+	  .on("click",".btn-cancel",doCancel)
+	  .on("click",".btn-save",update)
+ var time = new Date();
+        $('#startTimeId').val(time);
+        $('#endTimeId').val(time);
+});
+
+function holdData(){
+	debugger
+	 var params={"id":$("#mainContentId").data("id")};
+	   var url="activity/findActivityById";
+	   $.getJSON(url,params,function(result){
+		   debugger
+		   console.log(111)
+		   if(result.state==1){
+	          doLoadPage(title);*/
+			     if(!result.data)return;
+				 console.log(result.data);
+				 //初始化用户信息 
+				 $("#nameId").val(result.data.actiName);
+				 $("#positionId").val(result.data.position);
+				 $("#actiTypeId").val(result.data.actiType);
+				/*$("#st").val(result.data.startTime);
+				 $("#et").val(result.data.endTime);*/
+				 $("#st").html("原开始时间:("+result.data.startTime+")");
+				 $("#et").html("原结束时间:("+result.data.startTime+")");
+		   }else{
+			  alert(result.message);
+		   }
+	   });
+
+}
+function update(){
+	var id=$("#mainContentId").data("id");
+	  //1.获取表单数据
+	  var params={
+			id:$("#mainContentId").data("id"),
+			actiName:$("#nameId").val(),
+			position:$("#positionId").val(),
+			/* valid:1, */
+			actiType:$("#actiTypeId").val(),
+			startTime:$("#startTimeId").val(),
+			endTime:$("#endTimeId").val(),
+			modifiedTime:new Date(),
+			/* midifiedTime:null, 
+			createUser:null,
+			modifiedUser:null*/
+    	}
+	  //2.异步提交表单数据
+	  debugger
+	  var insertUrl="activity/update";
+	  $.post(insertUrl,params,function(result){
+		  if(result.state==1){
+			  alert(result.message);
+			  doBack();
+		  }else{
+			  alert(result.message);
+		  }
+	  });
+}
+</script>
+</body>
+</html>
