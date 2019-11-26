@@ -186,11 +186,11 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 	@Override
 	public void doCreateComm(String commName, String position) {
 		// 1.插入社区表
-		if (commName==null || commName=="")
+		if (commName == null || commName == "")
 			throw new ServiceException("用户名不能为空");
-		 List<PetcCommunityPO> list = communityDao.findPetcCommunityByName(commName);
-		if(list!=null)
-			throw new  ServiceException("用户名已存在");
+		List<PetcCommunityPO> list = communityDao.findPetcCommunityByName(commName);
+		if (list != null && list.size() > 0)
+			throw new ServiceException("用户名已存在");
 		PetcCommunityPO po = new PetcCommunityPO();
 		po.setCommName(commName);
 		po.setPosition(position);
@@ -212,12 +212,11 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 	public void doDisband(Integer commId) {
 		// 1.校验参数
 		if (commId == null || commId < 1)
-			throw new IllegalArgumentException("参数有误");
+			throw new ServiceException("参数有误");
 		// 2.删除user_comm
 		petcUserCommDao.deleteUserCommByCommId(commId);
 		// 3.删除chat
 		chatDao.deleteChatByCommId(commId);
-
 		// 4.删除community
 		communityDao.deleteComm(commId);
 
@@ -227,12 +226,42 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 	public void doExit(Integer commId) {
 		// 1.校验参数非空
 		if (commId == null || commId < 1 || "".equals(commId))
-			throw new IllegalArgumentException("参数有误");
+			throw new ServiceException("参数有误");
 		// 2.获取当前登录用户的id
 		Integer myUserId = ShiroUtils.getUserId();
 		// 3.根据登录的用户id,社区id删除user_comm的数据
 		petcUserCommDao.deleteUserCommByUserCommId(myUserId, commId);
 
+	}
+
+	@Override
+	public List<PetcCommunityPO> loadComm(String commName) {
+		return communityDao.loadComm(commName);
+	}
+
+	@Override
+	public void doJoin(Integer commId) {
+		// 1.校验参数非空
+		if (commId == null || commId < 1 || "".equals(commId))
+			throw new ServiceException("参数有误");
+		// 2.获取当前登录用户的id
+		Integer myUserId = ShiroUtils.getUserId();
+		// 3.根据登录的用户id,社区id删除user_comm的数据
+		petcUserCommDao.insertUserCommByUserCommId(myUserId, commId);
+	}
+
+	@Override
+	public void doModify(Integer commId, String commName, String position) {
+		// 1.校验参数非空
+		if (commId == null || commId < 1 || "".equals(commId))
+			throw new ServiceException("参数有误");
+		PetcCommunityPO po = new PetcCommunityPO();
+		po.setId(commId);
+		po.setCommName(commName);
+		po.setPosition(position);
+		po.setModifiedTime(new Date());
+		po.setModifiedUser(ShiroUtils.getUserId());
+		communityDao.updateComm(po);
 	}
 
 }

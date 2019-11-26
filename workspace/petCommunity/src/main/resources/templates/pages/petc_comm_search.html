@@ -35,7 +35,8 @@ html, body {
 						<a href="#menu"><img src="dist/img/menu-icon.png" alt="" /></a>
 						<nav id="menu">
 							<ul class="">
-								<li class="menu-title" onclick="location.href='home'">&lt; 主页</li>
+								<li class="menu-title" onclick="location.href='home'">&lt;
+									主页</li>
 								<li><a href="personal_modify"><span class="icons">
 									</span> 修改信息</a></li>
 								<li><a href="personal_password"><span
@@ -45,30 +46,41 @@ html, body {
 							</ul>
 						</nav>
 					</div>
-
 					<div class="title">
+						<div class="title-left">
+							<img src="dist/img/icon.png" alt="" />
+						</div>
 						<div class="title-right">
-
-							<h6>昵称：</h6>
-							<input type="text" class="form-control" id="nickname" th:value="${user.nickname}">
-							<h6>常用定位：</h6>
-							<input type="text" class="form-control" id="position" th:value="${user.position}">
-							<h6>邮箱：</h6>
-							<input type="text" class="form-control" id="email" th:value="${user.email}">
-							<h6>电话：</h6>
-							<input type="text" class="form-control" id="mobile" th:value="${user.mobile}">
-							<h6>宠物类型：</h6>
-							<input type="text" class="form-control" id="petType" th:value="${user.petType}">
-							<h2>
-								<input type="button" class="btn btn-warning" value="确认修改"
-									onclick="modifyInfo()" />
-							</h2>
+							<h2">用户名</h2>
+							<h6">常用定位</h6>
 						</div>
 						<div class="clear"></div>
 					</div>
 				</div>
 			</div>
+			<div class="clear"></div>
+			<div class="work-text">
+				<h3>
+					<span id="contentType">社区名：</span><input type="text" id="commName"
+						class="form-control" /> <input type="button" value="查找"
+						class="btn btn-primary" onclick="loadContent()" />
+				</h3>
 
+				<section class="ac-container">
+					<!-- <div>
+						<label for="ac-1" class="grid1"><i></i>社区一</label>
+					</div>
+					<div>
+						<label for="ac-2" class="grid2"><i></i>社区二</label>
+					</div>
+					<div>
+						<label for="ac-3" class="grid3"><i></i>社区三</label>
+					</div>
+					<div>
+						<label for="ac-4" class="grid4"><i></i>社区四</label>
+					</div> -->
+				</section>
+			</div>
 		</div>
 	</div>
 
@@ -92,28 +104,34 @@ html, body {
 				alert("Thank you for clicking, but that's a demo link.");
 				return false;
 			});
+
+			loadContent();//页面加载完成后，默认载入社区信息
 		});
-		
-		function modifyInfo() {
-			var url = "personal_modify/doModifyInfo"
-			
+		function loadContent() {
+			var url = "comm_search/loadComm"
 			var params = {
-				"nickname" : $("#nickname").val(),
-				"position" : $("#position").val(),
-				"email" : $("#email").val(),
-				"mobile" : $("#mobile").val(),
-				"petType" : $("#petType").val()
+				"commName" : $("#commName").val()
 			};
-			$.post(url, params, function(result) {
+			$.getJSON(url, params, function(result) {
 				if (result.state == 1) {//ok
-					alert("修改成功");
-					location.href = "home";
+					setContent(result.data);//将数据呈现在页面上 
 				} else {
-					alert(result.message);
+					alert(result.msg)
 				}
-			});
+			});//特殊的ajax函数
 		}
-		
+		function setContent(data) {
+			console.log(data);
+			var content = $(".ac-container");
+			content.empty();
+			for (var i = 0; i < data.length; i++) {
+				var url = "comm_detail?id=" + data[i].id;
+				var n = i % 4 + 1;
+				var eleStr = "<div><a href='"+url+"'><label for='ac-"+n+"' class='grid"+n+"'><i></i>"
+						+ data[i].commName + "</label><a></div>";
+				content.append($(eleStr));
+			}
+		}
 	</script>
 </body>
 </html>

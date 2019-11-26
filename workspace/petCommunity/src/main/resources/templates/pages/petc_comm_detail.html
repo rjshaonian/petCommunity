@@ -35,7 +35,8 @@ html, body {
 						<a href="#menu"><img src="dist/img/menu-icon.png" alt="" /></a>
 						<nav id="menu">
 							<ul class="">
-								<li class="menu-title" onclick="location.href='home'">主页</li>
+								<li class="menu-title" onclick="location.href='home'">&lt;
+									主页</li>
 								<li><a href="personal_modify"><span class="icons">
 									</span> 修改信息</a></li>
 								<li><a href="personal_password"><span
@@ -48,19 +49,23 @@ html, body {
 					<div class="title">
 						<div class="title-right">
 							<h6>社区名：</h6>
-							<h2 th:text="${vo.po.commName}">社区名</h2>
+							<h2 th:text="${vo.po.commName}" id="commName">社区名</h2>
 							<h6>社区定位：</h6>
-							<h2 th:text="${vo.po.position}">社区定位</h2>
+							<h2 th:text="${vo.po.position}" id="position">社区定位</h2>
 							<h6>创建时间：</h6>
-							<h2 th:text="${vo.po.createdTimeStr}">创建时间</h2>
+							<h2 th:text="${vo.po.createdTimeStr}" id="createdTimeStr">创建时间</h2>
 							<h6>创建者：</h6>
-							<h2 id="nickname" th:text="${vo.nickname}">创建者</h2>
+							<h2 th:text="${vo.nickname}" id="nickname">创建者</h2>
 							<h2>
 								<input type="hidden" class="btn btn-primary" value="加入"
-									id="join" /> <input type="hidden" class="btn btn-danger"
-									value="退出" id="exit" /> <input type="hidden"
-									class="btn btn-warning" value="修改" id="modify" /> <input
-									type="hidden" class="btn btn-danger" value="解散" id="disband" />
+									id="join" onclick="join()" /> <input type="hidden"
+									class="btn btn-danger" value="退出" id="exit" onclick="exit()" />
+								<input type="hidden" class="btn btn-warning" value="修改"
+									id="modify" onclick="modify()" /> <input type="hidden"
+									class="btn btn-danger" value="解散" id="disband"
+									onclick="disband()" /><input type="hidden"
+									class="btn btn-primary" value="确认修改" id="doModify"
+									onclick="doModify()" />
 							</h2>
 						</div>
 						<div class="clear"></div>
@@ -98,58 +103,93 @@ html, body {
 		
 		function showBtn(){
 			var relationship = [[${vo.relationship}]]-0;
-			if(relationship==2){//如果自己是创建者
-				$("#modify").attr("type","button");//显示修改按钮
-				$("#modify").attr("onclick","modify()")//绑定修改按钮的点击事件
+			if(relationship==2){//2如果自己是创建者
+				$("#modify").attr("type","button");//修改
 				$("#disband").attr("type","button");//解散
-				$("#disband").attr("onclick","disband()")
 				$("#nickname").html($("#nickname").html()+"（我）");
-			}else if(relationship==1){//如果自己已加入社区
+			}else if(relationship==1){//1如果自己已加入社区
 				$("#exit").attr("type","button");//退出
-				$("#exit").attr("onclick","exit()");
-			}else if(relationship ==0){//如果自己未加入社区
+			}else if(relationship ==0){//0如果自己未加入社区
 				$("#join").attr("type","button");//加入
-				$("#join").attr("onclick","join()");
 			}
 		}
 		
 		function disband(){
+			if(!window.confirm("确认解散？？")){
+				return;
+			}
 			var commId = [[${vo.po.id}]]-0;
-			//发送ajax请求
-			//commnity,user_comm,chat  
 			var url="/comm_detail/doDisband";
 			var params={
 				"commId":commId
-			};
+				};
 			$.post(url,params,function(result){
-				//成功返回home
-				
-					if (result.state == 1) {
-						location.href="/home";
-						
+				if (result.state == 1) {
+					location.href="/home";
 				}else{
 					alert("失败");
 				}
-				//失败则弹框提示
 			});
 		}
 		
 		function exit(){
+			if(!window.confirm("确认退出？？")){
+				return;
+			}
 			var commId = [[${vo.po.id}]]-0;
 			var url="/comm_detail/doExit";
 			var params={
 					"commId":commId
 				};
 			$.post(url,params,function(result){
-				//成功返回home
-				
-					if (result.state == 1) {
-						location.href="/home";
-						
+				if (result.state == 1) {
+					alert("退出社区成功");
+					location.href="/home";
 				}else{
 					alert(result.message);
 				}
-				//失败则弹框提示
+			});
+		}
+		function join(){
+			var commId = [[${vo.po.id}]]-0;
+			var url="/comm_detail/doJoin";
+			var params={
+					"commId":commId
+				};
+			$.post(url,params,function(result){
+				if (result.state == 1) {
+					alert("加入社区成功");
+					location.href="/chat?id="+commId;
+				}else{
+					alert(result.message);
+				}
+			});
+		}
+		function modify(){
+			var inputCommName = $("<input type='text' class='form-control' />").val($("#commName").html());
+			$("#commName").empty().append(inputCommName);
+			var inputPosition = $("<input type='text' class='form-control' />").val($("#position").html());
+			$("#position").empty().append(inputPosition);
+			$("#modify").attr("type","hidden");//修改
+			$("#disband").attr("type","hidden");//解散
+			$("#doModify").attr("type","button");//确认修改
+		}
+		function doModify(){
+			var commId = [[${vo.po.id}]]-0;
+			var url="/comm_detail/doModify";
+			var params={
+					"commId":commId,
+					"commName":$("#commName input").val(),
+					"position":$("#position input").val()
+				};
+			console.log(params);
+			$.post(url,params,function(result){
+				if (result.state == 1) {
+					alert("修改社区信息成功");
+					location.href="/comm_detail?id="+commId;
+				}else{
+					alert(result.message);
+				}
 			});
 		}
 	</script>

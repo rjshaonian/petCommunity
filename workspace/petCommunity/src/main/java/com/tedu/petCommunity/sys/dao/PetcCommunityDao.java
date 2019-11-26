@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.tedu.petCommunity.dailyreport.vo.UserCommVo;
 import com.tedu.petCommunity.sys.entity.PetcCommunityPO;
@@ -22,6 +23,7 @@ public interface PetcCommunityDao {
 
 	/** 创建社区 */
 	int createObject(PetcCommunityPO entity);
+
 	List<PetcCommunityPO> findPetcCommunityByName(String commName);
 
 	/** 查找社区 */
@@ -86,5 +88,17 @@ public interface PetcCommunityDao {
 	 */
 	@Insert("insert into user_comm values(null,#{userId},#{commId})")
 	void insertRelationshipByUserComm(Integer userId, Integer commId);
+
+	/**
+	 * @param commName
+	 * @return
+	 */
+	List<PetcCommunityPO> loadComm(String commName);
+
+	/**
+	 * @param po
+	 */
+	@Update("update community set comm_name=#{commName},position=#{position},modified_time=#{modifiedTime},modified_user=#{modifiedUser} WHERE id=#{id}")
+	int updateComm(PetcCommunityPO po);
 
 }

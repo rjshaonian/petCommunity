@@ -1,5 +1,7 @@
 package com.tedu.petCommunity.sys.service;
 
+import java.util.List;
+
 import com.tedu.petCommunity.common.vo.CommObject;
 import com.tedu.petCommunity.common.vo.PageObject;
 import com.tedu.petCommunity.dailyreport.vo.UserCommVo;
@@ -67,8 +69,32 @@ public interface PetcCommunityService {
 	 */
 	void doCreateComm(String commName, String position);
 
+	/**
+	 * @param commId
+	 */
 	void doDisband(Integer commId);
 
+	/**
+	 * @param commId
+	 */
 	void doExit(Integer commId);
+
+	/**
+	 * @param commName
+	 * @return
+	 */
+	List<PetcCommunityPO> loadComm(String commName);
+
+	/**
+	 * @param commId
+	 */
+	void doJoin(Integer commId);
+
+	/**
+	 * @param commId
+	 * @param commName
+	 * @param position
+	 */
+	void doModify(Integer commId, String commName, String position);
 
 }

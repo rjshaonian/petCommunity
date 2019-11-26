@@ -25,8 +25,8 @@
 		(comm_name,position,create_user,created_time,modified_time)
 		values
 		(#{commName},#{position},#{createUser},#{createdTime},#{modifiedTime})
-	</insert>	
-	<select id="findPetcCommunityByName" 
+	</insert>
+	<select id="findPetcCommunityByName"
 		resultType="com.tedu.petCommunity.sys.entity.PetcCommunityPO">
 		select comm_name from community where comm_name=#{commName}
 	</select>
@@ -73,20 +73,31 @@
 		(#{commName},#{position})
 	</insert>
 
-	
+
 	<delete id="doDisband">
-	delete user_id
-	from user_comm
-	where comm_id=#{commId};
-	
-	delete content
-	from chat
-	where comm_id=#{commId};
-	
-	delete id
-	from community
-	where id=#{commId}
-	
-	
+		delete user_id
+		from user_comm
+		where comm_id=#{commId};
+
+		delete content
+		from chat
+		where comm_id=#{commId};
+
+		delete id
+		from community
+		where id=#{commId}
+
 	</delete>
+	
+	<select id="loadComm"
+		resultType="com.tedu.petCommunity.sys.entity.PetcCommunityPO">
+		select *from community
+		<where>
+			<if test="commName!=null and commName!=''">
+				comm_name like concat("%",#{commName},"%")
+			</if>
+		</where>
+		order by created_time desc
+		limit 0,20
+	</select>
 </mapper>
