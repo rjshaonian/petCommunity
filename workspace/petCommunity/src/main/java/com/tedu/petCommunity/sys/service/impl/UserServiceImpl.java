@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException("密码不能为空");
 		if (StringUtils.isEmpty(data.getMobile()))
 			throw new ServiceException("手机号码不能为空");
-		if (StringUtils.isEmpty(data.getCode()))
+		if (StringUtils.isEmpty(code))
 			throw new ServiceException("验证码不能为空");
 		// 2.校验验证码
 		HttpSession session = request.getSession();

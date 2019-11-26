@@ -11,20 +11,21 @@
 	</select>
 	<update id="updateUserInfo"
 		parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO">
-		update user set username =#{username},
+		update user set
 		nickname=#{nickname},
 		email=#{email},
 		mobile=#{mobile},
+		position=#{position},
 		pet_type=#{petType},
-		valid=#{valid},
 		modified_time=now(),
-		modified_user=#{modifiedUser} where id=#{id}
+		modified_user=#{id} where id=#{id}
 	</update>
 	<update id="updatePassword">
          update user
          set password=#{password},
              salt=#{salt},
-             modified_time=now()
+             modified_time=now(),
+             modified_user=#{id}
          where id=#{id}
 </update>
 	
