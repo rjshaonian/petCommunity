@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.tedu.petCommunity.common.config.PageProperties;
@@ -15,6 +16,7 @@ import com.tedu.petCommunity.common.vo.CommObject;
 import com.tedu.petCommunity.common.vo.PageObject;
 import com.tedu.petCommunity.dailyreport.vo.UserCommVo;
 import com.tedu.petCommunity.sys.dao.CommActi;
+import com.tedu.petCommunity.sys.dao.PetcChatDao;
 import com.tedu.petCommunity.sys.dao.PetcCommunityDao;
 import com.tedu.petCommunity.sys.dao.PetcUserCommDao;
 import com.tedu.petCommunity.sys.entity.PetcCommunityPO;
@@ -27,6 +29,8 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 
 	@Autowired
 	private PetcCommunityDao communityDao;
+	@Autowired
+	private PetcChatDao chatDao;
 
 	@Override
 	public PageObject<PetcCommunityPO> findCommunitys(Integer userId, Integer pageCurrent) {
@@ -149,7 +153,7 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 		if (entity == null)
 			throw new ServiceException("不存在");
 		communityDao.deleteComm(commId);
-		communityDao.deleteObject(entity);
+		// communityDao.deleteObject(entity);
 	}
 
 	@Override
@@ -199,6 +203,34 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 		Integer commId = communityDao.findCommIdByPO(po);
 		// 3.向用户、社区关系表中插入一条关联数据
 		communityDao.insertRelationshipByUserComm(userId, commId);
+	}
+
+	@Override
+	@Transactional
+	public void doDisband(Integer commId) {
+		// 1.校验参数
+		if (commId == null || commId < 1)
+			throw new IllegalArgumentException("参数有误");
+		// 2.删除user_comm
+		petcUserCommDao.deleteUserCommByCommId(commId);
+		// 3.删除chat
+		chatDao.deleteChatByCommId(commId);
+
+		// 4.删除community
+		communityDao.deleteComm(commId);
+
+	}
+
+	@Override
+	public void doExit(Integer commId) {
+		// 1.校验参数非空
+		if (commId == null || commId < 1 || "".equals(commId))
+			throw new IllegalArgumentException("参数有误");
+		// 2.获取当前登录用户的id
+		Integer myUserId = ShiroUtils.getUserId();
+		// 3.根据登录的用户id,社区id删除user_comm的数据
+		petcUserCommDao.deleteUserCommByUserCommId(myUserId, commId);
+
 	}
 
 }

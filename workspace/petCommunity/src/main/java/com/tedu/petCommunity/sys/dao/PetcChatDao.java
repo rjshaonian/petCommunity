@@ -5,6 +5,7 @@ package com.tedu.petCommunity.sys.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -44,4 +45,7 @@ public interface PetcChatDao {
 	 */
 	@Insert("insert into chat values(null,#{commId},#{content},#{valid},#{createdTime},#{createdUser})")
 	void insertChatMessage(PetcChatPO po);
+
+	@Delete("delete from chat where comm_id=#{commId}")
+	void deleteChatByCommId(Integer commId);
 }

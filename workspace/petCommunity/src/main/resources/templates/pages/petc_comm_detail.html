@@ -46,9 +46,6 @@ html, body {
 						</nav>
 					</div>
 					<div class="title">
-						<!-- <div class="title-left">
-							<img src="dist/img/icon.png" alt="" />
-						</div> -->
 						<div class="title-right">
 							<h6>社区名：</h6>
 							<h2 th:text="${vo.po.commName}">社区名</h2>
@@ -80,6 +77,7 @@ html, body {
 
 	<script type="text/javascript">
 		$(function() {
+		
 			$("#menu").mmenu({
 				extensions : [ "theme-dark", "effect-listitems-slide" ],
 				iconPanels : {
@@ -100,15 +98,59 @@ html, body {
 		
 		function showBtn(){
 			var relationship = [[${vo.relationship}]]-0;
-			if(relationship==2){
-				$("#modify").attr("type","button");
-				$("#disband").attr("type","button");
+			if(relationship==2){//如果自己是创建者
+				$("#modify").attr("type","button");//显示修改按钮
+				$("#modify").attr("onclick","modify()")//绑定修改按钮的点击事件
+				$("#disband").attr("type","button");//解散
+				$("#disband").attr("onclick","disband()")
 				$("#nickname").html($("#nickname").html()+"（我）");
-			}else if(relationship==1){
-				$("#exit").attr("type","button");
-			}else if(relationship ==0){
-				$("#join").attr("type","button");
+			}else if(relationship==1){//如果自己已加入社区
+				$("#exit").attr("type","button");//退出
+				$("#exit").attr("onclick","exit()");
+			}else if(relationship ==0){//如果自己未加入社区
+				$("#join").attr("type","button");//加入
+				$("#join").attr("onclick","join()");
 			}
+		}
+		
+		function disband(){
+			var commId = [[${vo.po.id}]]-0;
+			//发送ajax请求
+			//commnity,user_comm,chat  
+			var url="/comm_detail/doDisband";
+			var params={
+				"commId":commId
+			};
+			$.post(url,params,function(result){
+				//成功返回home
+				
+					if (result.state == 1) {
+						location.href="/home";
+						
+				}else{
+					alert("失败");
+				}
+				//失败则弹框提示
+			});
+		}
+		
+		function exit(){
+			var commId = [[${vo.po.id}]]-0;
+			var url="/comm_detail/doExit";
+			var params={
+					"commId":commId
+				};
+			$.post(url,params,function(result){
+				//成功返回home
+				
+					if (result.state == 1) {
+						location.href="/home";
+						
+				}else{
+					alert(result.message);
+				}
+				//失败则弹框提示
+			});
 		}
 	</script>
 </body>

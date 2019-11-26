@@ -70,20 +70,20 @@
 		(#{commName},#{position})
 	</insert>
 
-	<!-- 退出社区 -->
-	<delete id="deleteObject">
-		delete from community
-		<choose>
-			<when test="ids!=null and ids.length>0">
-				<where>
-					<foreach collection="ids" item="id" separator="or">
-						id=#{id}
-					</foreach>
-				</where>
-			</when>
-			<otherwise>
-				where id=-1
-			</otherwise>
-		</choose>
+	
+	<delete id="doDisband">
+	delete user_id
+	from user_comm
+	where comm_id=#{commId};
+	
+	delete content
+	from chat
+	where comm_id=#{commId};
+	
+	delete id
+	from community
+	where id=#{commId}
+	
+	
 	</delete>
 </mapper>

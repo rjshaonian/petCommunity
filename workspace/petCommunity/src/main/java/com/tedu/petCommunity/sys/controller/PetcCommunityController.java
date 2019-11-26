@@ -35,6 +35,20 @@ public class PetcCommunityController {
 		return new JsonResult("create ok");
 	}
 
+	@ResponseBody
+	@RequestMapping("/comm_detail/doDisband")
+	public JsonResult doDisband(Integer commId) {
+		communityService.doDisband(commId);
+		return new JsonResult("disband ok");
+	}
+
+	@ResponseBody
+	@RequestMapping("/comm_detail/doExit")
+	public JsonResult doExit(Integer commId) {
+		communityService.doExit(commId);
+		return new JsonResult("exit ok");
+	}
+
 //	@RequestMapping("/community/doFindCommunitys")
 //	public JsonResult doFindCommunitys(Integer userId, Integer pageCurrent) {
 //

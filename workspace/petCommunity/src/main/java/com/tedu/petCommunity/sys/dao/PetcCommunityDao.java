@@ -2,6 +2,7 @@ package com.tedu.petCommunity.sys.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -35,6 +36,7 @@ public interface PetcCommunityDao {
 	UserCommVo findObjectById(Integer id);
 
 	/** 删除社区 */
+	@Delete("delete from community where id=#{id}")
 	int deleteComm(Integer id);
 
 	/** 加入社区 */
@@ -42,7 +44,7 @@ public interface PetcCommunityDao {
 	int addC(PetcCommunityPO entity);
 
 	/** 退出社区 */
-	int deleteObject(PetcCommunityPO entity);
+	int doExit(Integer commId);
 
 	/**
 	 * @param id
@@ -83,4 +85,5 @@ public interface PetcCommunityDao {
 	 */
 	@Insert("insert into user_comm values(null,#{userId},#{commId})")
 	void insertRelationshipByUserComm(Integer userId, Integer commId);
+
 }
