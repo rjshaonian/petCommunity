@@ -162,7 +162,7 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 	public PetcCommDetailVO getCommDetailVO(Integer id) {
 		// 1.根据id获取社区信息
 		PetcCommunityPO po = communityDao.getCommunityById(id);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		po.setCreatedTimeStr(format.format(po.getCreatedTime()));
 		po.setModifiedTimeStr(format.format(po.getModifiedTime()));
 		// 2.根据创建者id获取创建者信息
@@ -253,15 +253,27 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 	@Override
 	public void doModify(Integer commId, String commName, String position) {
 		// 1.校验参数非空
-		if (commId == null || commId < 1 || "".equals(commId))
+		if (commId == null || commId < 1)
 			throw new ServiceException("参数有误");
+		if (StringUtils.isEmpty(commName) || StringUtils.isEmpty(position))
+			throw new ServiceException("参数有误");
+		// 2.组织参数
 		PetcCommunityPO po = new PetcCommunityPO();
 		po.setId(commId);
 		po.setCommName(commName);
 		po.setPosition(position);
 		po.setModifiedTime(new Date());
 		po.setModifiedUser(ShiroUtils.getUserId());
-		communityDao.updateComm(po);
+		// 3.持久化数据
+		communityDao.updateCommByPO(po);
 	}
 
+	@Override
+	public List<PetcUserPO> getUsersByCommId(Integer commId) {
+		// 1.校验参数非空
+		if (commId == null || commId < 1)
+			throw new ServiceException("参数有误");
+		// 2.查询数据
+		return communityDao.getUsersByCommId(commId);
+	}
 }

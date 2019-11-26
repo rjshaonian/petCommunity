@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>宠物社区</title>
+<!--Custom Theme files-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<!--Custom Theme files-->
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link href="dist/css/style.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link type="text/css" rel="stylesheet"
+	href="dist/css/jquery.mmenu.all.css?v=5.4.4" />
+<link
+	href="bower_components/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet">
+<!--//Custom Theme files-->
+<!--web-fonts-->
+<link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600'
+	rel='stylesheet' type='text/css'>
+<!--//web-fonts-->
+<style type="text/css">
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body>
+	<div class=" mm-wrapper" id="page">
+		<div class="push-menu ">
+			<div class="banner">
+				<div class="banner-text">
+					<div class="menu">
+						<a href="#menu"><img src="dist/img/menu-icon.png" alt="" /></a>
+						<nav id="menu">
+							<ul class="">
+								<li class="menu-title" onclick="location.href='home'">&lt;
+									主页</li>
+								<li><a href="personal_modify"><span class="icons">
+									</span> 修改信息</a></li>
+								<li><a href="personal_password"><span
+										class="icons icn4"> </span> 修改密码</a></li>
+								<li><a href="login"><span class="icons icn5"> </span>
+										退出登录</a></li>
+							</ul>
+						</nav>
+					</div>
+
+					<div class="title">
+						<div class="title-right">
+							<h2>创建活动</h2>
+							<h6>活动名：</h6>
+							<input type="text" class="form-control" id="actiName">
+							<h6>活动定位：</h6>
+							<input type="text" class="form-control" id="position">
+							<h6>宠物类型：</h6>
+							<input type="text" class="form-control" id="actiType">
+							<h6>从：</h6>
+							<input type="text" id="datetimeStart" name="datetimepicker"
+								readonly class="form-control form-datetime">
+							<h6>至：</h6>
+							<input type="text" id="datetimeEnd" name="datetimepicker"
+								readonly class="form-control form-datetime">
+							<h2>
+								<input type="button" class="btn btn-primary" value="创建"
+									onclick="createActi()" />
+							</h2>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script src="dist/js/jquery-1.11.1.min.js"></script>
+	<script src="dist/js/jquery.mmenu.min.all.js?v=5.4.4"></script>
+	<script src="bower_components/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<script
+		src="bower_components/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+	<script
+		src="bower_components/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$("#menu").mmenu({
+				extensions : [ "theme-dark", "effect-listitems-slide" ],
+				iconPanels : {
+					add : true,
+					visible : 1
+				},
+				navbar : {
+					add : false
+				},
+				counters : true
+			}).on('click', 'a[href^="#/"]', function() {
+				alert("Thank you for clicking, but that's a demo link.");
+				return false;
+			});
+
+			loadTimepicker();
+
+		});
+
+		function createActi() {
+			var url = "acti_create/doCreate";
+			var actiName = $("#actiName").val();
+			var position = $("#position").val();
+			var actiType = $("#actiType").val();
+			var datetimeStart = $("#datetimeStart").val();
+			var datetimeEnd = $("#datetimeEnd").val();
+			if (actiName == null || actiName == "" || position == null
+					|| position == "" || actiType == null || actiType == "") {
+				alert("社区名、定位、宠物类型不能为空");
+				return;
+			}
+			if (datetimeStart == null || datetimeStart == ""
+					|| datetimeEnd == null || datetimeEnd == "") {
+				alert("开始时间或结束时间不能为空");
+				return;
+			}
+			var params = {
+				"actiName" : actiName,
+				"position" : position,
+				"actiType" : actiType,
+				"datetimeStart" : datetimeStart,
+				"datetimeEnd" : datetimeEnd
+			};
+			$.post(url, params, function(result) {
+				if (result.state == 1) {//ok
+					alert("创建成功");
+					location.href = "home";
+				} else {
+					alert(result.message);
+				}
+			});//特殊的ajax函数
+		}
+		function loadTimepicker() {
+			$("#datetimeStart").datetimepicker({
+				format : 'yyyy-mm-dd hh:ii',
+				minView : 'hour',
+				language : 'zh-CN',
+				autoclose : true
+			//startDate : new Date()
+			}).on(
+					"click",
+					function() {
+						$("#datetimeStart").datetimepicker("setEndDate",
+								$("#datetimeEnd").val());
+						console.log($("#datetimeStart").val());
+						console.log($("#datetimeEnd").val());
+					});
+			$("#datetimeEnd").datetimepicker({
+				format : 'yyyy-mm-dd hh:ii',
+				minView : 'hour',
+				language : 'zh-CN',
+				autoclose : true
+			//startDate : new Date()
+			}).on(
+					"click",
+					function() {
+						$("#datetimeEnd").datetimepicker("setStartDate",
+								$("#datetimeStart").val());
+
+					});
+		}
+	</script>
+</body>
+</html>

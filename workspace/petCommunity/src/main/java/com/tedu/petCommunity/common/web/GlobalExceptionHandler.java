@@ -6,7 +6,6 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.tedu.petCommunity.common.vo.JsonResult;
@@ -26,7 +25,6 @@ public class GlobalExceptionHandler {
 	}
 
 	@ExceptionHandler(ShiroException.class)
-	@ResponseBody
 	public JsonResult doHandleShiroException(ShiroException e) {
 		JsonResult r = new JsonResult();
 		r.setState(0);

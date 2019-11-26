@@ -27,15 +27,19 @@ public class PetcActivityPO {
 	// @DateTimeFormat(pattern = "yyyy-MM-dd")
 	// 开始时间
 	private Date startTime;
+	private String startTimeStr;
 	// 结束时间
 	// @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endTime;
+	private String endTimeStr;
 	// 创建时间
-	private Date createTime;
+	private Date createdTime;
+	private String createdTimeStr;
 	// 修改时间
 	private Date modifiedTime;/* i */
+	private String modifiedTimeStr;
 	// 创建者id
-	private Integer createUser;
+	private Integer createdUser;
 	// 修改者id
 	private Integer modifiedUser;
 

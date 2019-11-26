@@ -35,7 +35,8 @@ html, body {
 						<a href="#menu"><img src="dist/img/menu-icon.png" alt="" /></a>
 						<nav id="menu">
 							<ul class="">
-								<li class="menu-title" onclick="location.href='home'">&lt; 主页</li>
+								<li class="menu-title" onclick="location.href='home'">&lt;
+									主页</li>
 								<li><a href="personal_modify"><span class="icons">
 									</span> 修改信息</a></li>
 								<li><a href="personal_password"><span
@@ -50,7 +51,8 @@ html, body {
 							<img src="dist/img/icon.png" alt="" />
 						</div> -->
 						<div class="title-right">
-							<h2 th:text="${commPO.commName}" th:onclick="location.href='comm_detail?id='+[[${id}]]">社区名</h2>
+							<h2 th:text="${commPO.commName}"
+								th:onclick="location.href='comm_detail?id='+[[${id}]]">社区名</h2>
 							<h6 th:text="${commPO.position}">常用定位</h6>
 						</div>
 						<div class="clear"></div>
@@ -60,8 +62,10 @@ html, body {
 			<div class="clear"></div>
 			<div class="work-text">
 				<div>
-					<textarea class="form-control" rows="3" style="width: 100%" id="chatMessage"></textarea>
-					<input type="button" onclick="sendMsg()" class="btn btn-primary" value="发送" />
+					<textarea class="form-control" rows="3" style="width: 100%"
+						id="chatMessage"></textarea>
+					<input type="button" onclick="sendMsg()" class="btn btn-primary"
+						value="发送" />
 				</div>
 
 				<section class="ac-container">
@@ -115,7 +119,7 @@ html, body {
 			var params = {
 				"commId" : commId
 			};
-			$.getJSON(url, params, function(result) {
+			$.post(url, params, function(result) {
 				if (result.state == 1) {//ok
 					setContent(result.data);//将数据呈现在页面上 
 				} else {
@@ -148,8 +152,10 @@ html, body {
 			var content = $("#chatContent");
 			content.empty();
 			for (var i = 0; i < data.length; i++) {
-				var eleStr = "<li>"+data[i].nickname+" "+data[i].createdTimeStr+"<p>"+data[i].content+"</p><hr/></li>";
-				content.append($(eleStr));
+				var eleStr = $("<li>"+data[i].nickname+" "+data[i].createdTimeStr+"<p>"+data[i].content+"</p><hr/></li>");
+				var url = "personal?id="+data[i].createdUser;
+				eleStr.attr("onclick","location.href='"+url+"'")
+				content.append(eleStr);
 			}
 		}
 	</script>

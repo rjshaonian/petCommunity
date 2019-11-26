@@ -97,4 +97,10 @@ public interface PetcCommunityService {
 	 */
 	void doModify(Integer commId, String commName, String position);
 
+	/**
+	 * @param commId
+	 * @return
+	 */
+	List<PetcUserPO> getUsersByCommId(Integer commId);
+
 }

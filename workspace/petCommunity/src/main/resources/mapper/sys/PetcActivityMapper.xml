@@ -37,11 +37,11 @@
 		parameterType="com.tedu.petCommunity.sys.entity.PetcActivityPO"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into activity
-		(id,acti_name,position,valid,acti_type,start_time,end_time,create_time,modified_time
-		,create_user,modified_user)
+		(id,acti_name,position,valid,acti_type,start_time,end_time,created_time,modified_time
+		,created_user,modified_user)
 		values
-		(null,#{actiName},#{position},#{valid},#{actiType},#{startTime},#{endTime},#{createTime},
-		#{modifiedTime},#{createUser},#{modifiedUser})
+		(null,#{actiName},#{position},#{valid},#{actiType},#{startTime},#{endTime},#{createdTime},
+		#{modifiedTime},#{createdUser},#{modifiedUser})
 	</insert>
 	<!--查询社区 -->
 	<select id="findActivitys"
@@ -61,4 +61,16 @@
 			(select acti_id from user_acti where user_id=#{userId})
 		</where>
 	</sql>
+	
+	<select id="loadActi"
+		resultType="com.tedu.petCommunity.sys.entity.PetcActivityPO">
+		select *from activity
+		<where>
+			<if test="actiName!=null and actiName!=''">
+				acti_name like concat("%",#{actiName},"%")
+			</if>
+		</where>
+		order by created_time desc
+		limit 0,20
+	</select>
 </mapper>

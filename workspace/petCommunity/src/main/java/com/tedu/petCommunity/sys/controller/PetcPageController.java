@@ -18,30 +18,30 @@ public class PetcPageController {
 //		return "home";
 //	}
 
-	@RequestMapping("activity")
-	public String goActivity() {
-		return "activity";
-	}
-
-	@RequestMapping("activity/activities")
-	public String showActivities() {
-		return "activity/activities";
-	}
-
-	@RequestMapping("acti_create")
-	public String goCreateActivity() {
-		return "activity/createActivity";
-	}
-
-	@RequestMapping("activity/detail")
-	public String goDetail() {
-		return "activity/detail";
-	}
-	
-	@RequestMapping("activity/fixActivity")
-	public String goFix() {
-		return "activity/fixActivity";
-	}
+//	@RequestMapping("activity")
+//	public String goActivity() {
+//		return "activity";
+//	}
+//
+//	@RequestMapping("activity/activities")
+//	public String showActivities() {
+//		return "activity/activities";
+//	}
+//
+//	@RequestMapping("acti_create")
+//	public String goCreateActivity() {
+//		return "activity/createActivity";
+//	}
+//
+//	@RequestMapping("activity/detail")
+//	public String goDetail() {
+//		return "activity/detail";
+//	}
+//	
+//	@RequestMapping("activity/fixActivity")
+//	public String goFix() {
+//		return "activity/fixActivity";
+//	}
 //
 //	@RequestMapping("doPageUI")
 //	public String doPageUI() {

@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PetcLogAspect {
 //	@Pointcut("@annotation(com.tedu.petCommunity.common.annotation.RequiredLog)")
-	@Pointcut("within(sys.service..*ServiceImpl)")
+	@Pointcut("bean(*ServiceImpl)")
 	public void logPointCut() {
 	}
 

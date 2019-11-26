@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>宠物社区</title>
+<!--Custom Theme files-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<!--Custom Theme files-->
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link href="dist/css/style.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link type="text/css" rel="stylesheet"
+	href="dist/css/jquery.mmenu.all.css?v=5.4.4" />
+<!--//Custom Theme files-->
+<!--web-fonts-->
+<link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600'
+	rel='stylesheet' type='text/css'>
+<!--//web-fonts-->
+<style type="text/css">
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body>
+	<div class=" mm-wrapper" id="page">
+		<div class="push-menu ">
+			<div class="banner">
+				<div class="banner-text">
+					<div class="menu">
+						<a href="#menu"><img src="dist/img/menu-icon.png" alt="" /></a>
+						<nav id="menu">
+							<ul class="">
+								<li class="menu-title" onclick="location.href='home'">&lt; 主页</li>
+								<li><a href="personal_modify"><span class="icons">
+									</span> 修改信息</a></li>
+								<li><a href="personal_password"><span
+										class="icons icn4"> </span> 修改密码</a></li>
+								<li><a href="login"><span class="icons icn5"> </span>
+										退出登录</a></li>
+							</ul>
+						</nav>
+					</div>
+
+					<div class="title">
+						<div class="title-right">
+							<h2>修改信息</h2>
+							<h6>昵称：</h6>
+							<h2 th:text="${vo.user.nickname}" id="nickname">昵称</h2>
+							<h6>常用定位：</h6>
+							<h2 th:text="${vo.user.position}">常用定位</h2>
+							<h6>邮箱：</h6>
+							<h2 th:text="${vo.user.email}">邮箱</h2>
+							<h6>电话：</h6>
+							<h2 th:text="${vo.user.mobile}">电话</h2>
+							<h6>宠物类型：</h6>
+							<h2 th:text="${vo.user.petType}">宠物类型</h2>
+							<h2>
+								<input type="hidden" class="btn btn-primary" value="添加关注"
+									onclick="subscribe()" id="subscribe"/>
+								<input type="hidden" class="btn btn-danger" value="取消关注"
+									onclick="unsubscribe()"  id="unsubscribe"/>
+									
+								<input type="hidden" class="btn btn-warning" value="修改信息"
+									onclick="location.href='personal_modify'"  id="modify"/>
+							</h2>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script src="dist/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript"
+		src="dist/js/jquery.mmenu.min.all.js?v=5.4.4"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$("#menu").mmenu({
+				extensions : [ "theme-dark", "effect-listitems-slide" ],
+				iconPanels : {
+					add : true,
+					visible : 1
+				},
+				navbar : {
+					add : false
+				},
+				counters : true
+			}).on('click', 'a[href^="#/"]', function() {
+				alert("Thank you for clicking, but that's a demo link.");
+				return false;
+			});
+			showBtn();
+		});
+		function showBtn(){
+			var relationship = [[${vo.relationship}]]-0;
+			if(relationship==2){//2如果自己
+				$("#modify").attr("type","button");//修改
+				$("#nickname").html($("#nickname").html()+"（我）");
+			}else if(relationship==1){//1如果自己已关注
+				$("#unsubscribe").attr("type","button");//取关
+			}else if(relationship ==0){//0如果自己未关注
+				$("#subscribe").attr("type","button");//关注
+			}
+		}
+		function unsubscribe(){
+			if(!window.confirm("取消关注？？")){
+				return;
+			}
+			var userId = [[${vo.user.id}]]-0;
+			var url="/personal/unsubscribe";
+			var params={
+					"userId":userId
+				};
+			$.post(url,params,function(result){
+				if (result.state == 1) {
+					alert("取消关注成功");
+					location.href="/personal?id="+userId;
+				}else{
+					alert(result.message);
+				}
+			});
+		}
+		function subscribe(){
+			var userId = [[${vo.user.id}]]-0;
+			var url="/personal/subscribe";
+			var params={
+					"userId":userId
+				};
+			$.post(url,params,function(result){
+				if (result.state == 1) {
+					alert("关注成功");
+					location.href="/personal?id="+userId;
+				}else{
+					alert(result.message);
+				}
+			});
+		}
+		
+	</script>
+</body>
+</html>

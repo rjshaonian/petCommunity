@@ -48,13 +48,14 @@ html, body {
 					</div>
 					<div class="title">
 						<div class="title-right">
+							<h2>社区详情</h2>
 							<h6>社区名：</h6>
 							<h2 th:text="${vo.po.commName}" id="commName">社区名</h2>
 							<h6>社区定位：</h6>
 							<h2 th:text="${vo.po.position}" id="position">社区定位</h2>
-							<h6>创建时间：</h6>
+							<h6>社区创建时间：</h6>
 							<h2 th:text="${vo.po.createdTimeStr}" id="createdTimeStr">创建时间</h2>
-							<h6>创建者：</h6>
+							<h6>社区创建者：</h6>
 							<h2 th:text="${vo.nickname}" id="nickname">创建者</h2>
 							<h2>
 								<input type="hidden" class="btn btn-primary" value="加入"
@@ -72,7 +73,13 @@ html, body {
 					</div>
 				</div>
 			</div>
+			<div class="work-text">
+				<h3>
+					<span id="contentType">社区成员</span>
+				</h3>
 
+				<section class="ac-container"></section>
+			</div>
 		</div>
 	</div>
 
@@ -99,8 +106,35 @@ html, body {
 			});
 			
 			showBtn();
+			loadContent();
 		});
 		
+		function loadContent() {
+			var commId = [[${vo.po.id}]]-0;
+			var url = "comm_detail/loadContent"
+			var params = {
+					"commId":commId
+			};
+			$.getJSON(url, params, function(result) {
+				if (result.state == 1) {//ok
+					setContent(result.data);//将数据呈现在页面上 
+				} else {
+					alert(result.msg)
+				}
+			});//特殊的ajax函数
+		}
+		function setContent(data) {
+			console.log(data);
+			var content = $(".ac-container");
+			content.empty();
+			for (var i = 0; i < data.length; i++) {
+				var url = "personal?id="+data[i].id;
+				var n = i % 4 + 1;
+				var eleStr = "<div><a href='"+url+"'><label for='ac-"+n+"' class='grid"+n+"'><i></i>"
+						+ data[i].nickname + "</label><a></div>";
+				content.append($(eleStr));
+			}
+		}
 		function showBtn(){
 			var relationship = [[${vo.relationship}]]-0;
 			if(relationship==2){//2如果自己是创建者

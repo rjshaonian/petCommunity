@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tedu.petCommunity.common.util.ShiroUtils;
 import com.tedu.petCommunity.common.vo.JsonResult;
 import com.tedu.petCommunity.sys.entity.PetcCommunityPO;
 import com.tedu.petCommunity.sys.service.PetcCommunityService;
@@ -32,7 +33,8 @@ public class PetcCommunityController {
 	}
 
 	@RequestMapping("/comm_search")
-	public String doCommSearchUI() {
+	public String doCommSearchUI(Model model) {
+		model.addAttribute("user", ShiroUtils.getUser());
 		return "petc_comm_search";
 	}
 
@@ -76,6 +78,12 @@ public class PetcCommunityController {
 	public JsonResult doModify(Integer commId, String commName, String position) {
 		communityService.doModify(commId, commName, position);
 		return new JsonResult("modify ok");
+	}
+
+	@RequestMapping("/comm_detail/loadContent")
+	@ResponseBody
+	public JsonResult loadContent(Integer commId) {
+		return new JsonResult(communityService.getUsersByCommId(commId));
 	}
 //	@RequestMapping("/community/doFindCommunitys")
 //	public JsonResult doFindCommunitys(Integer userId, Integer pageCurrent) {

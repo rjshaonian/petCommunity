@@ -50,7 +50,7 @@ html, body {
 							<img src="dist/img/icon.png" alt="" />
 						</div>
 						<div class="title-right">
-							<h2 th:text="${user.nickname}">用户名</h2>
+							<h2 th:text="${user.nickname}"  onclick="location.href='personal'">用户名</h2>
 							<h6 th:text="${user.position}">常用定位</h6>
 						</div>
 						<div class="clear"></div>
@@ -129,7 +129,7 @@ html, body {
 			$("#acti").attr("class", "banner-bottom-left");
 			$("#comm").attr("class", "banner-bottom-right");
 			$("#contentType").html("活动");
-			$("#search").attr("onclick", "location.href = 'activity'");
+			$("#search").attr("onclick", "location.href = 'acti_search'");
 			$("#create").attr("onclick", "location.href = 'acti_create'");
 			loadContent("acti");
 		}

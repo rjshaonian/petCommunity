@@ -10,6 +10,7 @@ import com.tedu.petCommunity.common.util.ShiroUtils;
 import com.tedu.petCommunity.common.vo.JsonResult;
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 import com.tedu.petCommunity.sys.service.PetcPersonalService;
+import com.tedu.petCommunity.sys.vo.PetcPersonalVO;
 
 @Controller
 @RequestMapping
@@ -24,11 +25,32 @@ public class PetcPersonalController {
 		return "petc_personal_password";
 	}
 
+	@RequestMapping("personal")
+	public String doPersionalUI(Integer id, Model model) {
+		PetcPersonalVO vo = personalService.getUserById(id);
+		model.addAttribute("vo", vo);
+		return "petc_personal";
+	}
+
 	@RequestMapping("personal_modify")
 	public String doPersionalMdfUI(Model model) {
 		PetcUserPO user = ShiroUtils.getUser();
 		model.addAttribute("user", user);
 		return "petc_personal_modify";
+	}
+
+	@ResponseBody
+	@RequestMapping("/personal/unsubscribe")
+	public JsonResult unsubscribe(Integer userId) {
+		personalService.unsubscribe(userId);
+		return new JsonResult("unsubscribe ok");
+	}
+
+	@ResponseBody
+	@RequestMapping("/personal/subscribe")
+	public JsonResult subscribe(Integer userId) {
+		personalService.subscribe(userId);
+		return new JsonResult("subscribe ok");
 	}
 
 	/**

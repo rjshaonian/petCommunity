@@ -32,18 +32,18 @@ public class PetcHomeServiceImpl implements PetcHomeService {
 		Integer userId = ShiroUtils.getUserId();
 		if ("comm".equals(type)) {
 			List<PetcCommunityPO> list = communityDao.findCommunitys(userId, 0, 20);
-			List<String> names=new ArrayList<String>();
-			for(PetcCommunityPO po:list) {
+			List<String> names = new ArrayList<String>();
+			for (PetcCommunityPO po : list) {
 				names.add(po.getCommName());
 			}
 			return new PetcHomeContentVO<PetcCommunityPO>("chat", list, names);
 		} else if ("acti".equals(type)) {
 			List<PetcActivityPO> list = activityDao.findActivitys(userId, 0, 20);
-			List<String> names=new ArrayList<String>();
-			for(PetcActivityPO po:list) {
+			List<String> names = new ArrayList<String>();
+			for (PetcActivityPO po : list) {
 				names.add(po.getActiName());
 			}
-			return new PetcHomeContentVO<PetcActivityPO>("activity", list,names);
+			return new PetcHomeContentVO<PetcActivityPO>("acti_detail", list, names);
 		} else {
 			throw new ServiceException("参数错误");
 		}

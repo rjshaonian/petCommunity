@@ -1,7 +1,10 @@
 package com.tedu.petCommunity.sys.dao;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 
@@ -23,4 +26,33 @@ public interface PetcUserDao {
 
 	/** 判断用户名是否存在 */
 	int existName(String username);
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	@Select("select * from user where id=#{id}")
+	PetcUserPO getUserById(Integer id);
+
+	/**
+	 * @param userId
+	 * @param id
+	 * @return
+	 */
+	@Select("select count(*) from subscribe where user_id=#{userId} and subscribe_user=#{subscribeUser}")
+	int getUserSubscribeByIds(Integer userId, Integer subscribeUser);
+
+	/**
+	 * @param userId
+	 * @param userId2
+	 */
+	@Delete("delete from subscribe where user_id=#{userId} and subscribe_user=#{subscribeUser}")
+	void deleteSubscribeByIds(Integer userId, Integer subscribeUser);
+
+	/**
+	 * @param userId
+	 * @param userId2
+	 */
+	@Insert("insert into subscribe values (null,#{userId},#{subscribeUser})")
+	void addSubscribeByIds(Integer userId, Integer subscribeUser);
 }

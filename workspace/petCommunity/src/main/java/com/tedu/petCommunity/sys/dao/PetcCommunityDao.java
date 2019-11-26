@@ -99,6 +99,13 @@ public interface PetcCommunityDao {
 	 * @param po
 	 */
 	@Update("update community set comm_name=#{commName},position=#{position},modified_time=#{modifiedTime},modified_user=#{modifiedUser} WHERE id=#{id}")
-	int updateComm(PetcCommunityPO po);
+	int updateCommByPO(PetcCommunityPO po);
+
+	/**
+	 * @param commId
+	 * @return
+	 */
+	@Select("select u.* from user u,user_comm where u.id=user_id and comm_id=#{commId}")
+	List<PetcUserPO> getUsersByCommId(Integer commId);
 
 }

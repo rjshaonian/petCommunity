@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>宠物社区</title>
+<!--Custom Theme files-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<!--Custom Theme files-->
+<link rel="stylesheet"
+	href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link href="dist/css/style.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link type="text/css" rel="stylesheet"
+	href="dist/css/jquery.mmenu.all.css?v=5.4.4" />
+<!--//Custom Theme files-->
+<!--web-fonts-->
+<link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600'
+	rel='stylesheet' type='text/css'>
+<link
+	href="bower_components/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet">
+<!--//web-fonts-->
+<style type="text/css">
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body>
+	<div class=" mm-wrapper" id="page">
+		<div class="push-menu ">
+			<div class="banner">
+				<div class="banner-text">
+					<div class="menu">
+						<a href="#menu"><img src="dist/img/menu-icon.png" alt="" /></a>
+						<nav id="menu">
+							<ul class="">
+								<li class="menu-title" onclick="location.href='home'">&lt;
+									主页</li>
+								<li><a href="personal_modify"><span class="icons">
+									</span> 修改信息</a></li>
+								<li><a href="personal_password"><span
+										class="icons icn4"> </span> 修改密码</a></li>
+								<li><a href="login"><span class="icons icn5"> </span>
+										退出登录</a></li>
+							</ul>
+						</nav>
+					</div>
+					<div class="title">
+						<div class="title-right">
+							<h2>活动详情</h2>
+							<h6>活动名：</h6>
+							<h2 th:text="${vo.po.actiName}" id="actiName">活动名</h2>
+							<h6>活动定位：</h6>
+							<h2 th:text="${vo.po.position}" id="position">活动定位</h2>
+							<h6>活动开始时间：</h6>
+							<h2 th:text="${vo.po.startTimeStr}" id="startTime">活动开始时间</h2>
+							<h6>活动结束时间：</h6>
+							<h2 th:text="${vo.po.endTimeStr}" id="endTime">活动结束时间</h2>
+							<h6>活动创建时间：</h6>
+							<h2 th:text="${vo.po.createdTimeStr}" id="createdTimeStr">活动创建时间</h2>
+							<h6>活动创建者：</h6>
+							<h2 th:text="${vo.nickname}" id="nickname">创建者</h2>
+							<h2>
+								<input type="hidden" class="btn btn-primary" value="加入"
+									id="join" onclick="join()" /> <input type="hidden"
+									class="btn btn-danger" value="退出" id="exit" onclick="exit()" />
+								<input type="hidden" class="btn btn-warning" value="修改活动"
+									id="modify" onclick="modify()" /> <input type="hidden"
+									class="btn btn-danger" value="取消活动" id="disband"
+									onclick="disband()" /><input type="hidden"
+									class="btn btn-primary" value="确认修改" id="doModify"
+									onclick="doModify()" />
+							</h2>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+			<div class="work-text">
+				<h3>
+					<span id="contentType">活动成员</span>
+				</h3>
+
+				<section class="ac-container"></section>
+			</div>
+		</div>
+	</div>
+
+	<script src="dist/js/jquery-1.11.1.min.js"></script>
+	<script src="dist/js/jquery.mmenu.min.all.js?v=5.4.4"></script>
+	<script src="bower_components/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<script
+		src="bower_components/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+	<script
+		src="bower_components/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+		
+			$("#menu").mmenu({
+				extensions : [ "theme-dark", "effect-listitems-slide" ],
+				iconPanels : {
+					add : true,
+					visible : 1
+				},
+				navbar : {
+					add : false
+				},
+				counters : true
+			}).on('click', 'a[href^="#/"]', function() {
+				alert("Thank you for clicking, but that's a demo link.");
+				return false;
+			});
+			
+			showBtn();
+			loadContent();
+		});
+		function loadContent() {
+			var actiId = [[${vo.po.id}]]-0;
+			var url = "acti_detail/loadContent"
+			var params = {
+					"actiId":actiId
+			};
+			$.getJSON(url, params, function(result) {
+				if (result.state == 1) {//ok
+					setContent(result.data);//将数据呈现在页面上 
+				} else {
+					alert(result.msg)
+				}
+			});//特殊的ajax函数
+		}
+		function setContent(data) {
+			console.log(data);
+			var content = $(".ac-container");
+			content.empty();
+			for (var i = 0; i < data.length; i++) {
+				var url = "personal?id="+data[i].id;
+				var n = i % 4 + 1;
+				var eleStr = "<div><a href='"+url+"'><label for='ac-"+n+"' class='grid"+n+"'><i></i>"
+						+ data[i].nickname + "</label><a></div>";
+				content.append($(eleStr));
+			}
+		}
+		function showBtn(){
+			var relationship = [[${vo.relationship}]]-0;
+			if(relationship==2){//2如果自己是创建者
+				$("#modify").attr("type","button");//修改
+				$("#disband").attr("type","button");//解散
+				$("#nickname").html($("#nickname").html()+"（我）");
+			}else if(relationship==1){//1如果自己已加入社区
+				$("#exit").attr("type","button");//退出
+			}else if(relationship ==0){//0如果自己未加入社区
+				$("#join").attr("type","button");//加入
+			}
+		}
+		
+		function disband(){
+			if(!window.confirm("确认取消活动？？")){
+				return;
+			}
+			var actiId = [[${vo.po.id}]]-0;
+			var url="/acti_detail/doDisband";
+			var params={
+					"actiId":actiId
+				};
+			$.post(url,params,function(result){
+				if (result.state == 1) {
+					location.href="/home";
+				}else{
+					alert(result.message);
+				}
+			});
+		}
+		
+		function exit(){
+			if(!window.confirm("确认退出活动？？")){
+				return;
+			}
+			var actiId = [[${vo.po.id}]]-0;
+			var url="/acti_detail/doExit";
+			var params={
+					"actiId":actiId
+				};
+			$.post(url,params,function(result){
+				if (result.state == 1) {
+					alert("退出社区成功");
+					location.href="/acti_detail?id="+actiId;
+				}else{
+					alert(result.message);
+				}
+			});
+		}
+		function join(){
+			var actiId = [[${vo.po.id}]]-0;
+			var url="/acti_detail/doJoin";
+			var params={
+					"actiId":actiId
+				};
+			$.post(url,params,function(result){
+				if (result.state == 1) {
+					alert("加入活动成功");
+					location.href="/acti_detail?id="+actiId;
+				}else{
+					alert(result.message);
+				}
+			});
+		}
+		function doModify(){
+			var actiId = [[${vo.po.id}]]-0;
+			var url="/acti_detail/doModify";
+			var params={
+					"actiId":actiId,
+					"actiName":$("#actiName input").val(),
+					"position":$("#position input").val(),
+					"datetimeStart":$("#datetimeStart").val(),
+					"datetimeEnd":$("#datetimeEnd").val()
+				};
+			console.log(params);
+			$.post(url,params,function(result){
+				if (result.state == 1) {
+					alert("修改社区信息成功");
+					location.href="/acti_detail?id="+actiId;
+				}else{
+					alert(result.message);
+				}
+			});
+		}
+		function modify(){
+			var inputActiName = $("<input type='text' class='form-control' />").val($("#actiName").html());
+			$("#actiName").empty().append(inputActiName);
+			var inputPosition = $("<input type='text' class='form-control' />").val($("#position").html());
+			$("#position").empty().append(inputPosition);
+			$("#modify").attr("type","hidden");//修改
+			$("#disband").attr("type","hidden");//解散
+			$("#doModify").attr("type","button");//确认修改
+			
+			var inputStartTime = $('<input type="text" id="datetimeStart" name="datetimepicker" readonly class="form-control form-datetime">"').val($("#startTime").html());
+			$("#startTime").empty().append(inputStartTime);
+			var inputEndTime = $('<input type="text" id="datetimeEnd" name="datetimepicker" readonly class="form-control form-datetime">').val($("#endTime").html());
+			$("#endTime").empty().append(inputEndTime);
+			
+			$("#datetimeStart").datetimepicker({
+				format : 'yyyy-mm-dd hh:ii',
+				minView : 'hour',
+				language : 'zh-CN',
+				autoclose : true
+			//startDate : new Date()
+			}).on(
+					"click",
+					function() {
+						$("#datetimeStart").datetimepicker("setEndDate",
+								$("#datetimeEnd").val());
+						console.log($("#datetimeStart").val());
+						console.log($("#datetimeEnd").val());
+					});
+			$("#datetimeEnd").datetimepicker({
+				format : 'yyyy-mm-dd hh:ii',
+				minView : 'hour',
+				language : 'zh-CN',
+				autoclose : true
+			//startDate : new Date()
+			}).on(
+					"click",
+					function() {
+						$("#datetimeEnd").datetimepicker("setStartDate",
+								$("#datetimeStart").val());
+
+					});
+		}
+	</script>
+</body>
+</html>

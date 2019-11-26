@@ -13,6 +13,7 @@ import com.tedu.petCommunity.common.util.ShiroUtils;
 import com.tedu.petCommunity.sys.dao.PetcUserDao;
 import com.tedu.petCommunity.sys.entity.PetcUserPO;
 import com.tedu.petCommunity.sys.service.PetcPersonalService;
+import com.tedu.petCommunity.sys.vo.PetcPersonalVO;
 
 @Service
 public class PetcPersonalServiceImpl implements PetcPersonalService {
@@ -46,5 +47,44 @@ public class PetcPersonalServiceImpl implements PetcPersonalService {
 			throw new ServiceException("保存对象不能为空");
 		po.setId(ShiroUtils.getUserId());
 		petcUserDao.updateUserInfo(po);
+	}
+
+	@Override
+	public PetcPersonalVO getUserById(Integer id) {
+		// 1.校验参数非空
+		if (id == null || id < 1)
+			id = ShiroUtils.getUserId();
+		// 2.查询数据
+		PetcUserPO user = petcUserDao.getUserById(id);
+		Integer myId = ShiroUtils.getUserId();
+		int relationship = 0;
+		if (user.getId().intValue() == myId) {
+			relationship = 2;
+		} else if (petcUserDao.getUserSubscribeByIds(myId, id) > 0) {
+			relationship = 1;
+		}
+		// 3.组织返回参数
+		PetcPersonalVO vo = new PetcPersonalVO();
+		vo.setUser(user);
+		vo.setRelationship(relationship);
+		return vo;
+	}
+
+	@Override
+	public void unsubscribe(Integer userId) {
+		// 1.校验参数非空
+		if (userId == null || userId < 1)
+			throw new ServiceException("参数有误");
+		// 2.删除subscribe表中数据
+		petcUserDao.deleteSubscribeByIds(ShiroUtils.getUserId(), userId);
+	}
+
+	@Override
+	public void subscribe(Integer userId) {
+		// 1.校验参数非空
+		if (userId == null || userId < 1)
+			throw new ServiceException("参数有误");
+		// 2.插入subscribe表中数据
+		petcUserDao.addSubscribeByIds(ShiroUtils.getUserId(), userId);
 	}
 }
