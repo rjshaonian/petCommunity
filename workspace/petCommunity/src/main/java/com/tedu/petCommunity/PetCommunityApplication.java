@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class PetCommunityApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PetCommunityApplication.class, args);
+		System.out.println("系统启动完毕");
 	}
 
 }
