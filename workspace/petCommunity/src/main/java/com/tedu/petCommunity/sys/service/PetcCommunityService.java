@@ -66,4 +66,9 @@ public interface PetcCommunityService {
 	 * @param position
 	 */
 	void doCreateComm(String commName, String position);
+
+	void doDisband(Integer commId);
+
+	void doExit(Integer commId);
+
 }
