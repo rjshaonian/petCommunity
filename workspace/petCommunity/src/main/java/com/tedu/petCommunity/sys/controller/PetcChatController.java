@@ -22,7 +22,7 @@ import com.tedu.petCommunity.sys.service.PetcChatService;
 public class PetcChatController {
 	@Autowired
 	PetcChatService chatService;
-
+ 
 	@RequestMapping()
 	public String doChatUI(Integer id, Model model) {
 		PetcCommunityPO commPO = chatService.getCommById(id);

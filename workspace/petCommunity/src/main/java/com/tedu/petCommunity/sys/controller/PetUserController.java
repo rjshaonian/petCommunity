@@ -11,12 +11,11 @@ import com.tedu.petCommunity.sys.entity.PetcUserPO;
 @RestController
 @RequestMapping("/user/")
 public class PetUserController {
+	
 
 	@RequestMapping("doUpdateUser")
 	public JsonResult doUpdateUser() {
 		PetcUserPO user = ShiroUtils.getUser();
 		return new JsonResult(user);
 	}
-	
-	
 }
