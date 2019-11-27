@@ -1,5 +1,7 @@
 package com.tedu.petCommunity.sys.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -55,4 +57,10 @@ public interface PetcUserDao {
 	 */
 	@Insert("insert into subscribe values (null,#{userId},#{subscribeUser})")
 	void addSubscribeByIds(Integer userId, Integer subscribeUser);
+
+	/**
+	 * @param username
+	 */
+	@Select("select * from user where username=#{username}")
+	List<PetcUserPO> getUserByUsername(String username);
 }

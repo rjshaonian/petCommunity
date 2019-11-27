@@ -39,3 +39,11 @@ async-thread-pool:
   maxPoolSize: 1000
   keepAliveSeconds: 30
   queueCapacity: 1000
+
+#github oauth设置github登录的相关参数
+github:
+  client:
+    id: 118fa472013f6a21d78d
+    secret: 6d44ce3c905259dc1e2c040c7c8bb913fc265109
+  redirect:
+    uri: http://localhost/callback

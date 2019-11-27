@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tedu.petCommunity.common.util.IPUtils;
 import com.tedu.petCommunity.common.util.ShiroUtils;
@@ -52,7 +53,7 @@ public class PetcLogAspect {
 	private PetcLogDao logDao;
 
 	// 获取用户行为日志信息,然后将日志写入到数据库
-	private void saveLog(ProceedingJoinPoint joinPoint, long time) throws Exception {
+	private void saveLog(ProceedingJoinPoint joinPoint, long time) {
 		// 1.获取日志信息
 		// 获取目标方法对象
 		Method targetMethod = getTargetMethod(joinPoint);
@@ -62,7 +63,12 @@ public class PetcLogAspect {
 		String operation = getOperation(targetMethod);
 		// String params = Arrays.toString(joinPoint.getArgs());
 		// 获取方法执行时的实际参数
-		String params = new ObjectMapper().writeValueAsString(joinPoint.getArgs());
+		String params = null;
+		try {
+			params = new ObjectMapper().writeValueAsString(joinPoint.getArgs());
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		// 2.封装日志信息
 		PetcLogPO logPO = new PetcLogPO(null, ShiroUtils.getUserId(), ShiroUtils.getUsername(), operation,
 				classMethodName, params, time, IPUtils.getIpAddr(), new Date());
@@ -85,10 +91,17 @@ public class PetcLogAspect {
 		return targetMethod.getDeclaringClass().getName() + "." + targetMethod.getName();
 	}
 
-	private Method getTargetMethod(ProceedingJoinPoint joinPoint) throws NoSuchMethodException {
+	private Method getTargetMethod(ProceedingJoinPoint joinPoint) {
 		Class<?> targetClass = joinPoint.getTarget().getClass();
 		MethodSignature s = (MethodSignature) joinPoint.getSignature();// 方法签名
-		Method targetMethod = targetClass.getMethod(s.getName(), s.getParameterTypes());
+		Method targetMethod = null;
+		try {
+			targetMethod = targetClass.getMethod(s.getName(), s.getParameterTypes());
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		}
 		return targetMethod;
 	}
 }

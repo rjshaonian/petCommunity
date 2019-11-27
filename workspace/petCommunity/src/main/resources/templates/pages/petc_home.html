@@ -35,7 +35,8 @@ html, body {
 						<a href="#menu"><img src="dist/img/menu-icon.png" alt="" /></a>
 						<nav id="menu">
 							<ul class="">
-								<li class="menu-title" onclick="location.href='home'">&lt; 主页</li>
+								<li class="menu-title" onclick="location.href='home'">&lt;
+									主页</li>
 								<li><a href="personal_modify"><span class="icons">
 									</span> 修改信息</a></li>
 								<li><a href="personal_password"><span
@@ -50,7 +51,7 @@ html, body {
 							<img src="dist/img/icon.png" alt="" />
 						</div>
 						<div class="title-right">
-							<h2 th:text="${user.nickname}"  onclick="location.href='personal'">用户名</h2>
+							<h2 th:text="${user.nickname}" onclick="location.href='personal'">用户名</h2>
 							<h6 th:text="${user.position}">常用定位</h6>
 						</div>
 						<div class="clear"></div>
@@ -72,8 +73,10 @@ html, body {
 			<div class="work-text">
 				<h3>
 					<span id="contentType">社区</span> <input type="button" id="search"
-						value="查找" class="btn btn-primary" style="float: right;" /> <input type="button"
-						id="create" value="创建" class="btn btn-primary" style="float: right;" />
+						value="查找" class="btn"
+						style="float: right; margin-left:10px; background-color: #2ebc4f;color:#fff" />
+					<input type="button" id="create" value="创建" class="btn"
+						style="float: right; margin: 0 5px; background-color: #2ebc4f;color:#fff" />
 				</h3>
 
 				<section class="ac-container">
@@ -122,7 +125,9 @@ html, body {
 			$("#acti").attr("class", "banner-bottom-right");
 			$("#contentType").html("社区");
 			$("#search").attr("onclick", "location.href = 'comm_search'");
+			$("#search").val("查找社区");
 			$("#create").attr("onclick", "location.href = 'comm_create'");
+			$("#create").val("创建社区");
 			loadContent("comm");
 		}
 		function loadActi() {
@@ -130,7 +135,9 @@ html, body {
 			$("#comm").attr("class", "banner-bottom-right");
 			$("#contentType").html("活动");
 			$("#search").attr("onclick", "location.href = 'acti_search'");
+			$("#search").val("查找活动");
 			$("#create").attr("onclick", "location.href = 'acti_create'");
+			$("#create").val("创建活动");
 			loadContent("acti");
 		}
 		function loadContent(type) {
@@ -153,7 +160,7 @@ html, body {
 			var list = data.list;
 			var names = data.names;
 			for (var i = 0; i < list.length; i++) {
-				var url = data.url+"?id="+list[i].id;
+				var url = data.url + "?id=" + list[i].id;
 				var n = i % 4 + 1;
 				var eleStr = "<div><a href='"+url+"'><label for='ac-"+n+"' class='grid"+n+"'><i></i>"
 						+ names[i] + "</label><a></div>";

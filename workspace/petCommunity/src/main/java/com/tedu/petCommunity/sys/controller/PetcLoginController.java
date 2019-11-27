@@ -25,10 +25,8 @@ public class PetcLoginController {
 
 	@RequestMapping("/doLogin")
 	@ResponseBody
-	public JsonResult doLogin(String username, String password, boolean isRememberMe) {
+	public JsonResult doLogin(String username, String password) {
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-		if (isRememberMe)
-			token.setRememberMe(true);
 		Subject subject = SecurityUtils.getSubject();
 		subject.login(token);
 		return new JsonResult("login ok");

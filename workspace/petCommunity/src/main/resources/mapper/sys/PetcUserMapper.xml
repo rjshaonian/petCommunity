@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.tedu.petCommunity.sys.dao.PetcUserDao">
+<mapper namespace="com.tedu.petCommunity.sys.dao.PetcUserDao">
 	<select id="findUserInfo" parameterType="int"
 		resultType="com.tedu.petCommunity.sys.entity.PetcUserPO">
 		select *
@@ -21,22 +20,24 @@
 		modified_user=#{id} where id=#{id}
 	</update>
 	<update id="updatePassword">
-         update user
-         set password=#{password},
-             salt=#{salt},
-             modified_time=now(),
-             modified_user=#{id}
-         where id=#{id}
-</update>
-	
+		update user
+		set password=#{password},
+		salt=#{salt},
+		modified_time=now(),
+		modified_user=#{id}
+		where id=#{id}
+	</update>
+
 	<!-- 添加数据 -->
-	<insert id="insertAll" parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO">
-		insert into user(username,password,mobile,nickname,salt) 
+	<insert id="insertAll"
+		parameterType="com.tedu.petCommunity.sys.entity.PetcUserPO">
+		insert into user(username,password,mobile,nickname,salt,created_time)
 		values
-		(#{username},#{password},#{mobile},#{nickname},#{salt}) 
+		(#{username},#{password},#{mobile},#{nickname},#{salt},now())
 	</insert>
-	
+
 	<select id="existName" resultType="int">
-		select count(*) from user where username=#{username}
+		select count(*) from user
+		where username=#{username}
 	</select>
 </mapper>
