@@ -130,8 +130,10 @@ html, body {
 			for (var i = 0; i < data.length; i++) {
 				var url = "personal?id="+data[i].id;
 				var n = i % 4 + 1;
+				//var flag = data[i].id==[[${vo.po.createdUser}]];
 				var eleStr = "<div><a href='"+url+"'><label for='ac-"+n+"' class='grid"+n+"'><i></i>"
 						+ data[i].nickname + "</label><a></div>";
+						//<span>"+flag+"</span>
 				content.append($(eleStr));
 			}
 		}
