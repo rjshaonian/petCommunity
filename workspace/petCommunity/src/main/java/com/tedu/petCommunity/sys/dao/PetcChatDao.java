@@ -43,7 +43,7 @@ public interface PetcChatDao {
 	/**
 	 * @param po
 	 */
-	@Insert("insert into chat values(null,#{commId},#{content},#{valid},#{createdTime},#{createdUser})")
+	@Insert("insert into chat values(null,#{commId},#{content},#{valid},now(),#{createdUser})")
 	void insertChatMessage(PetcChatPO po);
 
 	@Delete("delete from chat where comm_id=#{commId}")
