@@ -1,7 +1,6 @@
 package com.tedu.petCommunity.common.aspect;
 
 import java.lang.reflect.Method;
-import java.util.Date;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -18,6 +17,7 @@ import com.tedu.petCommunity.common.util.IPUtils;
 import com.tedu.petCommunity.common.util.ShiroUtils;
 import com.tedu.petCommunity.sys.dao.PetcLogDao;
 import com.tedu.petCommunity.sys.entity.PetcLogPO;
+import com.tedu.petCommunity.sys.entity.PetcUserPO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,8 +70,18 @@ public class PetcLogAspect {
 			e.printStackTrace();
 		}
 		// 2.封装日志信息
-		PetcLogPO logPO = new PetcLogPO(null, ShiroUtils.getUserId(), ShiroUtils.getUsername(), operation,
-				classMethodName, params, time, IPUtils.getIpAddr(), new Date());
+		PetcLogPO logPO = new PetcLogPO();
+		try {
+			PetcUserPO user = ShiroUtils.getUser();
+			logPO.setUserId(user.getId());
+			logPO.setUsername(user.getUsername());
+		} catch (Exception e) {
+		}
+		logPO.setOperation(operation);
+		logPO.setMethod(classMethodName);
+		logPO.setParams(params);
+		logPO.setTime(time);
+		logPO.setIp(IPUtils.getIpAddr());
 		// 3.持久化日志信息
 		new Thread() {
 			public void run() {

@@ -1,5 +1,6 @@
 package com.tedu.petCommunity.sys.dao;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tedu.petCommunity.sys.entity.PetcLogPO;
@@ -17,6 +18,7 @@ public interface PetcLogDao {
 	 * @param logPO
 	 * @return
 	 */
+	@Insert("insert into log values (null,#{userId},#{username},#{operation},#{method},#{params},#{time},#{ip},now())")
 	int insertObject(PetcLogPO logPO);
 
 }
