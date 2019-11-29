@@ -81,4 +81,15 @@ public class GithubUserServiceImpl implements GithubUserService {
 		subject.login(token);
 	}
 
+	@Override
+	public String getGithubUserAuthorizeUri() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("https://github.com/login/oauth/authorize?client_id=");
+		sb.append(clientId);
+		sb.append("&redirect_uri=");
+		sb.append(redirectUri);
+		sb.append("&scope=user&state=1");
+		return sb.toString();
+	}
+
 }

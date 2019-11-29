@@ -16,4 +16,9 @@ public interface GithubUserService {
 	 */
 	public void callback(String code, String state, HttpServletRequest request, HttpServletResponse response);
 
+	/**
+	 * @return
+	 */
+	public String getGithubUserAuthorizeUri();
+
 }
