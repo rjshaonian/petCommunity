@@ -1,12 +1,3 @@
-#server
-server:
-  port: 80
-  servlet:
-    context-path: /
-  tomcat:
-    max-threads: 1000
-    uri-encoding: utf-8
-
 #spring
 spring:
   datasource:
@@ -19,6 +10,17 @@ spring:
     cache: false
   aop:
     proxy-target-class: false
+  profiles:
+    active: dev     #指定当前使用的是生产环境配置
+
+#server
+server:
+  port: 80
+  servlet:
+    context-path: /
+  tomcat:
+    max-threads: 1000
+    uri-encoding: utf-8
 
 #mybatis
 mybatis:
@@ -40,6 +42,10 @@ async-thread-pool:
   keepAliveSeconds: 30
   queueCapacity: 1000
 
+---
+spring:
+  profiles: dev
+
 #github oauth设置github登录的相关参数
 github:
   client:
@@ -47,3 +53,15 @@ github:
     secret: 6d44ce3c905259dc1e2c040c7c8bb913fc265109
   redirect:
     uri: http://localhost/callback
+
+---
+spring:
+  profiles: prod
+
+#github oauth设置github登录的相关参数
+github:
+  client:
+    id: 118fa472013f6a21d78d
+    secret: 6d44ce3c905259dc1e2c040c7c8bb913fc265109
+  redirect:
+    uri: http://111.229.41.3/callback
