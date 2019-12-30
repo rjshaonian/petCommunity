@@ -1,5 +1,4 @@
 # petCommunity
 达内项目峰会-宠物社区
 
-# Creating a new branch is quick.
-解决冲突
+# 此项目为手机端网页项目，clone本项目启动服务后，请通过手机端打开页面

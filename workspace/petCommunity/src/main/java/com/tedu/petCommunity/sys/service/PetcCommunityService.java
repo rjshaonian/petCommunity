@@ -52,10 +52,10 @@ public interface PetcCommunityService {
 	int addObject(PetcCommunityPO entity);
 
 	/**
-	 * @param createUser
+	 * @param createdUser
 	 * @return
 	 */
-	PetcUserPO getUserNameById(Integer createUser);
+	PetcUserPO getUserNameById(Integer createdUser);
 
 	/**
 	 * @param id

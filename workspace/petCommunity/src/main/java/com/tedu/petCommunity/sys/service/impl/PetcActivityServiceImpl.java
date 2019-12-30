@@ -49,8 +49,8 @@ public class PetcActivityServiceImpl implements PetcActivityService {
 		PetcActivityPO rm = activityDao.findActivityById(id);
 		/*
 		 * SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		 * rm.setCreateTime2(format.format(rm.getCreateTime()));
-		 * System.err.println(rm.getCreateTime2());
+		 * rm.setCreatedTime2(format.format(rm.getCreateTime()));
+		 * System.err.println(rm.getCreatedTime2());
 		 */
 		if (rm == null)
 			throw new ServiceException("记录可能已不存在");

@@ -13,7 +13,7 @@
 		resultType="com.tedu.petCommunity.sys.entity.PetcUserChatVO"
 		id="findPageObjects">
 		select c.*,u.username from user u,chat c where comm_id=#{commId}
-		and u.id=c.create_user
+		and u.id=c.created_user
 	</select>
 	
 	<select

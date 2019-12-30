@@ -22,9 +22,9 @@
 	<insert id="createObject"
 		parameterType="com.tedu.petCommunity.sys.entity.PetcCommunityPO">
 		insert into community
-		(comm_name,position,create_user,created_time,modified_time)
+		(comm_name,position,created_user,created_time,modified_time)
 		values
-		(#{commName},#{position},#{createUser},#{createdTime},#{modifiedTime})
+		(#{commName},#{position},#{createdUser},#{createdTime},#{modifiedTime})
 	</insert>
 	<select id="findPetcCommunityByName"
 		resultType="com.tedu.petCommunity.sys.entity.PetcCommunityPO">
@@ -44,7 +44,7 @@
 		resultType="com.tedu.petCommunity.sys.entity.PetcCommunityPO">
 		select *
 		<include refid="queryWhereId" />
-		order by create_time desc
+		order by created_time desc
 
 	</select>
 

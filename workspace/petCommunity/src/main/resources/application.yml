@@ -1,9 +1,11 @@
 #spring
 spring:
   datasource:
-    url: jdbc:mysql://mysql57.rdsmc5gff9sm7gq.rds.bj.baidubce.com/pet_community?serverTimezone=GMT%2B8&characterEncoding=utf8
+          #引入druid数据源
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://cdb-rp2vk72l.gz.tencentcdb.com:10050/pet_community?serverTimezone=GMT%2B8&characterEncoding=utf8
     username: root
-    password: petc123456
+    password: Yh112358
   thymeleaf:
     prefix: classpath:/templates/pages/
     suffix: .html
@@ -11,7 +13,8 @@ spring:
   aop:
     proxy-target-class: false
   profiles:
-    active: dev     #指定当前使用的是生产环境配置
+    active: dev     #指定当前使用的是开发环境配置
+    #active: prod     #指定当前使用的是生产环境配置
 
 #server
 server:
@@ -64,4 +67,4 @@ github:
     id: 118fa472013f6a21d78d
     secret: 6d44ce3c905259dc1e2c040c7c8bb913fc265109
   redirect:
-    uri: http://111.229.41.3/callback
+    uri: http://rjshaonian.cn/callback

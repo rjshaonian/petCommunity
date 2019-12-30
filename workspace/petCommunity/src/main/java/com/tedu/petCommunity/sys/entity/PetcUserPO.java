@@ -32,11 +32,11 @@ public class PetcUserPO implements Serializable {
 	// 是否启用0:未启用;1:启用
 	private Integer valid;
 	// 创建时间
-	private Date createTime;
+	private Date createdTime;
 	// 修改时间
 	private Date modifiedTime;
 	// 创建者id
-	private Integer createUser;
+	private Integer createdUser;
 	// 修改者id
 	private Integer modifiedUser;
 

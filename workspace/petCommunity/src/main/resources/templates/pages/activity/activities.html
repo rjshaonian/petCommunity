@@ -106,11 +106,11 @@ td {
 							+ result.data.actiType + "</td><td>"
 							+ result.data.startTime + "</td><td>"
 							+ result.data.endTime + "</td><td>"
-							+ result.data.createTime + "</td><td>"
-							+ result.data.createUser + "</td></tr>";
+							+ result.data.createdTime + "</td><td>"
+							+ result.data.createdUser + "</td></tr>";
 					/*var td = "<td>"+ row.actiName + "</td>" + 
 					"<td>" + row.position + "</td>"+
-					"<td>" + row.createTime + "</td>";
+					"<td>" + row.createdTime + "</td>";
 					tr.append(td);*/
 					//tr追加到body
 					tBody.append(tr);
@@ -195,7 +195,7 @@ td {
 			debugger
 			var tds = "<td hidden='true'>" + row.id + "</td>" + "<td>"
 					+ row.actiName + "</td>" + "<td>" + row.position + "</td>"
-					+ "<td>" + row.createTime + "</td>" + "<td>"
+					+ "<td>" + row.createdTime + "</td>" + "<td>"
 					+ "&nbsp;<a class='btn-look' id='look'>详情</a></td>";
 			return tds;
 		}

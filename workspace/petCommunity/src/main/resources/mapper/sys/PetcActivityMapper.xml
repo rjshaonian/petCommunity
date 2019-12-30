@@ -23,10 +23,10 @@
 	<select id="findActivities"
 		resultType="com.tedu.petCommunity.sys.entity.PetcActivityPO">
 		select
-		id,acti_name,position,valid,acti_type,start_time,end_time,create_time,modified_time
-		,create_user,modified_user from activity
+		id,acti_name,position,valid,acti_type,start_time,end_time,created_time,modified_time
+		,created_user,modified_user from activity
 		<include refid="queryWhereId" />
-		order by create_time desc limit #{startIndex},#{pageSize}
+		order by created_time desc limit #{startIndex},#{pageSize}
 	</select>
 	<select id="findActivityById"
 		resultType="com.tedu.petCommunity.sys.entity.PetcActivityPO">

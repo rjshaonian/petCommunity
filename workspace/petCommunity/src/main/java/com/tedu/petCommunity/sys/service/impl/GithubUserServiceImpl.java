@@ -70,8 +70,8 @@ public class GithubUserServiceImpl implements GithubUserService {
 			po.setSalt(salt);
 			po.setPassword(hex);
 			po.setNickname(githubUser.getName());
-			po.setCreateTime(new Date());
-			po.setModifiedTime(po.getCreateTime());
+			po.setCreatedTime(new Date());
+			po.setModifiedTime(po.getCreatedTime());
 			userDao.insertAll(po);
 		}
 
