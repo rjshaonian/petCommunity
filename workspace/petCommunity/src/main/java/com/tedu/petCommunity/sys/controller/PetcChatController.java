@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tedu.petCommunity.common.util.ShiroUtils;
 import com.tedu.petCommunity.common.vo.JsonResult;
 import com.tedu.petCommunity.sys.entity.PetcCommunityPO;
 import com.tedu.petCommunity.sys.service.PetcChatService;
+import com.tedu.petCommunity.sys.service.RocketmqProducerService;
 
 /**
  * @author VictorHe 2019年11月23日 上午10:06:31
@@ -22,7 +24,7 @@ import com.tedu.petCommunity.sys.service.PetcChatService;
 public class PetcChatController {
 	@Autowired
 	PetcChatService chatService;
- 
+
 	@RequestMapping()
 	public String doChatUI(Integer id, Model model) {
 		PetcCommunityPO commPO = chatService.getCommById(id);
@@ -37,10 +39,15 @@ public class PetcChatController {
 		return new JsonResult(chatService.getContentByCommId(commId));
 	}
 
+	@Autowired
+	private RocketmqProducerService rocketmqProducerService;
+
 	@RequestMapping("/sendMsg")
 	@ResponseBody
 	public JsonResult sendMsg(Integer commId, String chatMessage) {
-		chatService.insertChatMessage(commId, chatMessage);
+		// 2020-03-03 阳昊 修改为rocketMQ方式插入
+		rocketmqProducerService.sendMsg(commId + "," + chatMessage + "," + ShiroUtils.getUserId());
+		// chatService.insertChatMessage(commId, chatMessage);
 		return new JsonResult("insert ok");
 	}
 //	@Autowired

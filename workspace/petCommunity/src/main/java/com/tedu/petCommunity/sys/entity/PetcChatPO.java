@@ -25,4 +25,10 @@ public class PetcChatPO {
 	// 创建者id
 	private Integer createdUser;
 
+	@Override
+	public String toString() {
+		return "PetcChatPO [id=" + id + ", commId=" + commId + ", content=" + content + ", valid=" + valid
+				+ ", createdTime=" + createdTime + ", createdUser=" + createdUser + "]";
+	}
+
 }

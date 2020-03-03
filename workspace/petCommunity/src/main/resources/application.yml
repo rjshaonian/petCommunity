@@ -1,7 +1,7 @@
 #spring
 spring:
   datasource:
-          #引入druid数据源
+    #引入druid数据源
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://cdb-rp2vk72l.gz.tencentcdb.com:10050/pet_community?serverTimezone=GMT%2B8&characterEncoding=utf8
     username: root
@@ -45,6 +45,15 @@ async-thread-pool:
   keepAliveSeconds: 30
   queueCapacity: 1000
 
+#rocketmq
+#配置rocketmq      
+rocketmq:
+  groupId: GID_Petc_chat
+  msgTopic: Petc_chat
+  accessKey: LTAI4FnPvY6h5w92zg6ADs61
+  secretKey: z1bI8UyuRut0Fdkq1WLNodXEE0N0Om
+  namesrvAddr: http://MQ_INST_1785275891834049_BcKAq53o.mq-internet-access.mq-internet.aliyuncs.com:80
+
 ---
 spring:
   profiles: dev
@@ -64,7 +73,7 @@ spring:
 #github oauth设置github登录的相关参数
 github:
   client:
-    id: 118fa472013f6a21d78d
-    secret: 6d44ce3c905259dc1e2c040c7c8bb913fc265109
+    id: 8497bcced5f5f7633e03
+    secret: 1ac7b68582d0b5d554dad1aabe0b1a6d04f0d20c
   redirect:
     uri: http://rjshaonian.cn/callback
