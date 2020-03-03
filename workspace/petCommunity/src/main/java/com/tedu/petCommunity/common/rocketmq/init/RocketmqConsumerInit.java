@@ -46,7 +46,7 @@ public class RocketmqConsumerInit {
 
 	@PostConstruct
 	public void init() {
-		System.out.println("初始化启动消费者者！");
+		System.out.println("初始化启动消费者！");
 		// consumer 实例配置初始化
 		Properties properties = new Properties();
 		// 您在控制台创建的consumer ID

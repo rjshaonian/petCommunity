@@ -3,14 +3,18 @@
  */
 package com.tedu.petCommunity.sys.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tedu.petCommunity.common.util.ObjectMapperUtil;
 import com.tedu.petCommunity.common.util.ShiroUtils;
 import com.tedu.petCommunity.common.vo.JsonResult;
+import com.tedu.petCommunity.sys.entity.PetcChatPO;
 import com.tedu.petCommunity.sys.entity.PetcCommunityPO;
 import com.tedu.petCommunity.sys.service.PetcChatService;
 import com.tedu.petCommunity.sys.service.RocketmqProducerService;
@@ -46,7 +50,13 @@ public class PetcChatController {
 	@ResponseBody
 	public JsonResult sendMsg(Integer commId, String chatMessage) {
 		// 2020-03-03 阳昊 修改为rocketMQ方式插入
-		rocketmqProducerService.sendMsg(commId + "," + chatMessage + "," + ShiroUtils.getUserId());
+		PetcChatPO po = new PetcChatPO();
+		po.setCommId(commId);
+		po.setContent(chatMessage);
+		po.setValid(1);
+		po.setCreatedTime(new Date());
+		po.setCreatedUser(ShiroUtils.getUserId());
+		rocketmqProducerService.sendMsg(ObjectMapperUtil.toJSON(po));
 		// chatService.insertChatMessage(commId, chatMessage);
 		return new JsonResult("insert ok");
 	}

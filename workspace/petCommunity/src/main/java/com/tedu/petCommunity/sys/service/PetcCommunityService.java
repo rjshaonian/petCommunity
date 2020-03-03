@@ -85,6 +85,11 @@ public interface PetcCommunityService {
 	 */
 	List<PetcCommunityPO> loadComm(String commName);
 
+//	/**
+//	 * @param commName
+//	 * @return
+//	 */
+//	List<PetcCommunityPO> loadCommCache(String commName);
 	/**
 	 * @param commId
 	 */

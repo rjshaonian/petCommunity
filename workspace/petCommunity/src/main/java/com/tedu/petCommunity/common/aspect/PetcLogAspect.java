@@ -67,7 +67,7 @@ public class PetcLogAspect {
 		try {
 			params = new ObjectMapper().writeValueAsString(joinPoint.getArgs());
 		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		// 2.封装日志信息
 		PetcLogPO logPO = new PetcLogPO();

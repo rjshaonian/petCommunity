@@ -1,7 +1,5 @@
 package com.tedu.petCommunity.common.rocketmq.init;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -12,6 +10,7 @@ import com.aliyun.openservices.ons.api.Action;
 import com.aliyun.openservices.ons.api.ConsumeContext;
 import com.aliyun.openservices.ons.api.Message;
 import com.aliyun.openservices.ons.api.MessageListener;
+import com.tedu.petCommunity.common.util.ObjectMapperUtil;
 import com.tedu.petCommunity.sys.dao.PetcChatDao;
 import com.tedu.petCommunity.sys.entity.PetcChatPO;
 
@@ -43,15 +42,8 @@ public class RocketmqTest1Listener implements MessageListener {
 			byte[] body = message.getBody();
 			String msg = new String(body);// 获取到接收的消息，由于接收到的是byte数组，所以需要转换成字符串
 
-			Integer commId = Integer.valueOf(msg.split(",")[0]);
-			String chatMessage = msg.split(",")[1];
-			Integer createdUser = Integer.valueOf(msg.split(",")[2]);
 			PetcChatPO po = new PetcChatPO();
-			po.setCommId(commId);
-			po.setContent(chatMessage);
-			po.setValid(1);
-			po.setCreatedTime(new Date());
-			po.setCreatedUser(createdUser);
+			po = ObjectMapperUtil.toObject(msg, po.getClass());
 			System.out.println(po);
 			chatDao.insertChatMessage(po);
 //			chatService.insertChatMessage(commId, chatMessage);

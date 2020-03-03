@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.tedu.petCommunity.common.annotation.CacheFind;
 import com.tedu.petCommunity.common.config.PageProperties;
 import com.tedu.petCommunity.common.exception.ServiceException;
 import com.tedu.petCommunity.common.util.ShiroUtils;
@@ -234,10 +235,39 @@ public class PetcCommunityServiceImpl implements PetcCommunityService {
 
 	}
 
+	@CacheFind(seconds = 30)
 	@Override
 	public List<PetcCommunityPO> loadComm(String commName) {
 		return communityDao.loadComm(commName);
 	}
+
+//	@Autowired(required = false)
+//	private Jedis jedis;
+//
+//	@Override
+//	public List<PetcCommunityPO> loadCommCache(String commName) {
+//		String key = "com.tedu.petCommunity.sys.service.PetcCommunityServiceImpl.loadCommCache::" + commName;
+//		String value = jedis.get(key);
+//		List<PetcCommunityPO> list = new ArrayList<>();
+//		Long start = System.currentTimeMillis();
+//		if (StringUtils.isEmpty(value)) {
+//			// 用户第一次查询
+//			list = loadComm(commName);
+//
+//			if (list.size() > 0) {
+//				String json = ObjectMapperUtil.toJSON(list);
+//				jedis.set(key, json);
+//			}
+//			Long end = System.currentTimeMillis();
+//			System.out.println("查询数据库时间为:" + (end - start) + "毫秒");
+//		} else {
+//			// 用户不是第一次查询.
+//			list = ObjectMapperUtil.toObject(value, list.getClass());
+//			Long end = System.currentTimeMillis();
+//			System.out.println("查询redis缓存时间为:" + (end - start) + "毫秒");
+//		}
+//		return list;
+//	}
 
 	@Override
 	public void doJoin(Integer commId) {
